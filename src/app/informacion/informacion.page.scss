@@ -1,0 +1,62 @@
+// Colors
+$text   : rgb(50,50,50);
+$primary: rgb(225,165,075);
+
+// Fonts
+@font-face {
+    font-family: Mermaid;
+    src: url(../../assets/fonts/mermaid.ttf);
+}
+
+#header {
+    background-color: $primary;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border: none;
+    position: relative;
+    height: 250px;
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        background: $primary;
+        background: linear-gradient(to right, $primary, rgb(235,190,125));
+        border-radius: 50%;
+        position: absolute;
+        bottom: -35px;
+        right: 35px;
+        width: 70px;
+        height: 70px;
+    }
+}
+
+.contenedor {
+    padding: 0 30px;
+
+    h1 {
+        color: $text;
+        font-size: 22px;
+        font-weight: bold;
+        font-family: 'Mermaid', serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 50px 0 50px;
+    }
+
+    h2 {
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    p {
+        color: gray;
+        font-size: 15px;
+        line-height: 25px;
+    }
+}

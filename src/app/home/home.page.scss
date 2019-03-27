@@ -3,7 +3,6 @@ $text   : rgb(50,50,50);
 $primary: rgb(225,165,075);
 
 // Fonts
-
 @font-face {
     font-family: Mermaid;
     src: url(../../assets/fonts/mermaid.ttf);
@@ -30,21 +29,21 @@ $primary: rgb(225,165,075);
             border-radius: 50%;
             width: 275px;
             height: 275px;
-    
-            .titulo {
-                color: $text;
-                font-size: 35px;
-                font-weight: bold;
-                font-family: 'Mermaid', serif;
-                text-align: center;
-                text-transform: uppercase;
-                letter-spacing: 5px;
-                // white-space: nowrap;
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-            }
+        }
+
+        .titulo {
+            color: $text;
+            font-size: 35px;
+            font-weight: bold;
+            font-family: 'Mermaid', serif;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            // white-space: nowrap;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
         }
     }
 
