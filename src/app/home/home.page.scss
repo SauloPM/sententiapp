@@ -1,1 +1,75 @@
+// Colors
+$text   : rgb(50,50,50);
+$primary: rgb(225,165,075);
 
+// Fonts
+
+@font-face {
+    font-family: Mermaid;
+    src: url(../../assets/fonts/mermaid.ttf);
+}
+
+.carrusel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    .categoria {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        height: 515px;
+
+        .imagen {
+            background-color: $primary;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            border-radius: 50%;
+            width: 275px;
+            height: 275px;
+    
+            .titulo {
+                color: $text;
+                font-size: 35px;
+                font-weight: bold;
+                font-family: 'Mermaid', serif;
+                text-align: center;
+                text-transform: uppercase;
+                letter-spacing: 5px;
+                // white-space: nowrap;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+            }
+        }
+    }
+
+    .navigation {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $primary;
+        font-size: 50px;
+        background: none;
+        outline: none;
+        padding: 0;
+        opacity: .25;
+        transition: .5s;
+
+        &:focus {
+            opacity: 1;
+        }
+    }
+}
+
+.copyright {
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}

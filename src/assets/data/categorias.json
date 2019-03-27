@@ -1,0 +1,34 @@
+{
+    "categorias": [
+        {
+            "titulo": "Día de la mujer",
+            "imagen": "../img/categorias/mujer.jpg",
+            "introduccion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi odio cumque necessitatibus! Sequi blanditiis, provident, quos voluptate iusto consectetur qui vitae dolor culpa vero nam asperiores nobis eaque accusantium minima!",
+            "activa": "true"
+        },
+        {
+            "titulo": "Día del padre",
+            "imagen": "../img/categorias/padre.jpg",
+            "introduccion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi odio cumque necessitatibus! Sequi blanditiis, provident, quos voluptate iusto consectetur qui vitae dolor culpa vero nam asperiores nobis eaque accusantium minima!",
+            "activa": "false"
+        },
+        {
+            "titulo": "Día de la naturaleza",
+            "imagen": "../img/categorias/naturaleza.jpg",
+            "introduccion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi odio cumque necessitatibus! Sequi blanditiis, provident, quos voluptate iusto consectetur qui vitae dolor culpa vero nam asperiores nobis eaque accusantium minima!",
+            "activa": "false"
+        },
+        {
+            "titulo": "Día de la poesía",
+            "imagen": "../img/categorias/poesía.jpg",
+            "introduccion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi odio cumque necessitatibus! Sequi blanditiis, provident, quos voluptate iusto consectetur qui vitae dolor culpa vero nam asperiores nobis eaque accusantium minima!",
+            "activa": "false"
+        },
+        {
+            "titulo": "Día del beso",
+            "imagen": "../img/categorias/beso.jpg",
+            "introduccion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi odio cumque necessitatibus! Sequi blanditiis, provident, quos voluptate iusto consectetur qui vitae dolor culpa vero nam asperiores nobis eaque accusantium minima!",
+            "activa": "false"
+        }
+    ]
+}

@@ -1,14 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+
+  <!-- Carrusel -->
+  <div class="carrusel">
+
+    <button class="navigation left" type="button" (click)="anterior()">
+        <ion-icon strong="true" name="arrow-back"></ion-icon>
+    </button>
+
+    <div class="categoria">
+      <div class="imagen" *ngFor="let categoria of categorias" [ngStyle]="{'display': categoria.activa}" [style.backgroundImage]="'url(' + categoria.imagen + ')'">
+        <span class="titulo">{{ categoria.titulo }}</span>
+      </div>
+    </div>
+
+    <button class="navigation right" type="button" (click)="siguiente()">
+        <ion-icon strong="true" name="arrow-forward"></ion-icon>
+    </button>
+
   </div>
 </ion-content>
+
+<ion-footer>
+  <p class="copyright">&copy; SententiApp</p>
+</ion-footer>

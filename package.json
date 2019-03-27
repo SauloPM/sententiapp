@@ -1,8 +1,8 @@
 {
   "name": "sententiapp",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Saulo Poveda Montesdeoca",
+  "homepage": "https://saulopm.com",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -54,5 +54,5 @@
     "tslint": "~5.12.0",
     "typescript": "~3.1.6"
   },
-  "description": "An Ionic project"
+  "description": "Proyecto de Investigación del Instituto Universitario de Análisis y Aplicaciones Textuales de la Universidad de Las Palmas de Gran Canaria"
 }
