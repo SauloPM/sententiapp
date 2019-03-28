@@ -1,24 +1,45 @@
-<ion-toolbar>
+<ion-header translucent="true" no-border>
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/" text="Volver"></ion-back-button>
+      <ion-back-button color="primary" defaultHref="/" text=""></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
+</ion-header>
+<!-- <section id="topbar">
+  <a href="home">Volver</a>
+</section> -->
 
-<ion-content>
+<ion-content fullscreen="true">
 
   <!-- <section id="header" [style.backgroundImage]="'url(' + categoria.imagen + ')'"></section> -->
 
   <div *ngFor="let categoria of categorias; let i = index">
+
+    <!-- Cabecera -->
     <section id="header" [style.backgroundImage]="'url(' + categoria.imagen + ')'" *ngIf="i == posicion">
       <button>
         <ion-icon name="add"></ion-icon>
       </button>
     </section>
 
+    <!-- Información -->
     <div class="contenedor" *ngIf="i == posicion">
       <h1>{{ categoria.titulo }}</h1>
       <h2>Introducción</h2>
       <p>{{ categoria.introduccion }}</p>
+    </div>
+  </div>
+
+  <!-- Otras fechas -->
+  <div class="contenedor">
+    <h2>Otras fechas</h2>
+    <div class="fechas">
+      <div class="fecha" *ngFor="let categoria of categorias; let i = index">
+        <a [routerLink]="['/informacion', i]">
+          <span class="thumbnail" *ngIf="i < 4" [style.backgroundImage]="'url(' + categoria.imagen + ')'"></span>
+        </a>
+        <span class="title" *ngIf="i < 4">{{ categoria.titulo }}</span>
+      </div>
     </div>
   </div>
 

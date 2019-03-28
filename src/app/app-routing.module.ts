@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
 
   // Para enviar parámetros dentro de la URL
-  { path: 'informacion/:id', loadChildren: './informacion/informacion.module#InformacionPageModule' },
+  { path: 'informacion/:id', loadChildren: './informacion/informacion.module#InformacionPageModule' }
   // { path: 'informacion', loadChildren: './informacion/informacion.module#InformacionPageModule' },
 ];
 

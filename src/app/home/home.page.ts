@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { debug } from 'util';
-import { url } from 'inspector';
+// import { url } from 'inspector';
+
+// Interfaces
+import { Categoria } from './../interfaces/categoria';
 
 // Servicios
 import { CategoriasService } from './../services/categorias.service';
@@ -10,16 +13,16 @@ import { CategoriasService } from './../services/categorias.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   // Atributos de clase
   categorias: Categoria[];
 
-  constructor(private servicio: CategoriasService) {
-    this.showCategorias();
-  }
+  constructor(private servicio: CategoriasService) { }
 
-  showCategorias() {
+  ngOnInit() {
+
+    // Almacenamos las categorías del JSON
     this.servicio.getCategorias().subscribe(
       respuesta => {
         this.categorias = respuesta['categorias'];
@@ -28,7 +31,7 @@ export class HomePage {
   }
 
   anterior() {
-
+    
     let indice  : number = 0;
     let posicion: number = 0;
 
@@ -70,11 +73,4 @@ export class HomePage {
     // Activamos la categoría anterior
     this.categorias[posicion].display = 'block';
   }
-}
-
-interface Categoria {
-  titulo: string;
-  imagen: string;
-  informacion: string;
-  display: string;
 }

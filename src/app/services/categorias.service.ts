@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient } from '@angular/common/http';
+
+// Operadores para observables
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,6 @@ export class CategoriasService {
   }
 
   getCategorias() {
-    return this.http.get('assets/data/categorias.json');
+    return this.http.get('assets/data/categorias.json').pipe(tap(console.log));
   }
 }
