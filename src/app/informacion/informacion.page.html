@@ -17,9 +17,9 @@
 
     <!-- Cabecera -->
     <section id="header" [style.backgroundImage]="'url(' + categoria.imagen + ')'" *ngIf="i == posicion">
-      <button>
+      <a class="button" [routerLink]="['/sentencias', i]">
         <ion-icon name="add"></ion-icon>
-      </button>
+      </a>
     </section>
 
     <!-- Información -->

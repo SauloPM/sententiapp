@@ -3,4 +3,5 @@ export interface Categoria {
     imagen: string;
     informacion: string;
     display: string;
+    sentencias: string[];
 }

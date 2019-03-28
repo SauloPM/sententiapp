@@ -10,16 +10,17 @@ import { Categoria } from './../interfaces/categoria';
 import { CategoriasService } from './../services/categorias.service';
 
 @Component({
-  selector: 'app-informacion',
-  templateUrl: './informacion.page.html',
-  styleUrls: ['./informacion.page.scss'],
+  selector: 'app-sentencias',
+  templateUrl: './sentencias.page.html',
+  styleUrls: ['./sentencias.page.scss'],
 })
-export class InformacionPage {
+export class SentenciasPage {
 
   // Atributos de clase
   posicion  : number = 0;
   categoriaSeleccionada : Categoria;
   categorias: Categoria[];
+  sentencias: string[];
 
   constructor(private activatedRoute: ActivatedRoute, private _categoriaService: CategoriasService) {
 
@@ -36,6 +37,7 @@ export class InformacionPage {
         this.activatedRoute.params.subscribe( parametroURL => {
           this.posicion = parametroURL['id'];
           this.categoriaSeleccionada = this.categorias[this.posicion];
+          this.sentencias = this.categoriaSeleccionada.sentencias;
         });
       }
     );

@@ -1,0 +1,38 @@
+<ion-header translucent="true" no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="/" text=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+
+  <div *ngFor="let categoria of categorias; let i = index">
+  
+      <!-- Listado de sentencias -->
+      <div class="contenedor" *ngIf="i == posicion">
+        <h1>{{ categoria.titulo }}</h1>
+        <h2>Listado de sentencias</h2>
+        <ion-list lines="inset">
+          <ion-item *ngFor="let sentencia of sentencias">
+            <ion-label>{{ sentencia }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  
+    <!-- Otras fechas -->
+    <div class="contenedor">
+      <h2>Otras fechas</h2>
+      <div class="fechas">
+        <div class="fecha" *ngFor="let categoria of categorias; let i = index">
+          <a [routerLink]="['/informacion', i]">
+            <span class="thumbnail" *ngIf="i < 4" [style.backgroundImage]="'url(' + categoria.imagen + ')'"></span>
+          </a>
+          <span class="title" *ngIf="i < 4">{{ categoria.titulo }}</span>
+        </div>
+      </div>
+    </div>
+
+</ion-content>

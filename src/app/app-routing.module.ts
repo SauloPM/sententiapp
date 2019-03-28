@@ -8,9 +8,9 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
 
-  // Para enviar parámetros dentro de la URL
-  { path: 'informacion/:id', loadChildren: './informacion/informacion.module#InformacionPageModule' }
-  // { path: 'informacion', loadChildren: './informacion/informacion.module#InformacionPageModule' },
+  // Envío de parámetros en de la URL
+  { path: 'informacion/:id', loadChildren: './informacion/informacion.module#InformacionPageModule' },
+  { path: 'sentencias/:id' , loadChildren: './sentencias/sentencias.module#SentenciasPageModule'    }
 ];
 
 @NgModule({
