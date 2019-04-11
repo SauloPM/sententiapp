@@ -1,10 +1,14 @@
 <ion-content>
 
+  <button class="buscador" type="button">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+
   <!-- Carrusel -->
   <div class="carrusel">
 
     <button class="navigation left" type="button" (click)="anterior()">
-        <ion-icon strong="true" name="arrow-back"></ion-icon>
+      <i class="fa fa-angle-left" aria-hidden="true"></i>
     </button>
 
     <div class="categoria" *ngFor="let categoria of categorias; let i = index">
@@ -16,12 +20,13 @@
     </div>
 
     <button class="navigation right" type="button" (click)="siguiente()">
-        <ion-icon strong="true" name="arrow-forward"></ion-icon>
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
     </button>
 
   </div>
-</ion-content>
 
-<ion-footer>
-  <p class="copyright">&copy; SententiApp</p>
-</ion-footer>
+  <section id="footer">
+    <p class="copyright">&copy; SententiApp</p>
+  </section>
+
+</ion-content>

@@ -1,46 +1,35 @@
-<ion-header translucent="true" no-border>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button color="primary" defaultHref="/" text=""></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<!-- <section id="topbar">
-  <a href="home">Volver</a>
-</section> -->
-
 <ion-content fullscreen="true">
 
-  <!-- <section id="header" [style.backgroundImage]="'url(' + categoria.imagen + ')'"></section> -->
+  <!-- Cabecera -->
+  <section id="header" [style.backgroundImage]="'url(' + categoria.imagen + ')'">
+    <a class="volver" [routerLink]="['/home']">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+    </a>
+    <a class="ver-sentencias" [routerLink]="['/sentencias', categoria.id]">+</a>
+  </section>
 
-  <div *ngFor="let categoria of categorias; let i = index">
-
-    <!-- Cabecera -->
-    <section id="header" [style.backgroundImage]="'url(' + categoria.imagen + ')'" *ngIf="i == posicion">
-      <a class="button" [routerLink]="['/sentencias', i]">
-        <ion-icon name="add"></ion-icon>
-      </a>
-    </section>
-
-    <!-- Información -->
-    <div class="contenedor" *ngIf="i == posicion">
-      <h1>{{ categoria.titulo }}</h1>
-      <h2>Introducción</h2>
-      <p>{{ categoria.introduccion }}</p>
-    </div>
+  <!-- Información -->
+  <div class="contenedor">
+    <h1>{{ categoria.titulo }}</h1>
+    <h2>Introducción</h2>
+    <p>{{ categoria.informacion }}</p>
   </div>
 
   <!-- Otras fechas -->
   <div class="contenedor">
     <h2>Otras fechas</h2>
-    <div class="fechas">
-      <div class="fecha" *ngFor="let categoria of categorias; let i = index">
-        <a [routerLink]="['/informacion', i]">
-          <span class="thumbnail" *ngIf="i < 4" [style.backgroundImage]="'url(' + categoria.imagen + ')'"></span>
+    <div class="otras-fechas">
+      <div class="fecha" *ngFor="let otraFecha of otrasFechas; let i = index">
+        <a [routerLink]="['/informacion', otraFecha.id]">
+          <span class="thumbnail" [style.backgroundImage]="'url(' + otraFecha.imagen + ')'"></span>
         </a>
-        <span class="title" *ngIf="i < 4">{{ categoria.titulo }}</span>
+        <span class="title">{{ otraFecha.titulo }}</span>
       </div>
     </div>
   </div>
+
+  <section id="footer">
+    <p class="copyright">&copy; SententiApp</p>
+  </section>
 
 </ion-content>

@@ -1,12 +1,19 @@
-// Colors
-$text   : rgb(50,50,50);
-$primary: rgb(225,165,075);
+@import './../../global.scss';
 
-// Fonts
-@font-face {
-    font-family: Mermaid;
-    src: url(../../assets/fonts/mermaid.ttf);
+// Buscador
+
+.buscador {
+    color: $text;
+    font-size: 20px;
+    background: none;
+    outline: none;
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    opacity: .5;
 }
+
+// Carrusel
 
 .carrusel {
     display: flex;
@@ -19,7 +26,7 @@ $primary: rgb(225,165,075);
         align-items: center;
         justify-content: center;
         position: relative;
-        height: 515px;
+        height: 450px;
 
         .imagen {
             background-color: $primary;
@@ -27,22 +34,22 @@ $primary: rgb(225,165,075);
             background-position: center;
             background-size: cover;
             border-radius: 50%;
-            width: 275px;
-            height: 275px;
+            width: 240px;
+            height: 240px;
         }
 
         .titulo {
             color: $text;
-            font-size: 35px;
+            font-size: 30px;
             font-weight: bold;
-            font-family: 'Mermaid', serif;
+            font-family: 'Playfair Display', serif;
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 5px;
-            // white-space: nowrap;
+            letter-spacing: 3px;
+            line-height: 35px;
             position: absolute;
             left: 0;
-            bottom: 0;
+            top: 360px;
             width: 100%;
         }
     }
@@ -52,23 +59,56 @@ $primary: rgb(225,165,075);
         align-items: center;
         justify-content: center;
         color: $primary;
-        font-size: 50px;
+        font-size: 75px;
+        font-weight: bold;
         background: none;
         outline: none;
-        padding: 0;
+        padding: 0 5px;
         opacity: .25;
         transition: .5s;
 
-        &:focus {
+        &:active {
             opacity: 1;
         }
     }
 }
 
-.copyright {
-    font-size: 12px;
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 5px;
+// Footer
+
+#footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+// Mobile first
+
+@media only screen and (min-width: 360px) {
+
+    // Buscador
+
+    .buscador {
+        font-size: 25px;
+    }
+
+    // Carrusel
+
+    .carrusel {
+    
+        .categoria {
+    
+            .imagen {
+                width: 275px;
+                height: 275px;
+            }
+
+            .titulo {
+                top: 380px;
+            }
+        }
+    
+        .navigation {
+            padding: 0 15px;
+        }
+    }
 }

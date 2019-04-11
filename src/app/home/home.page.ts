@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { debug } from 'util';
-// import { url } from 'inspector';
 
 // Interfaces
 import { Categoria } from './../interfaces/categoria';
@@ -15,19 +13,12 @@ import { CategoriasService } from './../services/categorias.service';
 })
 export class HomePage implements OnInit {
 
-  // Atributos de clase
   categorias: Categoria[];
 
-  constructor(private servicio: CategoriasService) { }
+  constructor(private servicioCategorias: CategoriasService) { }
 
   ngOnInit() {
-
-    // Almacenamos las categorías del JSON
-    this.servicio.getCategorias().subscribe(
-      respuesta => {
-        this.categorias = respuesta['categorias'];
-      }
-    );
+    this.categorias = this.servicioCategorias.getCategorias();
   }
 
   anterior() {
@@ -37,8 +28,9 @@ export class HomePage implements OnInit {
 
     // Buscamos la posición de la categoría activa
     this.categorias.forEach(categoria => {
-      if (categoria.display === 'block')
+      if (categoria.display === 'block') {
         posicion = indice;
+      }
       indice++;
     });
 
@@ -59,8 +51,9 @@ export class HomePage implements OnInit {
 
     // Buscamos la posición de la categoría activa
     this.categorias.forEach(categoria => {
-      if (categoria.display === 'block')
+      if (categoria.display === 'block') {
         posicion = indice;
+      }
       indice++;
     });
 
