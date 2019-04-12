@@ -168,4 +168,27 @@ export class CategoriasService {
 
     return resultados;
   }
+
+  /*
+
+    · Función que devuelve un vector de fechas cuyo título albergue la secuencia pasada por parámetro
+
+  */
+  buscarFechas( secuencia: string ) {
+
+    let resultados: Categoria[] = [];
+    secuencia = secuencia.toLowerCase();
+
+    for (let fecha of this.categorias) {
+
+      let titulo: string = fecha.titulo;
+      titulo = titulo.toLowerCase();
+
+      if ( titulo.toString().indexOf(secuencia) >= 0 ) {
+        resultados.push(fecha);
+      }
+    }
+
+    return resultados;
+  }
 }

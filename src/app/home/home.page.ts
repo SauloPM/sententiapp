@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Interfaces
 import { Categoria } from './../interfaces/categoria';
 
 // Servicios
 import { CategoriasService } from './../services/categorias.service';
+import { getElementDepthCount } from '@angular/core/src/render3/state';
 
 @Component({
   selector: 'app-home',
@@ -14,13 +16,28 @@ import { CategoriasService } from './../services/categorias.service';
 export class HomePage implements OnInit {
 
   categorias: Categoria[];
+  buscar: boolean = false;
 
-  constructor(private servicioCategorias: CategoriasService) { }
+  constructor(private router: Router, private servicioCategorias: CategoriasService) { }
 
   ngOnInit() {
     this.categorias = this.servicioCategorias.getCategorias();
   }
 
+  // Método que muestra los resultados de la búsqueda
+  buscarFecha(secuencia: string) {
+  
+    // Eliminamos los espacios innecesarios
+    secuencia = secuencia.trim();
+
+    // Utilizamos el buscador si la secuenca contiene al menos un carácter
+    if (secuencia.trim() === '') {
+      this.router.navigate( ['/home'] );
+    }
+    this.router.navigate( ['/resultados', secuencia] );
+  }
+
+  // Método que muestra la categoría anterior
   anterior() {
     
     let indice  : number = 0;
@@ -44,6 +61,7 @@ export class HomePage implements OnInit {
     this.categorias[posicion].display = 'block';
   }
 
+  // Método que muestra la categoría siguiente
   siguiente() {
 
     let indice  : number = 0;
