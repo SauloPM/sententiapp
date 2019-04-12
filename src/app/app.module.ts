@@ -13,14 +13,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule  } from '@angular/common/http';
 import { CategoriasService } from './services/categorias.service';
 
+// Módulos
+import { ComponentsModule } from './components/components.module';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ComponentsModule
   ],
   providers: [
     StatusBar,

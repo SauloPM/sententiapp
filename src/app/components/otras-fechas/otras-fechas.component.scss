@@ -1,0 +1,30 @@
+@import './../../../global.scss';
+
+// Otras fechas
+
+.otras-fechas {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .fecha {
+
+        .thumbnail {
+            display: block;
+            background-color: $primary;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            margin-bottom: 8px;
+            width: 100px;
+            height: 100px;
+        }
+
+        .caption {
+            display: block;
+            color: $text;
+            font-size: 10px;
+            margin: 0;
+        }
+    }
+}

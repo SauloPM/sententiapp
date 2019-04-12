@@ -18,6 +18,32 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+// Headings
+
+h1 {
+    color: $text;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 35px;
+    margin: 60px 0 30px;
+}
+
+h2 {
+    color: $text;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+p {
+    color: gray;
+    font-size: 15px;
+    line-height: 25px;
+    margin: 0 0 30px;
+}
+
 // Utils
 
 .contenedor {
@@ -56,34 +82,5 @@ body {
         letter-spacing: 5px;
         margin: 3px 0 0;
         opacity: .5;
-    }
-}
-
-// Otras fechas
-
-.otras-fechas {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .fecha {
-
-        .thumbnail {
-            display: block;
-            background-color: $primary;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            margin-bottom: 8px;
-            width: 100px;
-            height: 100px;
-        }
-
-        .title {
-            display: block;
-            color: $text;
-            font-size: 10px;
-            margin: 0;
-        }
     }
 }

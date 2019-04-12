@@ -16,18 +16,9 @@
   </div>
 
   <!-- Otras fechas -->
-  <div class="contenedor">
-    <h2>Otras fechas</h2>
-    <div class="otras-fechas">
-      <div class="fecha" *ngFor="let otraFecha of otrasFechas; let i = index">
-        <a [routerLink]="['/informacion', otraFecha.id]">
-          <span class="thumbnail" [style.backgroundImage]="'url(' + otraFecha.imagen + ')'"></span>
-        </a>
-        <span class="title">{{ otraFecha.titulo }}</span>
-      </div>
-    </div>
-  </div>
+  <app-otras-fechas></app-otras-fechas>
 
+  <!-- Footer -->
   <section id="footer">
     <p class="copyright">&copy; SententiApp</p>
   </section>
