@@ -1,9 +1,9 @@
 $(window).on("load", function() {
 
-    ajustarAlto();
+    //ajustarAlto();
 
     $(window).resize(function() {
-        ajustarAlto();
+        //ajustarAlto();
     })
 });
 

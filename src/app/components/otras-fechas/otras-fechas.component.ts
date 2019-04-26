@@ -1,4 +1,4 @@
-import { Component         } from '@angular/core';
+import { Component, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute    } from '@angular/router';
 import { Categoria         } from './../../interfaces/categoria';
 import { CategoriasService } from './../../services/categorias.service';
@@ -8,11 +8,17 @@ import { CategoriasService } from './../../services/categorias.service';
   templateUrl: './otras-fechas.component.html',
   styleUrls: ['./otras-fechas.component.scss'],
 })
-export class OtrasFechasComponent {
+export class OtrasFechasComponent implements AfterViewChecked  {
 
   // Atributos
+  ancho: number;
   categoria: Categoria;
   otrasFechas: Categoria[];
+
+  ngAfterViewChecked () {
+    // this.ancho = document.getElementById('hijo1').offsetWidth;
+    // document.getElementById('hijo1').style.height = this.ancho + 'px';
+  }
 
   // Constructor
   constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: CategoriasService) {

@@ -1,19 +1,12 @@
 <!-- Otras fechas -->
 <div class="contenedor">
   <h2>Otras fechas</h2>
-  <div class="otras-fechas">
-    <div class="fecha" *ngFor="let otraFecha of otrasFechas; let i = index">
-      <a [routerLink]="['/informacion', otraFecha.id]">
-        <span class="thumbnail" [style.backgroundImage]="'url(' + otraFecha.imagen + ')'"></span>
-      </a>
-      <span class="caption">{{ otraFecha.titulo }}</span>
-    </div>
+  <div class="thumbnails">
+    <a [routerLink]="['/informacion', otrasFechas[0].id]" class="thumbnail" [style.backgroundImage]="'url(' + otrasFechas[0].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}" #hijo1>1</a>
+    <a [routerLink]="['/informacion', otrasFechas[1].id]" class="thumbnail" [style.backgroundImage]="'url(' + otrasFechas[1].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}">2</a>
+    <a [routerLink]="['/informacion', otrasFechas[2].id]" class="thumbnail" [style.backgroundImage]="'url(' + otrasFechas[2].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}">3</a>
   </div>
-</div>
-
-<div class="padre">
-  <div class="hijo">1</div>
-  <div class="hijo">2</div>
-  <div class="hijo">3</div>
-  <div class="hijo">4</div>
+  <div class="captions">
+      <span class="caption" *ngFor="let otraFecha of otrasFechas; let i = index">{{ otraFecha.titulo }}</span>
+    </div>
 </div>

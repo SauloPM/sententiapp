@@ -13,7 +13,7 @@ export class CategoriasService {
     {
       id: 0,
       titulo: 'Día de la mujer',
-      imagen: '../../assets/img/categorias/mujer.jpg',
+      imagen: '../../assets/img/fechas/mujer.jpg',
       informacion: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi odio cumque necessitatibus! Sequi blanditiis, provident, quos voluptate iusto consectetur qui vitae dolor culpa vero nam asperiores nobis eaque accusantium minima!',
       display: 'block',
       sentencias: [
@@ -32,7 +32,7 @@ export class CategoriasService {
     {
       id: 1,
       titulo: 'Día del padre',
-      imagen: '../../assets/img/categorias/padre.jpg',
+      imagen: '../../assets/img/fechas/padre.jpg',
       informacion: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi odio cumque necessitatibus! Sequi blanditiis, provident, quos voluptate iusto consectetur qui vitae dolor culpa vero nam asperiores nobis eaque accusantium minima!',
       display: 'none',
       sentencias: [
@@ -51,7 +51,7 @@ export class CategoriasService {
     {
       id: 2,
       titulo: 'Día de la naturaleza',
-      imagen: '../../assets/img/categorias/naturaleza.jpg',
+      imagen: '../../assets/img/fechas/naturaleza.jpg',
       informacion: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi odio cumque necessitatibus! Sequi blanditiis, provident, quos voluptate iusto consectetur qui vitae dolor culpa vero nam asperiores nobis eaque accusantium minima!',
       display: 'none',
       sentencias: [
@@ -70,7 +70,7 @@ export class CategoriasService {
     {
       id: 3,
       titulo: 'Día de la poesía',
-      imagen: '../../assets/img/categorias/poesia.png',
+      imagen: '../../assets/img/fechas/poesia.png',
       informacion: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi odio cumque necessitatibus! Sequi blanditiis, provident, quos voluptate iusto consectetur qui vitae dolor culpa vero nam asperiores nobis eaque accusantium minima!',
       display: 'none',
       sentencias: [
@@ -89,7 +89,7 @@ export class CategoriasService {
     {
       id: 4,
       titulo: 'Día del beso',
-      imagen: '../../assets/img/categorias/beso.jpg',
+      imagen: '../../assets/img/fechas/beso.jpg',
       informacion: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi odio cumque necessitatibus! Sequi blanditiis, provident, quos voluptate iusto consectetur qui vitae dolor culpa vero nam asperiores nobis eaque accusantium minima!',
       display: 'none',
       sentencias: [

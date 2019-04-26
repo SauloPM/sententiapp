@@ -9,9 +9,7 @@
 
     .fecha {
 
-        .thumbnail {
-            display: flex;
-            flex-grow: 1;
+        .thumbnail1 {
             background-color: $primary;
             background-repeat: no-repeat;
             background-position: center;
@@ -33,16 +31,36 @@
     }
 }
 
-.padre {
+.thumbnails {
     display: flex;
-    flex-direction: row;
-    border: 10px solid darkblue;
-    padding: 5px;
+    align-items: center;
+    justify-content: space-between;
 
-    .hijo {
+    .thumbnail {
         color: white;
         font-weight: bold;
-        background: darkorange;
+        background-color: darkorange;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        border: 5px solid white;
+        border-radius: 50%;
+        margin-bottom: 8px;
         width: 100%;
+    }
+}
+
+.captions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    .caption {
+        flex-grow: 0;
+        color: $text;
+        font-size: 10px;
+        text-align: center;
+        margin: 0;
+        width: 33.3%;
     }
 }
