@@ -1,5 +1,9 @@
 $(window).on("load", function() {
 
+    jQuery.getJSON("http://localhost:55852/servicioprueba.asmx/getAllSentencias", function(datos) {
+        console.log(datos);
+    });
+
     //ajustarAlto();
 
     $(window).resize(function() {

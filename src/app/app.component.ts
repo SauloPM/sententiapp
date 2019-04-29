@@ -19,7 +19,10 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      // this.statusBar.styleDefault();
+      if (this.platform.is('android')) {
+        this.statusBar.styleBlackOpaque();
+      }
       this.splashScreen.hide();
     });
   }
