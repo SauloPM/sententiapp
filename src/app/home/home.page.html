@@ -1,37 +1,39 @@
 <ion-content>
 
-  <!-- Buscador -->
-  <div class="buscador">
-    <input class="entrada" #secuencia type="text" (keyup.enter)="buscarFecha(secuencia.value)" *ngIf="buscar">
-    <button class="boton" type="button" (click)="buscar = !buscar">
-      <i class="fa fa-search" aria-hidden="true"></i>
-    </button>
-  </div>
+  <div class="page-wrapper">
 
-  <!-- Carrusel -->
-  <div class="carrusel">
-
-    <button class="navigation left" type="button" (click)="anterior()">
-      <i class="fa fa-angle-left" aria-hidden="true"></i>
-    </button>
-
-    <div class="categoria" *ngFor="let categoria of categorias; let i = index">
-      <a [routerLink]="['/informacion', i]">
-        <div class="imagen" *ngIf="categoria.display == 'block'" [style.backgroundImage]="'url(' + categoria.imagen + ')'">
-        </div>
-      </a>
-      <span class="titulo" *ngIf="categoria.display == 'block'">{{ categoria.titulo }}</span>
+    <!-- Buscador -->
+    <div class="buscador">
+      <input class="entrada" #secuencia type="text" (keyup.enter)="buscarFecha(secuencia.value)" *ngIf="buscar">
+      <button class="boton" type="button" (click)="buscar = !buscar">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
     </div>
 
-    <button class="navigation right" type="button" (click)="siguiente()">
-      <i class="fa fa-angle-right" aria-hidden="true"></i>
-    </button>
+    <!-- Carrusel -->
+    <div class="carrusel">
 
+      <button class="navigation left" type="button" (click)="anterior()">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+      </button>
+
+      <div class="categoria" *ngFor="let categoria of categorias; let i = index">
+        <a [routerLink]="['/informacion', i]">
+          <div class="imagen" *ngIf="categoria.display == 'block'" [style.backgroundImage]="'url(' + categoria.imagen + ')'">
+          </div>
+        </a>
+        <span class="titulo" *ngIf="categoria.display == 'block'">{{ categoria.titulo }}</span>
+      </div>
+
+      <button class="navigation right" type="button" (click)="siguiente()">
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </button>
+
+    </div>
+
+    <!-- Footer -->
+    <section id="footer">
+      <p class="copyright">&copy; SententiApp</p>
+    </section>
   </div>
-
-  <!-- Footer -->
-  <section id="footer">
-    <p class="copyright">&copy; SententiApp</p>
-  </section>
-
 </ion-content>
