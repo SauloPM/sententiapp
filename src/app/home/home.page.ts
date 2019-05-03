@@ -19,9 +19,12 @@ export class HomePage implements OnInit {
   categorias: Categoria[];
   buscar: boolean = false;
 
+  fechas: any;
+
   constructor(private router: Router, private servicioCategorias: CategoriasService, private http: HttpClient) {
     this.http.get('http://localhost:55852/sentencias.asmx/MostrarSentencias').subscribe( data => {
       console.log(JSON.parse(JSON.stringify(data)));
+      this.fechas = data;
     });
   }
 
