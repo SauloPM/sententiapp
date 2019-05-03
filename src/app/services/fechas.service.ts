@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // Interfaces
-import { Categoria } from './../interfaces/categoria';
+import { Fecha } from '../interfaces/fechas';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriasService {
+export class FechasService {
 
-  categorias: Categoria[] = [
+  fechas: Fecha[] = [
     {
       id: 0,
       titulo: 'Día de la mujer',
@@ -118,25 +118,25 @@ export class CategoriasService {
   }
 
   getCategorias() {
-    return this.categorias;
+    return this.fechas;
     // return this.http.get('assets/data/categorias.json').pipe(tap(console.log));
   }
 
   getCategoria(id: number) {
-    return this.categorias[id];
+    return this.fechas[id];
   }
 
   buscarCategoria(secuencia: string) {
     
-    let resultados: Categoria[];
+    let resultados: Fecha[];
     secuencia = secuencia.toLowerCase();
 
-    for (let categoria of this.categorias) {
+    for (let fechas of this.fechas) {
 
-      let titulo: string = categoria.titulo.toLowerCase();
+      let titulo: string = fechas.titulo.toLowerCase();
 
       if ( titulo.indexOf(secuencia) >= 0 ) {
-        resultados.push(categoria);
+        resultados.push(fechas);
       }
     }
 
@@ -154,16 +154,16 @@ export class CategoriasService {
   getCategoriasAleatorias(id: number) {
 
     let posicion: number;
-    let resultados: Categoria[] = new Array(3);
+    let resultados: Fecha[] = new Array(3);
 
     for (let i = 0; i < 3; i++) {
 
       // Número aleatorio entre 0 y el tamaño del vector categorias - 1
       do {
-        posicion = Math.floor(Math.random() * this.categorias.length);
-      } while (resultados.includes(this.categorias[posicion]) || posicion === id);
+        posicion = Math.floor(Math.random() * this.fechas.length);
+      } while (resultados.includes(this.fechas[posicion]) || posicion === id);
 
-      resultados[i] = this.categorias[posicion];
+      resultados[i] = this.fechas[posicion];
     }
 
     return resultados;
@@ -176,10 +176,10 @@ export class CategoriasService {
   */
   buscarFechas( secuencia: string ) {
 
-    let resultados: Categoria[] = [];
+    let resultados: Fecha[] = [];
     secuencia = secuencia.toLowerCase();
 
-    for (let fecha of this.categorias) {
+    for (let fecha of this.fechas) {
 
       let titulo: string = fecha.titulo;
       titulo = titulo.toLowerCase();

@@ -1,4 +1,4 @@
-export interface Categoria {
+export interface Fecha {
     id: number;
     titulo: string;
     imagen: string;

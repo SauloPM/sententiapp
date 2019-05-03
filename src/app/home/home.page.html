@@ -3,9 +3,17 @@
   <div class="page-wrapper">
 
     <!-- Buscador -->
-    <div class="buscador">
-      <input class="entrada" #secuencia type="text" (keyup.enter)="buscarFecha(secuencia.value)" *ngIf="buscar">
-      <button class="boton" type="button" (click)="buscar = !buscar">
+    <div class="buscador" type="button" (click)="mostrarBuscador()">
+      <i class="icono fa fa-search" aria-hidden="true"></i>
+    </div>
+
+    <!-- Formulario -->
+    <div id="formulario-busqueda" class="formulario">
+      <button class="boton" type="button" (click)="cerrarBuscador()">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+      <input id="entrada" class="entrada" type="text" #secuencia>
+      <button class="boton" type="button" (click)="buscarFecha(secuencia.value)">
         <i class="fa fa-search" aria-hidden="true"></i>
       </button>
     </div>
@@ -17,12 +25,12 @@
         <i class="fa fa-angle-left" aria-hidden="true"></i>
       </button>
 
-      <div class="categoria" *ngFor="let categoria of categorias; let i = index">
+      <div class="fecha" *ngFor="let fecha of fechas; let i = index">
         <a [routerLink]="['/informacion', i]">
-          <div class="imagen" *ngIf="categoria.display == 'block'" [style.backgroundImage]="'url(' + categoria.imagen + ')'">
+          <div class="imagen" *ngIf="fecha.display == 'block'" [style.backgroundImage]="'url(' + fecha.imagen + ')'">
           </div>
         </a>
-        <span class="titulo" *ngIf="categoria.display == 'block'">{{ categoria.titulo }}</span>
+        <span class="titulo" *ngIf="fecha.display == 'block'">{{ fecha.titulo }}</span>
       </div>
 
       <button class="navigation right" type="button" (click)="siguiente()">

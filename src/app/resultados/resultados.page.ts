@@ -1,7 +1,7 @@
 import { Component         } from '@angular/core';
 import { ActivatedRoute    } from '@angular/router';
-import { Categoria         } from './../interfaces/categoria';
-import { CategoriasService } from './../services/categorias.service';
+import { Fecha             } from '../interfaces/fechas';
+import { FechasService     } from '../services/fechas.service';
 
 @Component({
   selector: 'app-resultados',
@@ -12,10 +12,10 @@ export class ResultadosPage {
 
   // Atributos
   secuencia: string;
-  fechasEncontradas: Categoria[];
+  fechasEncontradas: Fecha[];
 
   // Constructor
-  constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: CategoriasService) {
+  constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: FechasService) {
     this.activatedRoute.params.subscribe( parametroURL => {
       this.secuencia = parametroURL.secuencia;
       this.fechasEncontradas = this.servicioCategorias.buscarFechas(parametroURL.secuencia);

@@ -1,30 +1,25 @@
-import { Component, AfterViewChecked } from '@angular/core';
+import { Component         } from '@angular/core';
 import { ActivatedRoute    } from '@angular/router';
-import { Categoria         } from './../../interfaces/categoria';
-import { CategoriasService } from './../../services/categorias.service';
+import { Fecha             } from '../../interfaces/fechas';
+import { FechasService     } from '../../services/fechas.service';
 
 @Component({
   selector: 'app-otras-fechas',
   templateUrl: './otras-fechas.component.html',
   styleUrls: ['./otras-fechas.component.scss'],
 })
-export class OtrasFechasComponent implements AfterViewChecked  {
+export class OtrasFechasComponent {
 
   // Atributos
   ancho: number;
-  categoria: Categoria;
-  otrasFechas: Categoria[];
-
-  ngAfterViewChecked () {
-    // this.ancho = document.getElementById('hijo1').offsetWidth;
-    // document.getElementById('hijo1').style.height = this.ancho + 'px';
-  }
+  fecha: Fecha;
+  otrasFechas: Fecha[];
 
   // Constructor
-  constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: CategoriasService) {
+  constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: FechasService) {
     this.activatedRoute.params.subscribe( parametroURL => {
-      this.categoria = this.servicioCategorias.getCategoria( parametroURL.id );
+      this.fecha = this.servicioCategorias.getCategoria( parametroURL.id );
     });
-    this.otrasFechas = this.servicioCategorias.getCategoriasAleatorias(this.categoria.id);
+    this.otrasFechas = this.servicioCategorias.getCategoriasAleatorias(this.fecha.id);
   }
 }

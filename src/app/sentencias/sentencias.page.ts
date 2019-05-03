@@ -1,7 +1,7 @@
-import { Component         } from '@angular/core';
-import { ActivatedRoute    } from '@angular/router';
-import { Categoria         } from './../interfaces/categoria';
-import { CategoriasService } from './../services/categorias.service';
+import { Component      } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Fecha          } from '../interfaces/fechas';
+import { FechasService  } from '../services/fechas.service';
 
 @Component({
   selector: 'app-sentencias',
@@ -11,15 +11,15 @@ import { CategoriasService } from './../services/categorias.service';
 export class SentenciasPage {
 
   // Atributos
-  categoria: Categoria;
-  otrasFechas: Categoria[];
+  fecha: Fecha;
+  otrasFechas: Fecha[];
 
   // Constructor
-  constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: CategoriasService) {
+  constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: FechasService) {
     this.activatedRoute.params.subscribe( parametroURL => {
-      this.categoria = this.servicioCategorias.getCategoria( parametroURL.id );
+      this.fecha = this.servicioCategorias.getCategoria( parametroURL.id );
     });
 
-    this.otrasFechas = this.servicioCategorias.getCategoriasAleatorias(this.categoria.id);
+    this.otrasFechas = this.servicioCategorias.getCategoriasAleatorias(this.fecha.id);
   }
 }

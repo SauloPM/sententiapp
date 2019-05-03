@@ -1,7 +1,7 @@
-import { Component         } from '@angular/core';
-import { ActivatedRoute    } from '@angular/router';
-import { Categoria         } from './../interfaces/categoria';
-import { CategoriasService } from './../services/categorias.service';
+import { Component      } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Fecha          } from '../interfaces/fechas';
+import { FechasService  } from '../services/fechas.service';
 
 @Component({
   selector: 'app-informacion',
@@ -11,12 +11,12 @@ import { CategoriasService } from './../services/categorias.service';
 export class InformacionPage {
 
   // Atributos
-  categoria: Categoria;
+  fecha: Fecha;
 
   // Constructor
-  constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: CategoriasService) {
+  constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: FechasService) {
     this.activatedRoute.params.subscribe( parametroURL => {
-      this.categoria = this.servicioCategorias.getCategoria( parametroURL.id );
+      this.fecha = this.servicioCategorias.getCategoria( parametroURL.id );
     });
   }
 }

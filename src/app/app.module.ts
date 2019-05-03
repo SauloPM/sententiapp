@@ -10,8 +10,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 // Servicios
-import { HttpClientModule  } from '@angular/common/http';
-import { CategoriasService } from './services/categorias.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FechasService    } from './services/fechas.service';
 
 // Módulos
 import { ComponentsModule } from './components/components.module';
@@ -32,7 +32,7 @@ import { ComponentsModule } from './components/components.module';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    CategoriasService
+    FechasService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,17 +2,17 @@
 
   <!-- Cabecera -->
   <section id="header">
-    <a class="volver" [routerLink]="['/informacion', categoria.id]">
+    <a class="volver" [routerLink]="['/informacion', fecha.id]">
         <i class="fa fa-angle-left" aria-hidden="true"></i>
     </a>
   </section>
 
   <!-- Listado de sentencias -->
   <div class="contenedor">
-    <h1>{{ categoria.titulo }}</h1>
+    <h1>{{ fecha.titulo }}</h1>
     <h2>Listado de sentencias</h2>
     <ul class="sentencias">
-      <li class="sentencia" *ngFor="let sentencia of categoria.sentencias">{{ sentencia }}</li>
+      <li class="sentencia" *ngFor="let sentencia of fecha.sentencias">{{ sentencia }}</li>
     </ul>
   </div>
   

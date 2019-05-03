@@ -3,11 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Interfaces
-import { Categoria } from './../interfaces/categoria';
+import { Fecha } from '../interfaces/fechas';
 
 // Servicios
-import { CategoriasService } from './../services/categorias.service';
-import { getElementDepthCount } from '@angular/core/src/render3/state';
+import { FechasService } from '../services/fechas.service';
 
 @Component({
   selector: 'app-home',
@@ -16,21 +15,27 @@ import { getElementDepthCount } from '@angular/core/src/render3/state';
 })
 export class HomePage implements OnInit {
 
-  categorias: Categoria[];
-  buscar: boolean = false;
+  fechas: Fecha[];
+  prueba: any;
 
-  fechas: any;
+  // ─────────────── //
+  //     GENERAL     //
+  // ─────────────── //
 
-  constructor(private router: Router, private servicioCategorias: CategoriasService, private http: HttpClient) {
+  constructor(private router: Router, private servicioCategorias: FechasService, private http: HttpClient) {
     this.http.get('http://localhost:55852/sentencias.asmx/MostrarSentencias').subscribe( data => {
       console.log(JSON.parse(JSON.stringify(data)));
-      this.fechas = data;
+      this.prueba = data;
     });
   }
 
   ngOnInit() {
-    this.categorias = this.servicioCategorias.getCategorias();
+    this.fechas = this.servicioCategorias.getCategorias();
   }
+
+  // ──────────────── //
+  //     BUSCADOR     //
+  // ──────────────── //
 
   // Método que muestra los resultados de la búsqueda
   buscarFecha(secuencia: string) {
@@ -41,55 +46,83 @@ export class HomePage implements OnInit {
     // Utilizamos el buscador si la secuenca contiene al menos un carácter
     if (secuencia.trim() === '') {
       this.router.navigate( ['/home'] );
+      
+      // Focus en el input
+      let entrada = document.getElementById('entrada');
+      entrada.focus();
+
+      // Resaltamos el input en rojo para indicarle al usuario que no ha escrito nada
+      entrada.classList.add('vacia');
+      setTimeout(function() {
+        entrada.classList.remove('vacia');
+      }, 150);
+    } else {
+      this.router.navigate( ['/resultados', secuencia] );
     }
-    this.router.navigate( ['/resultados', secuencia] );
   }
 
-  // Método que muestra la categoría anterior
+  mostrarBuscador() {
+    let formularioBusqueda = document.getElementById('formulario-busqueda');
+    formularioBusqueda.style.top = '0';
+
+    let entrada = document.getElementById('entrada');
+    entrada.focus();
+  }
+
+  cerrarBuscador() {
+    let formularioBusqueda = document.getElementById('formulario-busqueda');
+    formularioBusqueda.style.top = '-75px';
+  }
+
+  // ──────────────── //
+  //     CARRUSEL     //
+  // ──────────────── //
+
+  // Mostrar categoría anterior
   anterior() {
     
     let indice  : number = 0;
     let posicion: number = 0;
 
     // Buscamos la posición de la categoría activa
-    this.categorias.forEach(categoria => {
-      if (categoria.display === 'block') {
+    this.fechas.forEach(fecha => {
+      if (fecha.display === 'block') {
         posicion = indice;
       }
       indice++;
     });
 
     // Desactivamos la categoría activa
-    this.categorias[posicion].display = 'none';
+    this.fechas[posicion].display = 'none';
 
     // Decrementamos la posición
-    posicion = ( posicion === 0 ) ? this.categorias.length - 1 : posicion - 1;
+    posicion = ( posicion === 0 ) ? this.fechas.length - 1 : posicion - 1;
 
     // Activamos la categoría anterior
-    this.categorias[posicion].display = 'block';
+    this.fechas[posicion].display = 'block';
   }
 
-  // Método que muestra la categoría siguiente
+  // Mostrar categoría siguiente
   siguiente() {
 
     let indice  : number = 0;
     let posicion: number = 0;
 
     // Buscamos la posición de la categoría activa
-    this.categorias.forEach(categoria => {
-      if (categoria.display === 'block') {
+    this.fechas.forEach(fecha => {
+      if (fecha.display === 'block') {
         posicion = indice;
       }
       indice++;
     });
 
     // Desactivamos la categoría activa
-    this.categorias[posicion].display = 'none';
+    this.fechas[posicion].display = 'none';
 
     // Decrementamos la posición
-    posicion = ( posicion === this.categorias.length - 1 ) ? 0 : posicion + 1;
+    posicion = ( posicion === this.fechas.length - 1 ) ? 0 : posicion + 1;
 
     // Activamos la categoría anterior
-    this.categorias[posicion].display = 'block';
+    this.fechas[posicion].display = 'block';
   }
 }

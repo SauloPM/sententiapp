@@ -1,28 +1,32 @@
 <ion-content>
 
-  <!-- Cabecera -->
-  <section id="header">
-    <a class="volver" [routerLink]="['/home']">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
-    </a>
-  </section>
+  <div class="page-wrapper">
 
-  <section id="resultados">
-    <div class="contenedor">
+    <div> <!-- No quitar, es para que la cabecera y los resultados aparezcan siempre pegados al top de la página -->
 
-      <p>Resultados encontrados para <span class="secuencia">{{secuencia}}</span></p>
+      <!-- Cabecera -->
+      <section id="header">
+        <a class="volver" [routerLink]="['/home']">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+        </a>
+      </section>
 
-      <a class="fecha" [routerLink]="['/informacion', fecha.id]" *ngFor="let fecha of fechasEncontradas">
-        <div class="imagen" [style.backgroundImage]="'url(' + fecha.imagen + ')'"></div>
-        <p class="titulo">{{fecha.titulo}}</p>
-        <i class="icono fa fa-angle-right" aria-hidden="true"></i>
-      </a>
+      <!-- Resultados -->
+      <section id="resultados">
+        <div class="contenedor">
+          <p>Resultados encontrados para <span class="secuencia">{{secuencia}}</span></p>
+          <a class="fecha" [routerLink]="['/informacion', fecha.id]" *ngFor="let fecha of fechasEncontradas">
+            <div class="imagen" [style.backgroundImage]="'url(' + fecha.imagen + ')'"></div>
+            <p class="titulo">{{fecha.titulo}}</p>
+            <i class="icono fa fa-angle-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </section>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <section id="footer">
-    <p class="copyright">&copy; SententiApp</p>
-  </section>
-
+    <!-- Footer -->
+    <section id="footer">
+      <p class="copyright">&copy; SententiApp</p>
+    </section>
+  </div>
 </ion-content>
