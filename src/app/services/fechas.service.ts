@@ -9,7 +9,8 @@ import { Fecha } from '../interfaces/fechas';
 })
 export class FechasService {
 
-  fechas: Fecha[] = [
+  fechas: any;
+  fechasPrueba: Fecha[] = [
     {
       id: 0,
       titulo: 'Día de la mujer',
@@ -107,26 +108,17 @@ export class FechasService {
     }
   ];
 
-  constructor( private http: HttpClient ) {
+  constructor( private http: HttpClient ) { }
 
-    // Notificamos al usuario que el servicio está disponible
-    console.log('Servicio de categorías listo para ser utilizado');
-
-    // Mostramos los datos por consola para que el usuario sepa que los datos se devuelven correctamente
-    // Esto es simplemente para mostrar los datos por consola, no tiene ningún otro efecto
-    this.getCategorias();
+  getFechas() {
+    return this.http.get('http://localhost:55852/sentencias.asmx/MostrarDatosInicio');
   }
 
-  getCategorias() {
-    return this.fechas;
-    // return this.http.get('assets/data/categorias.json').pipe(tap(console.log));
-  }
-
-  getCategoria(id: number) {
+  getFecha(id: number) {
     return this.fechas[id];
   }
 
-  buscarCategoria(secuencia: string) {
+  buscarFecha(secuencia: string) {
     
     let resultados: Fecha[];
     secuencia = secuencia.toLowerCase();
@@ -151,7 +143,7 @@ export class FechasService {
     · No tiene sentido tener una categoría abierta y abajo mostrar un acceso directo a ella misma: es redundante
 
   */
-  getCategoriasAleatorias(id: number) {
+  getFechasAleatorias(id: number) {
 
     let posicion: number;
     let resultados: Fecha[] = new Array(3);

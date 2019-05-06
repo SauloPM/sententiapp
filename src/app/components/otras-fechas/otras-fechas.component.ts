@@ -18,8 +18,8 @@ export class OtrasFechasComponent {
   // Constructor
   constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: FechasService) {
     this.activatedRoute.params.subscribe( parametroURL => {
-      this.fecha = this.servicioCategorias.getCategoria( parametroURL.id );
+      this.fecha = this.servicioCategorias.getFecha( parametroURL.id );
     });
-    this.otrasFechas = this.servicioCategorias.getCategoriasAleatorias(this.fecha.id);
+    this.otrasFechas = this.servicioCategorias.getFechasAleatorias(this.fecha.id);
   }
 }

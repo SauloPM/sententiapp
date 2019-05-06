@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Servicios
 import { HttpClientModule } from '@angular/common/http';
-import { FechasService    } from './services/fechas.service';
 
 // Módulos
 import { ComponentsModule } from './components/components.module';
@@ -31,8 +30,7 @@ import { ComponentsModule } from './components/components.module';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    FechasService
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }    
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component  } from '@angular/core';
+import { Router     } from '@angular/router';
 
 // Interfaces
 import { Fecha } from '../interfaces/fechas';
@@ -13,24 +12,32 @@ import { FechasService } from '../services/fechas.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
 
-  fechas: Fecha[];
+  fechas: any[] = [];
+  etiquetas: string[];
   prueba: any;
 
   // ─────────────── //
   //     GENERAL     //
   // ─────────────── //
 
-  constructor(private router: Router, private servicioCategorias: FechasService, private http: HttpClient) {
-    this.http.get('http://localhost:55852/sentencias.asmx/MostrarSentencias').subscribe( data => {
-      console.log(JSON.parse(JSON.stringify(data)));
-      this.prueba = data;
+  constructor(private router: Router, private servicioFechas: FechasService) {
+    this.servicioFechas.getFechas().subscribe( (data: any[]) => {
+      console.log(data);
+      this.fechas = data;
     });
   }
 
-  ngOnInit() {
-    this.fechas = this.servicioCategorias.getCategorias();
+  getEtiquetas() {
+
+    let resultado: string[] = [];
+
+    this.fechas.forEach(function (valor, indice, vector) {
+      resultado.push(vector[indice].etiqueta);
+    });
+
+    return resultado;
   }
 
   // ──────────────── //
