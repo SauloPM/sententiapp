@@ -2,22 +2,22 @@
 
   <!-- Cabecera -->
   <section id="header">
-    <a class="volver" [routerLink]="['/informacion', fecha.id]">
+    <a class="volver" [routerLink]="['/informacion', id]">
         <i class="fa fa-angle-left" aria-hidden="true"></i>
     </a>
   </section>
 
   <!-- Listado de sentencias -->
-  <!-- <div class="contenedor">
-    <h1>{{ fecha.titulo }}</h1>
+  <div class="contenedor">
+    <h1>{{ fecha.etiqueta }}</h1>
     <h2>Listado de sentencias</h2>
     <ul class="sentencias">
-      <li class="sentencia" *ngFor="let sentencia of fecha.sentencias">{{ sentencia }}</li>
+      <li class="sentencia" *ngFor="let fecha of fechas">{{ fecha.extractolatino }}</li>
     </ul>
-  </div> -->
+  </div>
   
   <!-- Otras fechas -->
-  <!-- <app-otras-fechas></app-otras-fechas> -->
+  <app-otras-fechas></app-otras-fechas>
 
   <!-- Footer -->
   <section id="footer">

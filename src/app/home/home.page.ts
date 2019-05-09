@@ -1,9 +1,6 @@
 import { Component  } from '@angular/core';
 import { Router     } from '@angular/router';
 
-// Interfaces
-import { Fecha } from '../interfaces/fechas';
-
 // Servicios
 import { FechasService } from '../services/fechas.service';
 
@@ -14,26 +11,42 @@ import { FechasService } from '../services/fechas.service';
 })
 export class HomePage {
 
-  fechas: any[] = [];
+  fechas: Fecha[] = [];
   etiquetas: string[];
   prueba: any;
 
-  // ─────────────── //
-  //     GENERAL     //
-  // ─────────────── //
+  /*
+  ┌ ─────────────── ┐
+  |     GENERAL     |
+  └ ─────────────── ┘
+  */
 
   constructor(private router: Router, private servicioFechas: FechasService) {
-    this.servicioFechas.getFechas().subscribe( (data: any[]) => {
+    this.servicioFechas.getFechas().subscribe( (data: Fecha[]) => {
+      
+      // Guardamos las fechas
       this.fechas = data;
+
+      // Hacemos visible solo la primera fecha
+      let i: number = 0;
+      this.fechas.forEach( item => {
+        if (i === 0) {
+          i = i + 1;
+          item.display = 'block';
+        } else {
+          item.display = 'none';
+        }
+      });
     });
   }
   
-  // ──────────────── //
-  //     BUSCADOR     //
-  // ──────────────── //
+  /*
+  ┌ ──────────────── ┐
+  |     BUSCADOR     |
+  └ ──────────────── ┘
+  */
 
-  // Método que muestra los resultados de la búsqueda
-  buscarFecha(secuencia: string) {
+  buscarFecha( secuencia: string ) {
   
     // Eliminamos los espacios innecesarios
     secuencia = secuencia.trim();
@@ -69,18 +82,19 @@ export class HomePage {
     formularioBusqueda.style.top = '-75px';
   }
 
-  // ──────────────── //
-  //     CARRUSEL     //
-  // ──────────────── //
+  /*
+  ┌ ──────────────── ┐
+  |     CARRUSEL     |
+  └ ──────────────── ┘
+  */
 
-  // Mostrar categoría anterior
   anterior() {
     
     let indice  : number = 0;
     let posicion: number = 0;
 
     // Buscamos la posición de la categoría activa
-    this.fechas.forEach(fecha => {
+    this.fechas.forEach( fecha => {
       if (fecha.display === 'block') {
         posicion = indice;
       }
@@ -95,9 +109,10 @@ export class HomePage {
 
     // Activamos la categoría anterior
     this.fechas[posicion].display = 'block';
+
+    console.log(this.fechas);
   }
 
-  // Mostrar categoría siguiente
   siguiente() {
 
     let indice  : number = 0;
@@ -120,4 +135,11 @@ export class HomePage {
     // Activamos la categoría anterior
     this.fechas[posicion].display = 'block';
   }
+}
+
+export interface Fecha {
+  id: number;
+  etiqueta: string;
+  imagen: string;
+  display: string;
 }

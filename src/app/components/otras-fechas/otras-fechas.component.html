@@ -7,6 +7,6 @@
     <a [routerLink]="['/informacion', otrasFechas[2].id]" class="thumbnail" [style.backgroundImage]="'url(' + otrasFechas[2].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}">3</a>
   </div>
   <div class="captions">
-    <span class="caption" *ngFor="let otraFecha of otrasFechas; let i = index">{{ otraFecha.titulo }}</span>
+    <span class="caption" *ngFor="let otraFecha of otrasFechas; let i = index">{{ otraFecha.etiqueta }}</span>
   </div>
 </div>

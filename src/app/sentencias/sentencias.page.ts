@@ -1,6 +1,5 @@
 import { Component      } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Fecha          } from '../interfaces/fechas';
 import { FechasService  } from '../services/fechas.service';
 
 @Component({
@@ -10,16 +9,27 @@ import { FechasService  } from '../services/fechas.service';
 })
 export class SentenciasPage {
 
-  // Atributos
-  fecha: Fecha;
-  otrasFechas: Fecha[];
+  id: number = 0;
+  fecha: Fecha = {
+    etiqueta: '',
+    extractolatino: '',
+  };
+  fechas: Fecha[] = [];
 
-  // Constructor
   constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: FechasService) {
-    // this.activatedRoute.params.subscribe( parametroURL => {
-    //   this.fecha = this.servicioCategorias.getFecha( parametroURL.id );
-    // });
+    this.activatedRoute.params.subscribe( parametroURL => {
 
-    // this.otrasFechas = this.servicioCategorias.getFechasAleatorias(this.fecha.id);
+      this.id = parametroURL.id;
+
+        this.servicioCategorias.getSentencias( parametroURL.id ).subscribe( ( data: Fecha[] ) => {
+          this.fecha = data[0];
+          this.fechas = data;
+        });
+    });
   }
+}
+
+export interface Fecha {
+  etiqueta: string;
+  extractolatino: string;
 }

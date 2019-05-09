@@ -25,11 +25,11 @@
         <i class="fa fa-angle-left" aria-hidden="true"></i>
       </button>
 
-      <div class="fecha" *ngFor="let fecha of fechas; let i = index">
-        <a *ngIf="i == 0" [routerLink]="['/informacion', fecha.id]">
+      <div class="fecha" *ngFor="let fecha of fechas">
+        <a *ngIf="fecha.display=='block'" [routerLink]="['/informacion', fecha.id]">
           <div class="imagen" [style.backgroundImage]="'url(' + fecha.imagen + ')'"></div>
         </a>
-        <span *ngIf="i == 0" class="titulo">{{ fecha.etiqueta }}</span>
+        <span *ngIf="fecha.display=='block'" class="titulo">{{ fecha.etiqueta }}</span>
       </div>
 
       <button class="navigation right" type="button" (click)="siguiente()">

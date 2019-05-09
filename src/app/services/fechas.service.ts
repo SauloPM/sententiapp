@@ -18,21 +18,24 @@ export class FechasService {
   }
 
   getFecha(id: number) {
-    // return this.http.get('http://localhost:55852/sentencias.asmx/MostrarInformacion?id=' + id);
-    return this.http.get('http://localhost:55852/sentencias.asmx/MostrarInformacion?id=5');
+    return this.http.get('http://localhost:55852/sentencias.asmx/MostrarInformacion?id=' + id);
   }
 
-  buscarFecha(secuencia: string) {
-    
-    let resultados: Fecha[];
+  getSentencias(id: number) {
+    return this.http.get('http://localhost:55852/sentencias.asmx/MostrarSentencias?id=' + id);
+  }
+
+  buscarFecha(secuencia: string, fechas: any[]) {
+
+    let resultados: any[] = [];
     secuencia = secuencia.toLowerCase();
 
-    for (let fechas of this.fechas) {
-
-      let titulo: string = fechas.titulo.toLowerCase();
+    for (let fecha of fechas) {
+      console.log(fecha);
+      let titulo: string = fecha.etiqueta.toLowerCase();
 
       if ( titulo.indexOf(secuencia) >= 0 ) {
-        resultados.push(fechas);
+        resultados.push(fecha);
       }
     }
 
@@ -54,7 +57,7 @@ export class FechasService {
 
     for (let i = 0; i < 3; i++) {
 
-      // Número aleatorio entre 0 y el tamaño del vector categorias - 1
+      // Número aleatorio entre 0 y el tamaño del vector fechas - 1
       do {
         posicion = Math.floor(Math.random() * fechas.length);
       } while (resultados.includes(fechas[posicion]) || posicion === id);

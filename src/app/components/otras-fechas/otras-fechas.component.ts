@@ -1,6 +1,5 @@
 import { Component         } from '@angular/core';
 import { ActivatedRoute    } from '@angular/router';
-import { Fecha             } from '../../interfaces/fechas';
 import { FechasService     } from '../../services/fechas.service';
 
 @Component({
@@ -10,22 +9,33 @@ import { FechasService     } from '../../services/fechas.service';
 })
 export class OtrasFechasComponent {
 
-  // Atributos
-  ancho: number;
-  fecha: any;
-  otrasFechas: any[];
+  ancho: number = 0;
+  fecha: Fecha = {
+    id: 0,
+    etiqueta: '',
+    imagen: ''
+  };
+  otrasFechas: Fecha[] = [ { id: 0, etiqueta: '', imagen: '' }, { id: 0, etiqueta: '', imagen: '' }, { id: 0, etiqueta: '', imagen: '' } ];
 
-  // Constructor
   constructor(private activatedRoute: ActivatedRoute, private servicioFechas: FechasService) {
 
-    // Obtenemos los datos necesarios de la fecha cuyo ID fue pasado por parámetro
     this.activatedRoute.params.subscribe( parametroURL => {
-      this.fecha = this.servicioFechas.getFecha( parametroURL.id );
 
-      // Obtenemos tres fechas aleatorias sin ser la que estamos cargando
-      this.servicioFechas.getFechas().subscribe( (data: any[]) => {
-        this.otrasFechas = this.servicioFechas.getFechasAleatorias(this.fecha.id, data);
+      // Almacenamos los datos de la fecha de la URL
+      this.servicioFechas.getFecha( parametroURL.id ).subscribe( (data: Fecha) => {
+        this.fecha = data[0];
+        
+        // Obtenemos tres fechas aleatorias
+        this.servicioFechas.getFechas().subscribe( (allFechas: Fecha[]) => {
+          this.otrasFechas = this.servicioFechas.getFechasAleatorias(this.fecha.id, allFechas);
+        });
       });
     });
   }
+}
+
+export interface Fecha {
+  id: number;
+  etiqueta: string;
+  imagen: string;
 }
