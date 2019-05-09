@@ -11,12 +11,26 @@ import { FechasService  } from '../services/fechas.service';
 export class InformacionPage {
 
   // Atributos
-  fecha: Fecha;
+  id: number;
+  fecha: any;
 
   // Constructor
-  constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: FechasService) {
-    this.activatedRoute.params.subscribe( parametroURL => {
-      this.fecha = this.servicioCategorias.getFecha( parametroURL.id );
+  constructor(private activatedRoute: ActivatedRoute, private servicioFechas: FechasService) {
+
+    this.servicioFechas.getFecha(5).subscribe( (data: any) => {
+      this.fecha = data[0];
     });
+
+    // this.servicioFechas.getFecha(5).subscribe( (data: any[]) => {
+    //   this.fecha = data;
+    // });
+
+    // this.activatedRoute.params.subscribe( parametroURL => {
+    //   this.id = parametroURL.id;
+
+    //   this.servicioFechas.getFecha(this.id).subscribe( (data: any[]) => {
+    //     this.fecha = data;
+    //   });
+    // });
   }
 }

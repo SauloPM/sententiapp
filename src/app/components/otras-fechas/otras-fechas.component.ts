@@ -12,14 +12,20 @@ export class OtrasFechasComponent {
 
   // Atributos
   ancho: number;
-  fecha: Fecha;
-  otrasFechas: Fecha[];
+  fecha: any;
+  otrasFechas: any[];
 
   // Constructor
-  constructor(private activatedRoute: ActivatedRoute, private servicioCategorias: FechasService) {
+  constructor(private activatedRoute: ActivatedRoute, private servicioFechas: FechasService) {
+
+    // Obtenemos los datos necesarios de la fecha cuyo ID fue pasado por parámetro
     this.activatedRoute.params.subscribe( parametroURL => {
-      this.fecha = this.servicioCategorias.getFecha( parametroURL.id );
+      this.fecha = this.servicioFechas.getFecha( parametroURL.id );
+
+      // Obtenemos tres fechas aleatorias sin ser la que estamos cargando
+      this.servicioFechas.getFechas().subscribe( (data: any[]) => {
+        this.otrasFechas = this.servicioFechas.getFechasAleatorias(this.fecha.id, data);
+      });
     });
-    this.otrasFechas = this.servicioCategorias.getFechasAleatorias(this.fecha.id);
   }
 }

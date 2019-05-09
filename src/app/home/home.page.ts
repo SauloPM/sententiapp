@@ -24,22 +24,10 @@ export class HomePage {
 
   constructor(private router: Router, private servicioFechas: FechasService) {
     this.servicioFechas.getFechas().subscribe( (data: any[]) => {
-      console.log(data);
       this.fechas = data;
     });
   }
-
-  getEtiquetas() {
-
-    let resultado: string[] = [];
-
-    this.fechas.forEach(function (valor, indice, vector) {
-      resultado.push(vector[indice].etiqueta);
-    });
-
-    return resultado;
-  }
-
+  
   // ──────────────── //
   //     BUSCADOR     //
   // ──────────────── //

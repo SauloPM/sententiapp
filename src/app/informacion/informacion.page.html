@@ -1,22 +1,23 @@
 <ion-content fullscreen="true">
 
   <!-- Cabecera -->
-  <section id="header" [style.backgroundImage]="'url(' + fecha.imagen + ')'">
+  <!-- <section id="header" [style.backgroundImage]="'url(' + fecha.imagen + ')'"> -->
+  <section id="header">
     <a class="volver" [routerLink]="['/home']">
         <i class="fa fa-angle-left" aria-hidden="true"></i>
     </a>
-    <a class="ver-sentencias" [routerLink]="['/sentencias', fecha.id]">+</a>
+    <!-- <a class="ver-sentencias" [routerLink]="['/sentencias', fecha.id]">+</a> -->
   </section>
 
   <!-- Información -->
   <div class="contenedor">
-    <h1>{{ fecha.titulo }}</h1>
+    <h1>{{ fecha.etiqueta }}</h1>
     <h2>Introducción</h2>
-    <p>{{ fecha.informacion }}</p>
+    <p>{{ fecha.descripcion }}</p>
   </div>
 
   <!-- Otras fechas -->
-  <app-otras-fechas></app-otras-fechas>
+  <!--<app-otras-fechas></app-otras-fechas>-->
 
   <!-- Footer -->
   <section id="footer">
