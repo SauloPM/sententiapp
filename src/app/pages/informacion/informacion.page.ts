@@ -1,6 +1,6 @@
 import { Component      } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FechasService  } from '../services/fechas.service';
+import { FechasService  } from '../../services/fechas.service';
 
 @Component({
   selector: 'app-informacion',

@@ -2,7 +2,7 @@ import { Component  } from '@angular/core';
 import { Router     } from '@angular/router';
 
 // Servicios
-import { FechasService } from '../services/fechas.service';
+import { FechasService } from '../../services/fechas.service';
 
 @Component({
   selector: 'app-home',
