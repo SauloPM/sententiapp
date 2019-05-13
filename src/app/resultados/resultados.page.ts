@@ -16,9 +16,10 @@ export class ResultadosPage {
     this.activatedRoute.params.subscribe( parametroURL => {
       
       this.secuencia = parametroURL.secuencia;
-      
-      this.servicioCategorias.getFechas().subscribe( ( data: any[] ) => {
-        this.fechasEncontradas = this.servicioCategorias.buscarFecha(parametroURL.secuencia, data);
+
+      this.servicioCategorias.getResultadosBusqueda( this.secuencia ).subscribe( ( data: any[] ) => {
+        console.log(data);
+        this.fechasEncontradas = data;
       });
     });
   }

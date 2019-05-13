@@ -14,32 +14,20 @@ export class FechasService {
   constructor( private http: HttpClient ) { }
 
   getFechas() {
-    return this.http.get('http://localhost:55852/sentencias.asmx/MostrarFechas');
+    return this.http.get('http://appstip.iatext.ulpgc.es/ServicioSententiApp/sentencias.asmx/MostrarFechas');
   }
 
   getFecha(id: number) {
-    return this.http.get('http://localhost:55852/sentencias.asmx/MostrarInformacion?id=' + id);
+    return this.http.get('http://appstip.iatext.ulpgc.es/ServicioSententiApp/sentencias.asmx/MostrarInformacion?id=' + id);
   }
 
   getSentencias(id: number) {
-    return this.http.get('http://localhost:55852/sentencias.asmx/MostrarSentencias?id=' + id);
+    return this.http.get('http://appstip.iatext.ulpgc.es/ServicioSententiApp/sentencias.asmx/MostrarSentencias?id=' + id);
   }
 
-  buscarFecha(secuencia: string, fechas: any[]) {
-
-    let resultados: any[] = [];
-    secuencia = secuencia.toLowerCase();
-
-    for (let fecha of fechas) {
-      console.log(fecha);
-      let titulo: string = fecha.etiqueta.toLowerCase();
-
-      if ( titulo.indexOf(secuencia) >= 0 ) {
-        resultados.push(fecha);
-      }
-    }
-
-    return resultados;
+  getResultadosBusqueda (secuencia: string) {
+    // return this.http.get('http://localhost:55852/sentencias.asmx/MostrarResultadosBusqueda?secuencia=' + secuencia);
+    return this.http.get('http://appstip.iatext.ulpgc.es/ServicioSententiApp/sentencias.asmx/MostrarResultadosBusqeuda?secuencia=' + secuencia);
   }
 
   /*
