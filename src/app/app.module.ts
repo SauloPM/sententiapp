@@ -15,6 +15,9 @@ import { HttpClientModule } from '@angular/common/http';
 // Módulos
 import { ComponentsModule } from './components/components.module';
 
+// Notificaciones PUSH
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -30,6 +33,7 @@ import { ComponentsModule } from './components/components.module';
   providers: [
     StatusBar,
     SplashScreen,
+    OneSignal,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }    
   ],
   bootstrap: [AppComponent]
