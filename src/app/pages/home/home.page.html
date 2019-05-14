@@ -27,7 +27,7 @@
 
       <div class="fecha" *ngFor="let fecha of fechas">
         <a *ngIf="fecha.display=='block'" [routerLink]="['/informacion', fecha.id]">
-          <div class="imagen" [style.backgroundImage]="'url(' + fecha.imagen + ')'"></div>
+          <div class="imagen" [style.backgroundImage]="'url(http://' + fecha.imagen + ')'"></div>
         </a>
         <span *ngIf="fecha.display=='block'" class="titulo">{{ fecha.etiqueta }}</span>
       </div>

@@ -1,27 +1,34 @@
 <ion-content fullscreen="true">
 
-  <!-- Cabecera -->
-  <section id="header">
-    <a class="volver" [routerLink]="['/informacion', id]">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
-    </a>
-  </section>
+  <div class="page-wrapper">
 
-  <!-- Listado de sentencias -->
-  <div class="contenedor">
-    <h1>{{ fecha.etiqueta }}</h1>
-    <h2>Listado de sentencias</h2>
-    <ul class="sentencias">
-      <li class="sentencia" *ngFor="let fecha of fechas">{{ fecha.extractolatino }}</li>
-    </ul>
+    <div>
+
+      <!-- Cabecera -->
+      <section id="header">
+        <a class="volver" [routerLink]="['/informacion', id]">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+        </a>
+      </section>
+
+      <!-- Listado de sentencias -->
+      <div class="contenedor">
+        <h1>{{ fecha.etiqueta }}</h1>
+        <h2>Listado de sentencias</h2>
+        <ul class="sentencias">
+          <li class="sentencia" *ngFor="let fecha of fechas">{{ fecha.extractolatino }}</li>
+        </ul>
+      </div>
+      
+      <!-- Otras fechas -->
+      <app-otras-fechas></app-otras-fechas>
+    </div>
+
+    <!-- Footer -->
+    <section id="footer">
+      <p class="copyright">&copy; SententiApp</p>
+    </section>
+
   </div>
-  
-  <!-- Otras fechas -->
-  <app-otras-fechas></app-otras-fechas>
-
-  <!-- Footer -->
-  <section id="footer">
-    <p class="copyright">&copy; SententiApp</p>
-  </section>
 
 </ion-content>

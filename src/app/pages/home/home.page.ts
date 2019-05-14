@@ -1,5 +1,5 @@
-import { Component  } from '@angular/core';
-import { Router     } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router    } from '@angular/router';
 
 // Servicios
 import { FechasService } from '../../services/fechas.service';
@@ -23,7 +23,7 @@ export class HomePage {
 
   constructor(private router: Router, private servicioFechas: FechasService) {
     this.servicioFechas.getFechas().subscribe( (data: Fecha[]) => {
-      
+
       // Guardamos las fechas
       this.fechas = data;
 
@@ -50,6 +50,8 @@ export class HomePage {
   
     // Eliminamos los espacios innecesarios
     secuencia = secuencia.trim();
+
+    this.cerrarBuscador();
 
     // Utilizamos el buscador si la secuenca contiene al menos un carácter
     if (secuencia.trim() === '') {
@@ -78,6 +80,11 @@ export class HomePage {
   }
 
   cerrarBuscador() {
+
+    // Vaciamos el input
+    (<HTMLInputElement>document.getElementById('entrada')).value = '';
+
+    // Ocultamos el formulario de búsqueda
     let formularioBusqueda = document.getElementById('formulario-busqueda');
     formularioBusqueda.style.top = '-75px';
   }
@@ -109,8 +116,6 @@ export class HomePage {
 
     // Activamos la categoría anterior
     this.fechas[posicion].display = 'block';
-
-    console.log(this.fechas);
   }
 
   siguiente() {

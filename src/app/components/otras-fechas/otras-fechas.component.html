@@ -2,9 +2,9 @@
 <div class="contenedor">
   <h2>Otras fechas</h2>
   <div class="thumbnails">
-    <a [routerLink]="['/informacion', otrasFechas[0].id]" class="thumbnail" [style.backgroundImage]="'url(' + otrasFechas[0].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}" #hijo1>1</a>
-    <a [routerLink]="['/informacion', otrasFechas[1].id]" class="thumbnail" [style.backgroundImage]="'url(' + otrasFechas[1].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}">2</a>
-    <a [routerLink]="['/informacion', otrasFechas[2].id]" class="thumbnail" [style.backgroundImage]="'url(' + otrasFechas[2].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}">3</a>
+    <a [routerLink]="['/informacion', otrasFechas[0].id]" class="thumbnail" [style.backgroundImage]="'url(http://' + otrasFechas[0].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}" #hijo1>1</a>
+    <a [routerLink]="['/informacion', otrasFechas[1].id]" class="thumbnail" [style.backgroundImage]="'url(http://' + otrasFechas[1].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}">2</a>
+    <a [routerLink]="['/informacion', otrasFechas[2].id]" class="thumbnail" [style.backgroundImage]="'url(http://' + otrasFechas[2].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}">3</a>
   </div>
   <div class="captions">
     <span class="caption" *ngFor="let otraFecha of otrasFechas; let i = index">{{ otraFecha.etiqueta }}</span>
