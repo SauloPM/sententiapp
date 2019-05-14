@@ -51,8 +51,6 @@ export class HomePage {
     // Eliminamos los espacios innecesarios
     secuencia = secuencia.trim();
 
-    this.cerrarBuscador();
-
     // Utilizamos el buscador si la secuenca contiene al menos un carácter
     if (secuencia.trim() === '') {
       this.router.navigate( ['/home'] );
@@ -67,6 +65,9 @@ export class HomePage {
         entrada.classList.remove('vacia');
       }, 150);
     } else {
+
+      this.cerrarBuscador();
+
       this.router.navigate( ['/resultados', secuencia] );
     }
   }
