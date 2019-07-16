@@ -26,6 +26,7 @@ export class FechasService {
   }
 
   getResultadosBusqueda (secuencia: string) {
+    // return this.http.get('http://localhost:55852/sentencias.asmx/MostrarResultadosBusqueda?secuencia=' + secuencia);
     return this.http.get('http://appstip.iatext.ulpgc.es/ServicioSententiApp/sentencias.asmx/MostrarResultadosBusqueda?secuencia=' + secuencia);
   }
 
