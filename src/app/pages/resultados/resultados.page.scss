@@ -35,8 +35,8 @@
 
     .fecha {
         display: flex;
-        justify-items: center;
         align-items: center;
+        justify-content: space-between;
         text-decoration: none;
         border-bottom: 1px solid rgb(235,235,235);
         padding: 0 10px;
@@ -49,6 +49,7 @@
         }
 
         .imagen {
+            flex-shrink: 0;
             background-color: $primary;
             background-size: cover;
             background-position: center;
@@ -66,10 +67,7 @@
             color: $primary;
             font-size: 20px;
             font-weight: bold;
-            position: absolute;
-            top: 50%;
-            right: 25px;
-            transform: translateY(-50%);
+            padding-left: 10px;
             opacity: .75;
         }
     }

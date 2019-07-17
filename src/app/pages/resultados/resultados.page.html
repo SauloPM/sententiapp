@@ -16,7 +16,7 @@
         <div class="contenedor">
           <p>Resultados encontrados para <span class="secuencia">{{secuencia}}</span></p>
           <a class="fecha" [routerLink]="['/informacion', fecha.id]" *ngFor="let fecha of fechasEncontradas">
-            <div class="imagen" [style.backgroundImage]="'url(' + fecha.imagen + ')'"></div>
+            <div class="imagen" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
             <p class="titulo">{{fecha.etiqueta}}</p>
             <i class="icono fa fa-angle-right" aria-hidden="true"></i>
           </a>
@@ -26,7 +26,7 @@
 
     <!-- Footer -->
     <section id="footer">
-      <p class="copyright">&copy; SententiApp</p>
+      <a class="copyright" href="https://iatext.ulpgc.es/">&copy; IATEXT</a>
     </section>
   </div>
 </ion-content>
