@@ -17,6 +17,9 @@ export class HomePage {
   prueba: any;
   fontSize = 'size-md';
 
+  mostrarCierre : string = '';
+  mostrarEntrada: string = '';
+
   // ─────────────── //
   //     GENERAL     //
   // ─────────────── //
@@ -45,38 +48,44 @@ export class HomePage {
   //     BUSCADOR     //
   // ──────────────── //
 
-  buscarFecha( secuencia: string ) {
-  
-    // Eliminamos los espacios innecesarios
+  mostrarBuscador(secuencia: string) {
+
     secuencia = secuencia.trim();
+    
+    // El buscador está visible
+    if ( this.mostrarEntrada === 'activa' ) {
 
-    // Utilizamos el buscador si la secuenca contiene al menos un carácter
-    if (secuencia.trim() === '') {
-      this.router.navigate( ['/home'] );
-      
-      // Focus en el input
-      let entrada = document.getElementById('entrada');
-      entrada.focus();
+      // Hemos escrito algo
+      if ( secuencia.length > 0 ) {
+        this.buscarFecha( secuencia );
+      }
 
-      // Resaltamos el input en rojo para indicarle al usuario que no ha escrito nada
-      entrada.classList.add('vacia');
-      setTimeout(function() {
-        entrada.classList.remove('vacia');
-      }, 150);
-    } else {
+      // No hemos escrito nada
+      else {
 
-      this.cerrarBuscador();
+        let entrada = document.getElementById('entrada');
 
-      this.router.navigate( ['/resultados', secuencia] );
+        // Hacemos focus
+        entrada.focus();
+
+        // Resaltamos el input en rojo para indicarle al usuario que no ha escrito nada
+        entrada.classList.add('vacia');
+        setTimeout(() => {
+          entrada.classList.remove('vacia');
+        }, 500);
+      }
     }
-  }
 
-  mostrarBuscador() {
-    let formularioBusqueda = document.getElementById('formulario-busqueda');
-    formularioBusqueda.style.top = '0';
+    // El buscador no está visible
+    else {
+      
+      this.mostrarEntrada = 'activa';
 
-    let entrada = document.getElementById('entrada');
-    entrada.focus();
+      setTimeout(() => {
+        this.mostrarCierre = 'activa';
+      }, 500);
+
+    }
   }
 
   cerrarBuscador() {
@@ -85,8 +94,29 @@ export class HomePage {
     (<HTMLInputElement>document.getElementById('entrada')).value = '';
 
     // Ocultamos el formulario de búsqueda
-    let formularioBusqueda = document.getElementById('formulario-busqueda');
-    formularioBusqueda.style.top = '-75px';
+    this.mostrarCierre = '';
+
+    setTimeout(() => {
+      this.mostrarEntrada = '';
+    }, 500);
+    
+  }
+
+  buscarFecha( secuencia: string ) {
+  
+    // Utilizamos el buscador si la secuenca contiene al menos un carácter
+    if (secuencia.trim() === '') {
+      this.router.navigate( ['/home'] );
+      
+      
+
+      
+    } else {
+
+      this.cerrarBuscador();
+
+      this.router.navigate( ['/resultados', secuencia] );
+    }
   }
 
   // ──────────────── //

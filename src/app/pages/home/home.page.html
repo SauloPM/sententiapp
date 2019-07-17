@@ -3,19 +3,10 @@
   <div class="page-wrapper animated fadeIn">
 
     <!-- Buscador -->
-    <div class="buscador" type="button" (click)="mostrarBuscador()">
-      <i class="icono fa fa-search" aria-hidden="true"></i>
-    </div>
-
-    <!-- Formulario -->
-    <div id="formulario-busqueda" class="formulario">
-      <button class="boton" type="button" (click)="cerrarBuscador()">
-        <i class="fa fa-times" aria-hidden="true"></i>
-      </button>
-      <input id="entrada" class="entrada" type="text" #secuencia autocomplete="off">
-      <button class="boton" type="button" (click)="buscarFecha(secuencia.value)">
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </button>
+    <div class="buscador">
+      <i class="icono fa fa-search" aria-hidden="true" (click)="mostrarBuscador(entrada.value)"></i>
+      <i class="icono fa fa-times"  aria-hidden="true" (click)="cerrarBuscador()" [ngClass]="mostrarCierre"></i>
+      <input #entrada id="entrada" [ngClass]="mostrarEntrada" class="entrada" type="text" #secuencia autocomplete="off">
     </div>
 
     <!-- Carrusel -->
