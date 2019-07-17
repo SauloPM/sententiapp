@@ -1,6 +1,6 @@
 <ion-content>
 
-  <div class="page-wrapper">
+  <div class="page-wrapper animated fadeIn">
 
     <!-- Buscador -->
     <div class="buscador" type="button" (click)="mostrarBuscador()">
@@ -25,11 +25,11 @@
         <i class="fa fa-angle-left" aria-hidden="true"></i>
       </button>
 
-      <div class="fecha" *ngFor="let fecha of fechas">
+      <div class="fecha" *ngFor="let fecha of fechas" (swipeRight)="siguiente()" (swipeLeft)="anterior()">
         <a *ngIf="fecha.display=='block'" [routerLink]="['/informacion', fecha.id]">
           <div class="imagen" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
         </a>
-        <span *ngIf="fecha.display=='block'" class="titulo">{{ fecha.etiqueta }}</span>
+        <span *ngIf="fecha.display=='block'" class="titulo" [ngClass]="fontSize">{{ fecha.etiqueta }}</span>
       </div>
 
       <button class="navigation right" type="button" (click)="siguiente()">
@@ -40,7 +40,7 @@
 
     <!-- Footer -->
     <section id="footer">
-      <p class="copyright">&copy; SententiApp</p>
+      <a class="copyright" href="https://iatext.ulpgc.es/">&copy; IATEXT</a>
     </section>
   </div>
 </ion-content>

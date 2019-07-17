@@ -11,15 +11,15 @@ import { FechasService } from '../../services/fechas.service';
 })
 export class HomePage {
 
+  // Atributos
   fechas: Fecha[] = [];
   etiquetas: string[];
   prueba: any;
+  fontSize = 'size-md';
 
-  /*
-  ┌ ─────────────── ┐
-  |     GENERAL     |
-  └ ─────────────── ┘
-  */
+  // ─────────────── //
+  //     GENERAL     //
+  // ─────────────── //
 
   constructor(private router: Router, private servicioFechas: FechasService) {
     this.servicioFechas.getFechas().subscribe( (data: Fecha[]) => {
@@ -33,6 +33,7 @@ export class HomePage {
         if (i === 0) {
           i = i + 1;
           item.display = 'block';
+          this.fontSize = item.etiqueta.length > 25 ? 'size-xs' : 'size-md';
         } else {
           item.display = 'none';
         }
@@ -40,11 +41,9 @@ export class HomePage {
     });
   }
   
-  /*
-  ┌ ──────────────── ┐
-  |     BUSCADOR     |
-  └ ──────────────── ┘
-  */
+  // ──────────────── //
+  //     BUSCADOR     //
+  // ──────────────── //
 
   buscarFecha( secuencia: string ) {
   
@@ -90,11 +89,9 @@ export class HomePage {
     formularioBusqueda.style.top = '-75px';
   }
 
-  /*
-  ┌ ──────────────── ┐
-  |     CARRUSEL     |
-  └ ──────────────── ┘
-  */
+  // ──────────────── //
+  //     CARRUSEL     //
+  // ──────────────── //
 
   anterior() {
     
@@ -117,6 +114,8 @@ export class HomePage {
 
     // Activamos la categoría anterior
     this.fechas[posicion].display = 'block';
+
+    this.fontSize = this.fechas[posicion].etiqueta.length > 25 ? 'size-xs' : 'size-md';
   }
 
   siguiente() {
@@ -140,6 +139,8 @@ export class HomePage {
 
     // Activamos la categoría anterior
     this.fechas[posicion].display = 'block';
+
+    this.fontSize = this.fechas[posicion].etiqueta.length > 25 ? 'size-xs' : 'size-md';
   }
 }
 
