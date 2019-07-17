@@ -1,6 +1,6 @@
-import { Component         } from '@angular/core';
-import { ActivatedRoute    } from '@angular/router';
-import { FechasService     } from '../../services/fechas.service';
+import { Component      } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FechasService  } from '../../services/fechas.service';
 
 @Component({
   selector: 'app-otras-fechas',
@@ -24,7 +24,7 @@ export class OtrasFechasComponent {
       // Almacenamos los datos de la fecha de la URL
       this.servicioFechas.getFecha( parametroURL.id ).subscribe( (data: Fecha) => {
         this.fecha = data[0];
-        
+
         // Obtenemos tres fechas aleatorias
         this.servicioFechas.getFechas().subscribe( (allFechas: Fecha[]) => {
           this.otrasFechas = this.servicioFechas.getFechasAleatorias(this.fecha.id, allFechas);
