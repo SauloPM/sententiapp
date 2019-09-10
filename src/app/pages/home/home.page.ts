@@ -4,6 +4,9 @@ import { Router    } from '@angular/router';
 // Servicios
 import { FechasService } from '../../services/fechas.service';
 
+// Declaramos las variables para jQuery
+declare var $: any;
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -36,7 +39,8 @@ export class HomePage {
         if (i === 0) {
           i = i + 1;
           item.display = 'block';
-          this.fontSize = item.etiqueta.length > 25 ? 'size-xs' : 'size-md';
+          // this.fontSize = item.etiqueta.length > 25 ? 'size-xs' : 'size-md';
+          $('.overlay').css('background-image', 'url(http://sententiapp.iatext.ulpgc.es' + item.imagen + ')');
         } else {
           item.display = 'none';
         }
@@ -145,7 +149,11 @@ export class HomePage {
     // Activamos la categoría anterior
     this.fechas[posicion].display = 'block';
 
-    this.fontSize = this.fechas[posicion].etiqueta.length > 25 ? 'size-xs' : 'size-md';
+    console.log(this.fechas[posicion]);
+
+    $('.overlay').css('background-image', 'url(http://sententiapp.iatext.ulpgc.es' + this.fechas[posicion].imagen + ')');
+
+    // this.fontSize = this.fechas[posicion].etiqueta.length > 25 ? 'size-xs' : 'size-md';
   }
 
   siguiente() {
@@ -170,7 +178,9 @@ export class HomePage {
     // Activamos la categoría anterior
     this.fechas[posicion].display = 'block';
 
-    this.fontSize = this.fechas[posicion].etiqueta.length > 25 ? 'size-xs' : 'size-md';
+    $('.overlay').css('background-image', 'url(http://sententiapp.iatext.ulpgc.es' + this.fechas[posicion].imagen + ')');
+
+    // this.fontSize = this.fechas[posicion].etiqueta.length > 25 ? 'size-xs' : 'size-md';
   }
 }
 

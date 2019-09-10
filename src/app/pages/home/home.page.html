@@ -1,16 +1,37 @@
 <ion-content>
 
-  <div class="page-wrapper">
+  <div id="portada" class="fondo">
+
+    <div class="overlay"></div>
+
+    <div class="recuadro">
+
+      <div class="fecha" *ngFor="let fecha of fechas" (swipeRight)="siguiente()" (swipeLeft)="anterior()">
+
+        <!-- Imagen -->
+        <a *ngIf="fecha.display=='block'" [routerLink]="['/informacion', fecha.id]">
+          <div class="imagen" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
+        </a>
+
+        <!-- Título -->
+        <span *ngIf="fecha.display=='block'" class="titulo" [ngClass]="fontSize">{{ fecha.etiqueta }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- <div class="page-wrapper hidden"> -->
 
     <!-- Buscador -->
-    <div class="buscador">
+    <!-- <div class="buscador hidden">
       <i class="icono fa fa-search" aria-hidden="true" (click)="mostrarBuscador(entrada.value)"></i>
       <i class="icono fa fa-times"  aria-hidden="true" (click)="cerrarBuscador()" [ngClass]="mostrarCierre"></i>
       <input #entrada id="entrada" [ngClass]="mostrarEntrada" class="entrada" type="text" #secuencia autocomplete="off">
-    </div>
+    </div> -->
 
     <!-- Carrusel -->
-    <div class="carrusel">
+    <!-- <div class="carrusel hidden">
 
       <button class="navigation left" type="button" (click)="anterior()">
         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -27,11 +48,11 @@
         <i class="fa fa-angle-right" aria-hidden="true"></i>
       </button>
 
-    </div>
+    </div> -->
 
     <!-- Footer -->
-    <section id="footer">
+    <!-- <section id="footer">
       <a class="copyright" href="https://iatext.ulpgc.es/" style="display: none">&copy; IATEXT</a>
-    </section>
-  </div>
+    </section> -->
+  <!-- </div> -->
 </ion-content>
