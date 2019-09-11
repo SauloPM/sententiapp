@@ -1,6 +1,21 @@
 <ion-content>
 
-  <div id="portada" class="fondo">
+  <section id="portada">
+
+      <div class="fecha" *ngFor="let fecha of fechas" (swipeRight)="siguiente()" (swipeLeft)="anterior()">
+
+        <a *ngIf="fecha.display=='block'" [routerLink]="['/informacion', fecha.id]">
+          <div class="imagen" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
+        </a>
+
+        <span *ngIf="fecha.display=='block'" class="titulo" [ngClass]="fontSize">{{ fecha.etiqueta }}</span>
+      </div>
+
+  </section>
+
+  <!-- Versión 2 -->
+
+  <!-- <div id="portada" class="fondo">
 
     <div class="overlay"></div>
 
@@ -8,18 +23,18 @@
 
       <div class="fecha" *ngFor="let fecha of fechas" (swipeRight)="siguiente()" (swipeLeft)="anterior()">
 
-        <!-- Imagen -->
         <a *ngIf="fecha.display=='block'" [routerLink]="['/informacion', fecha.id]">
           <div class="imagen" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
         </a>
 
-        <!-- Título -->
         <span *ngIf="fecha.display=='block'" class="titulo" [ngClass]="fontSize">{{ fecha.etiqueta }}</span>
       </div>
 
     </div>
 
-  </div>
+  </div> -->
+
+  <!-- Versión 1 -->
 
   <!-- <div class="page-wrapper hidden"> -->
 
