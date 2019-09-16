@@ -1,18 +1,25 @@
 <ion-content>
 
   <section id="portada">
+    <div class="contenedor">
 
-      <div class="fecha" *ngFor="let fecha of fechas" (swipeRight)="siguiente()" (swipeLeft)="anterior()">
-
-        <a *ngIf="fecha.display=='block'" [routerLink]="['/informacion', fecha.id]">
-          <div class="imagen" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
-        </a>
-
-        <span *ngIf="fecha.display=='block'" class="titulo" [ngClass]="fontSize">{{ fecha.etiqueta }}</span>
+      <!-- Buscador -->
+      <div class="buscador cerrado">
+        <input type="text" class="entrada">
+        <div class="mango"></div>
+        <div class="cierre">×</div>
       </div>
 
+      <!-- Fechas -->
+      <a class="fecha" [routerLink]="['/informacion', fecha.id]" *ngFor="let fecha of fechas">
+        <div class="imagen" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
+        <div class="titulo">{{ fecha.etiqueta }}</div>
+      </a>
+    </div>
+    <div class="ruido"></div>
   </section>
-
+  
+    
   <!-- Versión 2 -->
 
   <!-- <div id="portada" class="fondo">

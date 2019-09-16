@@ -21,7 +21,7 @@
 //     BUSCADOR     //
 // ──────────────── //
 
-.buscador {
+.buscadorr {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -111,7 +111,7 @@
 }
 
 @media only screen and (min-width: 360px) {
-    .buscador .icono {
+    .buscadorr .icono {
         font-size: 25px;
     }
 }

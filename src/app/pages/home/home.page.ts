@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router    } from '@angular/router';
 
 // Servicios
 import { FechasService } from '../../services/fechas.service';
 
-// Declaramos las variables para jQuery
+// jQuery
 declare var $: any;
 
 @Component({
@@ -12,7 +12,7 @@ declare var $: any;
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   // Atributos
   fechas: Fecha[] = [];
@@ -40,19 +40,80 @@ export class HomePage {
           i = i + 1;
           item.display = 'block';
           // this.fontSize = item.etiqueta.length > 25 ? 'size-xs' : 'size-md';
-          $('.overlay').css('background-image', 'url(http://sententiapp.iatext.ulpgc.es' + item.imagen + ')');
+          //$('.overlay').css('background-image', 'url(http://sententiapp.iatext.ulpgc.es' + item.imagen + ')');
         } else {
           item.display = 'none';
         }
       });
     });
   }
+
+  ngOnInit() {
+
+    $(document).on("click", ".buscador.cerrado", function() {
+
+      if ($(".cierre").css("display") == "flex")
+        return;
+  
+      $(".buscador").removeClass("cerrado").addClass("abierto");
+      
+      $(".buscador").css('cursor', 'initial');
+  
+      $(".mango").animate({ opacity: '0' }, 250);
+      
+      setTimeout( function() {
+        $(".buscador").animate({ borderRadius: '2px' }, 500);
+      }, 250);
+  
+      setTimeout( function() {
+        $(".buscador").animate({ width: '100%' }, 500);
+      }, 500);
+      
+      setTimeout( function() {
+        $(".buscador").animate({ height: '50px' }, 500);
+      }, 1000);
+  
+      setTimeout( function() {
+        $(".entrada").css('display', 'block').focus();
+      }, 1500);
+  
+      setTimeout( function() {
+        $(".cierre").css('display', 'flex');
+      }, 1750);
+    });
+
+    $(document).on("click", ".buscador.abierto .cierre", function() {
+      
+      $(".buscador").removeClass("abierto").addClass("cerrado");
+
+      $(".buscador").css('cursor', 'pointer');
+
+      $(".cierre").css('display', 'none');
+
+      $(".entrada").css('display', 'none');
+
+      $(".buscador").animate({ width: '30px' }, 500);
+      
+      setTimeout( function() {
+        $(".buscador").animate({ height: '30px' }, 500);
+      }, 500);
+      
+      setTimeout( function() {
+        $(".buscador").animate({ borderRadius: '50%' }, 500);
+      }, 1000);
+      
+      setTimeout( function() {
+        $(".mango").animate({ opacity: '1' }, 250);
+        $(".buscador").removeClass("abierto").addClass("cerrado");
+      }, 1500);
+    })
+  }
   
   // ──────────────── //
   //     BUSCADOR     //
   // ──────────────── //
 
-  mostrarBuscador(secuencia: string) {
+  mostrarBuscadorrrr(secuencia: string) {
 
     secuencia = secuencia.trim();
     
@@ -92,7 +153,7 @@ export class HomePage {
     }
   }
 
-  cerrarBuscador() {
+  cerrarBuscadorrrr() {
 
     // Vaciamos el input
     (<HTMLInputElement>document.getElementById('entrada')).value = '';
@@ -151,7 +212,7 @@ export class HomePage {
 
     console.log(this.fechas[posicion]);
 
-    $('.overlay').css('background-image', 'url(http://sententiapp.iatext.ulpgc.es' + this.fechas[posicion].imagen + ')');
+    //$('.overlay').css('background-image', 'url(http://sententiapp.iatext.ulpgc.es' + this.fechas[posicion].imagen + ')');
 
     // this.fontSize = this.fechas[posicion].etiqueta.length > 25 ? 'size-xs' : 'size-md';
   }
@@ -178,7 +239,7 @@ export class HomePage {
     // Activamos la categoría anterior
     this.fechas[posicion].display = 'block';
 
-    $('.overlay').css('background-image', 'url(http://sententiapp.iatext.ulpgc.es' + this.fechas[posicion].imagen + ')');
+    //$('.overlay').css('background-image', 'url(http://sententiapp.iatext.ulpgc.es' + this.fechas[posicion].imagen + ')');
 
     // this.fontSize = this.fechas[posicion].etiqueta.length > 25 ? 'size-xs' : 'size-md';
   }

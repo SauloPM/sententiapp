@@ -10,11 +10,15 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
-// Colors
+// Colores
 $text        : rgb(50,50,50);
 $primary     : rgb(225,165,075);
 $darkprimary : rgb(175,115,025);
 $lightprimary: rgb(255,195,105);
+
+// Dimensiones
+$mobile: 468px;
+$tablet: 768px;
 
 body {
     font-family: 'Lato', sans-serif;
@@ -49,9 +53,9 @@ p {
 
 // Utils
 
-.contenedor {
-    padding: 0 30px;
-}
+// .contenedor {
+//     padding: 0 30px;
+// }
 
 .hidden {
     display: none !important;
@@ -97,6 +101,7 @@ p {
 //     UTILS     //
 // ───────────── //
 
+.ruido,
 .overlay {
     position: absolute;
     top: 0;
@@ -104,7 +109,6 @@ p {
     right: 0;
     bottom: 0;
     width: 100%;
-    min-height: 100vh;
 }
 
 // ─────────────── //
@@ -112,18 +116,140 @@ p {
 // ─────────────── //
 
 #portada {
-    background: $primary;
+    background: linear-gradient(45deg, $primary 20%, $lightprimary 55%);
     padding: 50px 25px;
+    position: relative;
     min-height: 100vh;
 
+    .contenedor {
+        margin: 0 auto;
+        max-width: 400px;
+    }
+
+    // Buscador
+
+    .buscador {
+        border: 4px solid white;
+        border-radius: 50%;
+        outline: none;
+        margin-left: auto;
+        margin-bottom: 50px;
+        position: relative;
+        z-index: 25;
+        width: 30px;
+        height: 30px;
+        opacity: .6;
+        cursor: pointer;
+
+        .mango {
+            background: white;
+            width: 15px;
+            height: 4px;
+            position: absolute;
+            bottom: -5px;
+            right: -10px;
+            transform: rotateZ(45deg);
+        }
+
+        .cierre {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+            position: absolute;
+            top: 0;
+            right: 10px;
+            z-index: 50;
+            height: 100%;
+            transition: .25s ease-in;
+            cursor: pointer;
+
+            &:hover {
+                transform: rotateZ(180deg);
+            }
+        }
+
+        .entrada {
+            display: none;
+            color: white;
+            font-size: 12px;
+            line-height: 20px;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0 45px 0 15px;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    // Fechas
+
     .fecha {
-        background: rgba(255,255,255,.25);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        text-decoration: none;
+        background: rgba(255,255,255,.35);
         border-radius: 5px;
-        padding: 25px;
+        box-shadow: 1px 1px 5px $darkprimary;
+        padding: 15px 25px;
         margin-bottom: 25px;
+        position: relative;
+        z-index: 25;
+
+        .imagen {
+            flex-shrink: 0;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 50%;
+            margin-right: 25px;
+            width: 50px;
+            height: 50px;
+        }
 
         .titulo {
             color: white;
+            font-size: 10px;
+            text-align: left;
+            line-height: 15px;
+        }
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    .ruido {
+        background: url('src/assets/img/ruido.png') repeat center;
+        background-size: 100px;
+    }
+}
+
+// Mobile First
+
+@media only screen and (min-width: $mobile) {
+    #portada .fecha .titulo {
+        font-size: 12px;
+        line-height: 20px;
+    }
+}
+
+@media only screen and (min-width: $tablet) {
+    #portada {
+
+        .contenedor {
+            max-width: 650px;
+        }
+
+        .fecha {
+            transition: .25s ease-in;
+    
+            &:hover {
+                transform: scale(1.025);
+            }
         }
     }
 }
