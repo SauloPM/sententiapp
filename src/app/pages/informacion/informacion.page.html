@@ -1,39 +1,60 @@
 <ion-content fullscreen="true">
-
   <section id="informacion">
 
-    <!-- Cabecera -->
+    <!-- ──────────────── -->
+    <!--     CABECERA     -->
+    <!-- ──────────────── -->
+
     <div class="cabecera" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'">
-      <a class="volver" [routerLink]="['/home']">
+      
+      <!-- Volver atrás -->
+      <a class="volver volver-atras" (click)="volverAtras()">
         <i class="fa fa-angle-left" aria-hidden="true"></i>
       </a>
-      <!-- <a class="ver-sentencias" [routerLink]="['/sentencias', fecha.id]">+</a> -->
+
+      <!-- Volver a inicio -->
+      <a class="volver volver-inicio" (click)="volverInicio()">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </a>
+
       <img class="pagina-rota" src="assets/img/pagina-rota.png" alt="">
     </div>
 
-    <!-- Información -->
+    <!-- ─────────────────── -->
+    <!--     INFORMACIÓN     -->
+    <!-- ─────────────────── -->
+
     <div class="contenedor">
 
       <h1 class="titulo">{{ fecha.etiqueta }}</h1>
       <p class="descripcion">{{ fecha.descripcion }}</p>
-      
-      <app-otras-fechas></app-otras-fechas>
+
+      <h2>Sentencias</h2>
+
+      <ul class="sentencias">
+        <li class="sentencia" *ngFor="let sentencia of sentencias">
+          <span>{{ sentencia.extractolatino }}</span>
+          <i class="flecha fa fa-angle-right" aria-hidden="true"></i>
+        </li>
+      </ul>
+
+      <h2>Otras fechas</h2>
+
+      <ion-slides class="slider" pager="true" [options]="opcionesSlider">
+        <ion-slide class="slide" *ngFor="let otraFecha of otrasFechas" [routerLink]="['/informacion', otraFecha.id]" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + otraFecha.imagen + ')'">
+          <span class="caption">{{ otraFecha.etiqueta }}</span>
+        </ion-slide>
+      </ion-slides>
 
     </div>
-    
-    <!-- <div class="owl-carousel">
-      <div> Your Content </div>
-      <div> Your Content </div>
-      <div> Your Content </div>
-      <div> Your Content </div>
-      <div> Your Content </div>
-      <div> Your Content </div>
-      <div> Your Content </div>
-    </div> -->
 
-    <!-- Footer -->
+    <!-- ────────────── -->
+    <!--     FOOTER     -->
+    <!-- ────────────── -->
+
     <div class="footer">
       <a class="copyright" href="https://iatext.ulpgc.es/">&copy; IATEXT</a>
     </div>
+
   </section>
 </ion-content>
