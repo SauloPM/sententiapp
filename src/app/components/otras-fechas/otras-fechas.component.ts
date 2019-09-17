@@ -1,35 +1,37 @@
-import { Component      } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+
+// Servicios
 import { FechasService  } from '../../services/fechas.service';
+
+// jQuery
+declare var $: any;
 
 @Component({
   selector: 'app-otras-fechas',
   templateUrl: './otras-fechas.component.html',
   styleUrls: ['./otras-fechas.component.scss'],
 })
-export class OtrasFechasComponent {
+export class OtrasFechasComponent implements OnInit, AfterViewInit {
 
-  ancho: number = 0;
-  fecha: Fecha = {
-    id: 0,
-    etiqueta: '',
-    imagen: ''
-  };
-  otrasFechas: Fecha[] = [ { id: 0, etiqueta: '', imagen: '' }, { id: 0, etiqueta: '', imagen: '' }, { id: 0, etiqueta: '', imagen: '' } ];
+  otrasFechas: Fecha[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private servicioFechas: FechasService) {
+  constructor(private servicioFechas: FechasService) {
+    
+    // Guardamos las fechas en una variable
+    this.servicioFechas.getFechas().subscribe( (data: Fecha[]) => {
+      this.otrasFechas = data;
+    });
+  }
 
-    this.activatedRoute.params.subscribe( parametroURL => {
+  ngOnInit() {
+    $(window).on("load", function() {
+      $('.owl-carousel').owlCarousel();
+    });
+  }
 
-      // Almacenamos los datos de la fecha de la URL
-      this.servicioFechas.getFecha( parametroURL.id ).subscribe( (data: Fecha) => {
-        this.fecha = data[0];
-
-        // Obtenemos tres fechas aleatorias
-        this.servicioFechas.getFechas().subscribe( (allFechas: Fecha[]) => {
-          this.otrasFechas = this.servicioFechas.getFechasAleatorias(this.fecha.id, allFechas);
-        });
-      });
+  ngAfterViewInit() {
+    $(window).on("load", function() {
+      $('.owl-carousel').owlCarousel();
     });
   }
 }
