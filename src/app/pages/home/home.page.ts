@@ -5,12 +5,11 @@ import { Router    } from '@angular/router';
 import { FechasService } from '../../services/fechas.service';
 
 // jQuery
-declare var $: any;
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: 'home.page.html'
 })
 export class HomePage implements OnInit {
 
