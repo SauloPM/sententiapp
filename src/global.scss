@@ -20,6 +20,14 @@ $lightprimary: rgb(255,195,105);
 $mobile: 468px;
 $tablet: 768px;
 
+// Scroll
+
+::-webkit-scrollbar { width: 0 }
+
+// ─────────────── //
+//     GENERAL     //
+// ─────────────── //
+
 body {
     font-family: 'Lato', sans-serif;
 }
@@ -29,17 +37,16 @@ body {
 h1 {
     color: $text;
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 700;
     font-family: 'Playfair Display', serif;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    line-height: 35px;
-    margin: 60px 0 30px;
+    line-height: 40px;
+    margin: 0;
+    transform: rotateX(20deg);
 }
 
 h2 {
     color: $text;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     margin-bottom: 25px;
 }
@@ -76,7 +83,7 @@ p {
     }
 }
 
-#footer {
+.footer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,14 +93,13 @@ p {
 
     .copyright {
         color: $text;
-        font-size: 10px;
+        font-size: 8px;
+        font-weight: 500;
         font-family: 'Montserrat', sans-serif;
         text-align: center;
         text-transform: uppercase;
         text-decoration: none;
         letter-spacing: 5px;
-        margin: 3px 0 0;
-        opacity: .5;
     }
 }
 
@@ -111,20 +117,29 @@ p {
     width: 100%;
 }
 
+.contenedor {
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+// Mobile First
+
+@media only screen and (min-width: $tablet) {
+    .contenedor {
+        max-width: 650px;
+    }
+}
+
 // ─────────────── //
 //     PORTADA     //
 // ─────────────── //
 
 #portada {
     background: linear-gradient(45deg, $primary 20%, $lightprimary 55%);
+    background: linear-gradient(45deg, $darkprimary 20%, $primary 55%);
     padding: 50px 25px;
     position: relative;
     min-height: 100vh;
-
-    .contenedor {
-        margin: 0 auto;
-        max-width: 400px;
-    }
 
     // Buscador
 
@@ -191,11 +206,12 @@ p {
         align-items: center;
         justify-content: flex-start;
         text-decoration: none;
-        background: rgba(255,255,255,.35);
-        border-radius: 5px;
+        background: rgba(255,255,255,.25);
+        border-radius: 2px;
         box-shadow: 1px 1px 5px $darkprimary;
+        outline: none;
         padding: 15px 25px;
-        margin-bottom: 25px;
+        margin-bottom: 15px;
         position: relative;
         z-index: 25;
 
@@ -240,8 +256,12 @@ p {
 @media only screen and (min-width: $tablet) {
     #portada {
 
-        .contenedor {
-            max-width: 650px;
+        .buscador.cerrado {
+            transition: opacity .25s;
+
+            &:hover {
+                opacity: 1;
+            }
         }
 
         .fecha {
@@ -250,6 +270,82 @@ p {
             &:hover {
                 transform: scale(1.025);
             }
+        }
+    }
+}
+
+// ─────────────────── //
+//     INFORMACIÓN     //
+// ─────────────────── //
+
+#informacion {
+
+    .contenedor {
+        padding: 0 25px;
+    }
+
+    .cabecera {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        box-shadow: inset 0 50px 100px black;
+        margin-bottom: 50px;
+        position: relative;
+        height: 225px;
+
+        .pagina-rota {
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            z-index: 100;
+            width: 100%;
+        }
+
+        .volver {
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+        }
+    }
+
+    .titulo {
+        margin: 0 0 25px;
+    }
+
+    .descripcion {
+        font-size: 12px;
+        line-height: 20px;
+        margin-bottom: 25px;
+    }
+}
+
+// Mobile First
+
+@media only screen and (min-width: $mobile) {
+    #informacion {
+
+        .cabecera {
+            height: 350px;
+        }
+
+        .descripcion {
+            font-size: 12px;
+            line-height: 20px;
+        }
+    }
+}
+
+@media only screen and (min-width: $tablet) {
+    
+    #informacion .cabecera .volver {
+        opacity: .5;
+        transition: .25s;
+
+        &:hover {
+            opacity: 1
         }
     }
 }

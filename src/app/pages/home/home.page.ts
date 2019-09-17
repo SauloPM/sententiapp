@@ -107,6 +107,27 @@ export class HomePage implements OnInit {
         $(".buscador").removeClass("abierto").addClass("cerrado");
       }, 1500);
     })
+
+    $(document).on("input", ".entrada", function () {
+
+      var titulo      = "";
+      var secuencia = $(".entrada").val().toLowerCase().trim();
+
+      $(".fecha .titulo").each(function () {
+
+          titulo = $(this).html().toLowerCase();
+
+          // Ha habido coincidencias o no se ha escrito nada
+          if ((titulo.indexOf(secuencia) > -1) || (secuencia.length == 0)) {
+              $(this).parent().css("display", "flex");
+          }
+
+          // No ha habido coincidencia
+          else {
+              $(this).parent().css("display", "none");
+          }
+      });
+  });
   }
   
   // ──────────────── //
