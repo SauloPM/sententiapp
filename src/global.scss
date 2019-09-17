@@ -94,7 +94,6 @@ p {
     .copyright {
         color: $text;
         font-size: 8px;
-        font-weight: 500;
         font-family: 'Montserrat', sans-serif;
         text-align: center;
         text-transform: uppercase;
@@ -306,8 +305,8 @@ p {
             font-size: 50px;
             font-weight: bold;
             position: absolute;
-            top: 25px;
-            left: 25px;
+            top: 10px;
+            left: 20px;
         }
     }
 
