@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router    } from '@angular/router';
 
+// Interfaces
+import { Fecha } from '../../interfaces/fecha';
+
 // Servicios
 import { FechasService } from '../../services/fechas.service';
 
 // jQuery
-import * as $ from 'jquery';
+declare var $: any;
+// import * as $ from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -13,37 +17,17 @@ import * as $ from 'jquery';
 })
 export class HomePage implements OnInit {
 
-  // Atributos
   fechas: Fecha[] = [];
-  etiquetas: string[];
-  prueba: any;
-  fontSize = 'size-md';
-
-  mostrarCierre : string = '';
-  mostrarEntrada: string = '';
 
   // ─────────────── //
-  //     GENERAL     //
+  //     MÉTODOS     //
   // ─────────────── //
 
   constructor(private router: Router, private servicioFechas: FechasService) {
+
+    // Guardamos en una variable todas las fechas
     this.servicioFechas.getFechas().subscribe( (data: Fecha[]) => {
-
-      // Guardamos las fechas
       this.fechas = data;
-
-      // Hacemos visible solo la primera fecha
-      let i: number = 0;
-      this.fechas.forEach( item => {
-        if (i === 0) {
-          i = i + 1;
-          item.display = 'block';
-          // this.fontSize = item.etiqueta.length > 25 ? 'size-xs' : 'size-md';
-          //$('.overlay').css('background-image', 'url(http://sententiapp.iatext.ulpgc.es' + item.imagen + ')');
-        } else {
-          item.display = 'none';
-        }
-      });
     });
   }
 
@@ -128,146 +112,4 @@ export class HomePage implements OnInit {
       });
   });
   }
-  
-  // ──────────────── //
-  //     BUSCADOR     //
-  // ──────────────── //
-
-  mostrarBuscadorrrr(secuencia: string) {
-
-    secuencia = secuencia.trim();
-    
-    // El buscador está visible
-    if ( this.mostrarEntrada === 'activa' ) {
-
-      // Hemos escrito algo
-      if ( secuencia.length > 0 ) {
-        this.buscarFecha( secuencia );
-      }
-
-      // No hemos escrito nada
-      else {
-
-        let entrada = document.getElementById('entrada');
-
-        // Hacemos focus
-        entrada.focus();
-
-        // Resaltamos el input en rojo para indicarle al usuario que no ha escrito nada
-        entrada.classList.add('vacia');
-        setTimeout(() => {
-          entrada.classList.remove('vacia');
-        }, 500);
-      }
-    }
-
-    // El buscador no está visible
-    else {
-      
-      this.mostrarEntrada = 'activa';
-
-      setTimeout(() => {
-        this.mostrarCierre = 'activa';
-      }, 500);
-
-    }
-  }
-
-  cerrarBuscadorrrr() {
-
-    // Vaciamos el input
-    (<HTMLInputElement>document.getElementById('entrada')).value = '';
-
-    // Ocultamos el formulario de búsqueda
-    this.mostrarCierre = '';
-
-    setTimeout(() => {
-      this.mostrarEntrada = '';
-    }, 500);
-    
-  }
-
-  buscarFecha( secuencia: string ) {
-  
-    // Utilizamos el buscador si la secuenca contiene al menos un carácter
-    if (secuencia.trim() === '') {
-      this.router.navigate( ['/home'] );
-      
-      
-
-      
-    } else {
-
-      this.cerrarBuscador();
-
-      this.router.navigate( ['/resultados', secuencia] );
-    }
-  }
-
-  // ──────────────── //
-  //     CARRUSEL     //
-  // ──────────────── //
-
-  anterior() {
-    
-    let indice  : number = 0;
-    let posicion: number = 0;
-
-    // Buscamos la posición de la categoría activa
-    this.fechas.forEach( fecha => {
-      if (fecha.display === 'block') {
-        posicion = indice;
-      }
-      indice++;
-    });
-
-    // Desactivamos la categoría activa
-    this.fechas[posicion].display = 'none';
-
-    // Decrementamos la posición
-    posicion = ( posicion === 0 ) ? this.fechas.length - 1 : posicion - 1;
-
-    // Activamos la categoría anterior
-    this.fechas[posicion].display = 'block';
-
-    console.log(this.fechas[posicion]);
-
-    //$('.overlay').css('background-image', 'url(http://sententiapp.iatext.ulpgc.es' + this.fechas[posicion].imagen + ')');
-
-    // this.fontSize = this.fechas[posicion].etiqueta.length > 25 ? 'size-xs' : 'size-md';
-  }
-
-  siguiente() {
-
-    let indice  : number = 0;
-    let posicion: number = 0;
-
-    // Buscamos la posición de la categoría activa
-    this.fechas.forEach(fecha => {
-      if (fecha.display === 'block') {
-        posicion = indice;
-      }
-      indice++;
-    });
-
-    // Desactivamos la categoría activa
-    this.fechas[posicion].display = 'none';
-
-    // Decrementamos la posición
-    posicion = ( posicion === this.fechas.length - 1 ) ? 0 : posicion + 1;
-
-    // Activamos la categoría anterior
-    this.fechas[posicion].display = 'block';
-
-    //$('.overlay').css('background-image', 'url(http://sententiapp.iatext.ulpgc.es' + this.fechas[posicion].imagen + ')');
-
-    // this.fontSize = this.fechas[posicion].etiqueta.length > 25 ? 'size-xs' : 'size-md';
-  }
-}
-
-export interface Fecha {
-  id: number;
-  etiqueta: string;
-  imagen: string;
-  display: string;
 }
