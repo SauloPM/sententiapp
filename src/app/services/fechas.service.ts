@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // Interfaces
-import { Fecha } from '../interfaces/fechas';
+import { Fecha } from '../interfaces/fecha';
 
 @Injectable({
   providedIn: 'root'
