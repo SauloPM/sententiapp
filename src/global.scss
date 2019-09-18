@@ -32,8 +32,6 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-// Headings
-
 h1 {
     color: $text;
     font-size: 30px;
@@ -56,50 +54,6 @@ p {
     font-size: 15px;
     line-height: 30px;
     margin: 0 0 30px;
-}
-
-// Utils
-
-// .contenedor {
-//     padding: 0 30px;
-// }
-
-.hidden {
-    display: none !important;
-}
-
-// Header
-
-#header {
-    .volver {
-        color: white;
-        font-size: 45px;
-        font-weight: bold;
-        background: none;
-        outline: none;
-        position: absolute;
-        top: 18px;
-        left: 25px;
-    }
-}
-
-.footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 25px;
-    width: 100%;
-    height: 40px;
-
-    .copyright {
-        color: $text;
-        font-size: 8px;
-        font-family: 'Montserrat', sans-serif;
-        text-align: center;
-        text-transform: uppercase;
-        text-decoration: none;
-        letter-spacing: 5px;
-    }
 }
 
 // ───────────── //
@@ -226,9 +180,9 @@ p {
 
         .titulo {
             color: white;
-            font-size: 10px;
+            font-size: 12px;
             text-align: left;
-            line-height: 15px;
+            line-height: 20px;
         }
 
         &:last-child {
@@ -243,13 +197,6 @@ p {
 }
 
 // Mobile First
-
-@media only screen and (min-width: $mobile) {
-    #portada .fecha .titulo {
-        font-size: 12px;
-        line-height: 20px;
-    }
-}
 
 @media only screen and (min-width: $tablet) {
     #portada {
@@ -400,6 +347,25 @@ p {
             }
         }
     }
+
+    .footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 25px;
+        width: 100%;
+        height: 40px;
+    
+        .copyright {
+            color: $text;
+            font-size: 8px;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 5px;
+        }
+    }
 }
 
 // Mobile First
@@ -436,108 +402,3 @@ p {
         }
     }
 }
-
-// ─────────────── //
-//     PORTADA     //
-// ─────────────── //
-
-// Versión 2
-
-// #portada {
-//     display: flex;
-//     align-items: flex-end;
-//     justify-content: center;
-//     padding: 50px 25px;
-
-//     &.fondo {
-//         background: black;
-//         position: relative;
-//         width: 100%;
-//         min-height: 100vh;
-        
-//         .overlay {
-//             background-position: center;
-//             background-repeat: no-repeat;
-//             background-size: cover;
-//             transition: .5s ease-in;
-//             filter: blur(5px);
-
-//             &::after {
-//                 content: "";
-//                 background: linear-gradient(45deg, black, transparent);
-//                 position: absolute;
-//                 top: 0;
-//                 left: 0;
-//                 right: 0;
-//                 bottom: 0;
-//                 width: 100%;
-//                 min-height: 100vh;
-//                 opacity: .75;
-//             }
-//         }
-    
-//         &::after {
-//             display: none;
-//             content: "";
-//             background: url('src/assets/img/ruido.png') repeat;
-//             background-size: contain;
-//             position: absolute;
-//             top: 0;
-//             left: 0;
-//             right: 0;
-//             bottom: 0;
-//             width: 100%;
-//             min-height: 100vh;
-//             opacity: .95;
-//         }
-//     }
-
-//     .recuadro {
-//         background: white;
-//         border-radius: 5px;
-//         box-shadow: 0 30px 45px rgba(0,0,0,.75);
-//         padding: 0 20px 25px;
-//         margin-top: 115px;
-//         position: relative;
-//         z-index: 50;
-//         width: 100%;
-//         max-width: 350px;
-//         height: 500px;
-
-//         .fecha {
-//             text-align: center;
-
-//             .imagen {
-//                 background-size: cover;
-//                 border-radius: 5px;
-//                 box-shadow: 0 45px 35px -35px black;
-//                 margin-top: -115px;
-//                 margin-bottom: 30px;
-//                 position: relative;
-//                 width: 100%;
-//                 height: 300px;
-//             }
-
-//             .titulo {
-//                 display: block;
-//                 color: rgb(40,40,40);
-//                 font-size: 20px;
-//                 font-weight: 500;
-//                 font-family: 'Abril Fatface', cursive;
-//                 font-family: 'Comfortaa', cursive;
-//                 text-transform: none;
-//                 line-height: 30px;
-//                 margin: 0 auto;
-//                 max-width: 250px;
-//             }
-
-//             .fecha {
-//                 color: $text;
-//                 font-weight: 900;
-//                 font-family: 'Playfair Display', serif;
-//                 text-transform: uppercase;
-//                 line-height: 35px;
-//             }
-//         }
-//     }
-// }
