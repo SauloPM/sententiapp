@@ -18,7 +18,7 @@ export class InformacionPage {
   fecha: Fecha = {
     id: 0,
     etiqueta: '',
-    descripcion: '',
+    descripcion: 'Esta sentencia no contiene ninguna descripción.',
     imagen: ''
   };
   
@@ -43,6 +43,10 @@ export class InformacionPage {
       }
     }
   }
+
+  // ─────────────── //
+  //     MÉTODOS     //
+  // ─────────────── //
 
   constructor(private activatedRoute: ActivatedRoute, private servicioFechas: FechasService, private navController: NavController) {
 
