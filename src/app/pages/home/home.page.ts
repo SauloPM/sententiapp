@@ -67,6 +67,12 @@ export class HomePage implements OnInit {
 
     $(document).on("click", ".buscador.abierto .cierre", function() {
       
+      // Vaciamos la entrada
+      $(".entrada").val("");
+
+      // Mostramos de nuevo todas las fechas
+      filtrar();
+      
       $(".buscador").removeClass("abierto").addClass("cerrado");
 
       $(".buscador").css('cursor', 'pointer');
@@ -92,6 +98,10 @@ export class HomePage implements OnInit {
     })
 
     $(document).on("input", ".entrada", function () {
+      filtrar();
+    });
+
+    function filtrar() {
 
       var titulo      = "";
       var secuencia = $(".entrada").val().toLowerCase().trim();
@@ -110,6 +120,6 @@ export class HomePage implements OnInit {
               $(this).parent().css("display", "none");
           }
       });
-  });
+    }
   }
 }
