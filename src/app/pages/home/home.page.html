@@ -1,5 +1,4 @@
 <ion-content>
-
   <section id="portada">
     <div class="contenedor">
 
@@ -18,63 +17,4 @@
     </div>
     <div class="ruido"></div>
   </section>
-  
-    
-  <!-- Versión 2 -->
-
-  <!-- <div id="portada" class="fondo">
-
-    <div class="overlay"></div>
-
-    <div class="recuadro">
-
-      <div class="fecha" *ngFor="let fecha of fechas" (swipeRight)="siguiente()" (swipeLeft)="anterior()">
-
-        <a *ngIf="fecha.display=='block'" [routerLink]="['/informacion', fecha.id]">
-          <div class="imagen" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
-        </a>
-
-        <span *ngIf="fecha.display=='block'" class="titulo" [ngClass]="fontSize">{{ fecha.etiqueta }}</span>
-      </div>
-
-    </div>
-
-  </div> -->
-
-  <!-- Versión 1 -->
-
-  <!-- <div class="page-wrapper hidden"> -->
-
-    <!-- Buscador -->
-    <!-- <div class="buscador hidden">
-      <i class="icono fa fa-search" aria-hidden="true" (click)="mostrarBuscador(entrada.value)"></i>
-      <i class="icono fa fa-times"  aria-hidden="true" (click)="cerrarBuscador()" [ngClass]="mostrarCierre"></i>
-      <input #entrada id="entrada" [ngClass]="mostrarEntrada" class="entrada" type="text" #secuencia autocomplete="off">
-    </div> -->
-
-    <!-- Carrusel -->
-    <!-- <div class="carrusel hidden">
-
-      <button class="navigation left" type="button" (click)="anterior()">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
-      </button>
-
-      <div class="fecha" *ngFor="let fecha of fechas" (swipeRight)="siguiente()" (swipeLeft)="anterior()">
-        <a *ngIf="fecha.display=='block'" [routerLink]="['/informacion', fecha.id]">
-          <div class="imagen" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
-        </a>
-        <span *ngIf="fecha.display=='block'" class="titulo" [ngClass]="fontSize">{{ fecha.etiqueta }}</span>
-      </div>
-
-      <button class="navigation right" type="button" (click)="siguiente()">
-        <i class="fa fa-angle-right" aria-hidden="true"></i>
-      </button>
-
-    </div> -->
-
-    <!-- Footer -->
-    <!-- <section id="footer">
-      <a class="copyright" href="https://iatext.ulpgc.es/" style="display: none">&copy; IATEXT</a>
-    </section> -->
-  <!-- </div> -->
 </ion-content>
