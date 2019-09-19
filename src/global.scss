@@ -97,7 +97,7 @@ p {
     min-height: 100vh;
 
     .contenedor {
-        padding: 35px 25px;
+        padding: 35px 25px 0;
     }
 
     .ruido {
@@ -226,6 +226,26 @@ p {
 
         &:last-child {
             margin: 0;
+        }
+    }
+
+    // Footer
+
+    .footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 50px;
+    
+        .copyright {
+            color: white;
+            font-size: 8px;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 5px;
         }
     }
 }
