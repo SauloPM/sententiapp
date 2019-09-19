@@ -100,6 +100,11 @@ p {
         padding: 35px 25px;
     }
 
+    .ruido {
+        background: url('src/assets/img/ruido.png') repeat center;
+        background-size: 100px;
+    }
+
     .pagina-rota {
         position: relative;
         top: -1px;
@@ -115,7 +120,9 @@ p {
         align-items: center;
         justify-content: center;
         background: white;
-        padding: 50px;
+        padding: 50px 75px 35px;
+        position: relative;
+        z-index: 25;
 
         .titulo {
             width: 100%;
@@ -221,11 +228,6 @@ p {
             margin: 0;
         }
     }
-
-    .ruido {
-        background: url('src/assets/img/ruido.png') repeat center;
-        background-size: 100px;
-    }
 }
 
 // Mobile First
@@ -325,7 +327,7 @@ p {
             outline: none;
             padding: 10px;
             position: relative;
-            height: 115px;
+            height: 75px;
             cursor: pointer;
     
             .caption {
@@ -416,11 +418,21 @@ p {
 
 // Mobile First
 
+@media only screen and (min-width: 350px) {
+    #informacion .slider .slide {
+        height: 100px;
+    }
+}
+
 @media only screen and (min-width: $mobile) {
     #informacion {
-
+        
         .cabecera {
             height: 350px;
+        }
+        
+        .slider .slide {
+            height: 115px;
         }
 
         .descripcion {

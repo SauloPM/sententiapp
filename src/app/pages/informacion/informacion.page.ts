@@ -36,7 +36,7 @@ export class InformacionPage {
     },
     breakpoints: {
       400: {
-        slidesPerView: 2,
+        slidesPerView: 3,
       },
       768: {
         slidesPerView: 3,
