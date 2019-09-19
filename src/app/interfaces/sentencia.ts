@@ -1,4 +1,4 @@
 export interface Sentencia {
-    etiqueta: string;
+    id: number;
     extractolatino: string;
 }
