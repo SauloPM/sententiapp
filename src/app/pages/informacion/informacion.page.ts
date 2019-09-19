@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 // Interfaces
 import { Fecha     } from '../../interfaces/fecha';
+import { Modal     } from '../../interfaces/modal';
 import { Sentencia } from '../../interfaces/sentencia';
 
 // Servicios
@@ -22,8 +23,11 @@ export class InformacionPage {
     imagen: ''
   };
   
-  otrasFechas: Fecha    [] = [];
-  sentencias : Sentencia[] = [];
+  otrasFechas   : Fecha    [] = [];
+  sentencias    : Sentencia[] = [];
+  datosSentencia: Modal    [] = [];
+
+  mostrarModal: boolean = false;
 
   // Configuración del carrusel
   opcionesSlider = {
@@ -51,7 +55,7 @@ export class InformacionPage {
   constructor(private activatedRoute: ActivatedRoute, private servicioFechas: FechasService, private navController: NavController) {
 
     // Guardamos en una variable todas las fechas
-    this.servicioFechas.getFechas().subscribe( (data: Fecha[]) => {
+    this.servicioFechas.getFechas().subscribe( ( data: Fecha[]) => {
       this.otrasFechas = data;
     });
 
@@ -59,7 +63,7 @@ export class InformacionPage {
     this.activatedRoute.params.subscribe( parametroURL => {
 
       // Guardamos en una variable los datos de la fecha cuyo ID se encuentra en la URL
-      this.servicioFechas.getFecha( parametroURL.id ).subscribe( (data: Fecha[]) => {
+      this.servicioFechas.getDatosFecha( parametroURL.id ).subscribe( (data: Fecha[]) => {
         this.fecha = data[0];
       });
 
@@ -68,6 +72,23 @@ export class InformacionPage {
         this.sentencias = data;
       });
     });
+  }
+
+  // Abrir modal
+  abrirModal(id: number) {
+    this.servicioFechas.getDatosSentencia( id ).subscribe( ( data: Modal[] ) => {
+      
+      // Guardamos en una variable los datos de la sentencia seleccionada
+      this.datosSentencia = data;
+      
+      // Mostramos el modal
+      this.mostrarModal = true;
+    });
+  }
+
+  // Cerrar modal
+  cerrarModal() {
+    this.mostrarModal = false;
   }
 
   // Volver a la página anterior
@@ -79,4 +100,5 @@ export class InformacionPage {
   volverInicio() {
     this.navController.navigateBack('/');
   }
+
 }

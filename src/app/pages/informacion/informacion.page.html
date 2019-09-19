@@ -1,5 +1,5 @@
 <ion-content fullscreen="true">
-  <section id="informacion">
+  <section id="informacion" *ngIf="!mostrarModal">
 
     <!-- ──────────────── -->
     <!--     CABECERA     -->
@@ -31,7 +31,7 @@
 
       <h2 *ngIf="sentencias.length">Sentencias</h2>
       <ul class="sentencias" *ngIf="sentencias.length">
-        <li class="sentencia" *ngFor="let sentencia of sentencias">
+        <li class="sentencia" *ngFor="let sentencia of sentencias" (click)="abrirModal(sentencia.id)">
           <span>{{ sentencia.extractolatino }}</span>
           <i class="flecha fa fa-angle-right" aria-hidden="true"></i>
         </li>
@@ -53,6 +53,30 @@
     <div class="footer">
       <a class="copyright" href="https://iatext.ulpgc.es/">&copy; IATEXT</a>
     </div>
-
+    
   </section>
+
+  <!-- ──────────────── -->
+  <!--     MODALES     -->
+  <!-- ─────────────── -->
+
+  <div class="modal-background" *ngIf="mostrarModal">
+    <div class="modal">
+      <h2>Datos de la sentencia</h2>
+      <ul class="items">
+        <li class="item" *ngIf="datosSentencia[0].autor.length">
+          <b>Autor:</b>&nbsp;{{ datosSentencia[0].autor }}</li>
+        <li class="item" *ngIf="datosSentencia[0].obra.length">
+          <b>Obra:</b>&nbsp;{{ datosSentencia[0].obra  }}</li>
+        <li class="item" *ngIf="datosSentencia[0].extractolatino.length">
+          <b>Extracto en latín:</b>&nbsp;{{ datosSentencia[0].extractolatino  }}</li>
+        <li class="item" *ngIf="datosSentencia[0].extractoespanol.length">
+          <b>Extracto en castellano:</b>&nbsp;{{ datosSentencia[0].extractoespanol }}</li>
+        <li class="item" *ngIf="datosSentencia[0].extractoingles.length">
+          <b>Extracto en inglés:</b>&nbsp;{{ datosSentencia[0].extractoingles  }}</li>
+      </ul>
+      <i class="cierre fa fa-times" aria-hidden="true" (click)="cerrarModal()"></i>
+    </div>
+    <div class="imagen-difuminada" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
+  </div>
 </ion-content>
