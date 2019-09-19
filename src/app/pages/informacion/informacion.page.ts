@@ -16,6 +16,8 @@ import { FechasService } from '../../services/fechas.service';
 })
 export class InformacionPage {
 
+  idFechaURL: number;
+
   fecha: Fecha = {
     id: 0,
     etiqueta: '',
@@ -25,7 +27,7 @@ export class InformacionPage {
   
   otrasFechas   : Fecha    [] = [];
   sentencias    : Sentencia[] = [];
-  datosSentencia: Modal    [] = [];
+  datosSentencia: Modal;
 
   mostrarModal: boolean = false;
 
@@ -62,6 +64,8 @@ export class InformacionPage {
     // Obtenemos los parámetros de la URL (en este caso solo es el id de la fecha)
     this.activatedRoute.params.subscribe( parametroURL => {
 
+      this.idFechaURL = parametroURL.id;
+
       // Guardamos en una variable los datos de la fecha cuyo ID se encuentra en la URL
       this.servicioFechas.getDatosFecha( parametroURL.id ).subscribe( (data: Fecha[]) => {
         this.fecha = data[0];
@@ -71,19 +75,23 @@ export class InformacionPage {
       this.servicioFechas.getSentencias( parametroURL.id ).subscribe( ( data: Sentencia[] ) => {
         this.sentencias = data;
       });
+
     });
+
   }
 
   // Abrir modal
-  abrirModal(id: number) {
+  abrirModal( id: number ) {
+
     this.servicioFechas.getDatosSentencia( id ).subscribe( ( data: Modal[] ) => {
       
       // Guardamos en una variable los datos de la sentencia seleccionada
-      this.datosSentencia = data;
+      this.datosSentencia = data[0];
       
       // Mostramos el modal
       this.mostrarModal = true;
     });
+
   }
 
   // Cerrar modal
