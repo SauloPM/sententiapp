@@ -103,21 +103,21 @@ export class HomePage implements OnInit {
 
     function filtrar() {
 
-      var titulo      = "";
+      var etiqueta      = "";
       var secuencia = $(".entrada").val().toLowerCase().trim();
 
-      $(".fecha .titulo").each(function () {
+      $(".fecha .etiqueta").each(function () {
 
-          titulo = $(this).html().toLowerCase();
+        etiqueta = $(this).html().toLowerCase();
 
           // Ha habido coincidencias o no se ha escrito nada
-          if ((titulo.indexOf(secuencia) > -1) || (secuencia.length == 0)) {
-              $(this).parent().css("display", "flex");
+          if ((etiqueta.indexOf(secuencia) > -1) || (secuencia.length == 0)) {
+              $(this).parent().parent().css("display", "flex");
           }
 
           // No ha habido coincidencia
           else {
-              $(this).parent().css("display", "none");
+              $(this).parent().parent().css("display", "none");
           }
       });
     }

@@ -1,6 +1,8 @@
 <ion-content>
   <section id="inicio">
 
+    <div class="ruido"></div>
+
     <!-- Portada -->
     <div class="portada">
         <img class="titulo" src="assets/img/titulo.svg" alt="">
@@ -24,11 +26,12 @@
           <div class="imagen" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
           <div>
             <div class="etiqueta">{{ fecha.etiqueta }}</div>
-            <div class="dia">2 de octubre</div>
+            <div class="dia">{{ fecha.dia }}</div>
           </div>
         </a>
+
       </div>
-      <div class="ruido"></div>
+      
     </div>
   </section>
 </ion-content>
