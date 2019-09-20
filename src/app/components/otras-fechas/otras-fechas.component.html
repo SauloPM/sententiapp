@@ -1,20 +1,9 @@
 <h2>Otras fechas</h2>
 
-<div class="owl-carousel fechas">
-
-  <a class="fecha" *ngFor="let otraFecha of otrasFechas" [routerLink]="['/informacion', otraFecha.id]" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + otraFecha.imagen + ')'">
-    <p>{{ otraFecha.etiqueta }}</p>
-  </a>
-
-</div>
-
-<!-- Código antiguo -->
-
-<!-- <div class="thumbnails">
-  <a [routerLink]="['/informacion', otrasFechas[0].id]" class="thumbnail" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + otrasFechas[0].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}" #hijo1>1</a>
-  <a [routerLink]="['/informacion', otrasFechas[1].id]" class="thumbnail" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + otrasFechas[1].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}">2</a>
-  <a [routerLink]="['/informacion', otrasFechas[2].id]" class="thumbnail" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + otrasFechas[2].imagen + ')'" style.height.px="{{ hijo1.offsetWidth }}">3</a>
-</div>
-<div class="captions">
-  <span class="caption" *ngFor="let otraFecha of otrasFechas; let i = index">{{ otraFecha.etiqueta }}</span>
-</div> -->
+<ion-slides class="slider" pager="true" [options]="opcionesSlider">
+  <ng-container *ngFor="let fecha of fechas">
+    <ion-slide class="slide" *ngIf="idFechaURL != fecha.id" [routerLink]="['/informacion', fecha.id]" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'">
+      <span class="caption">{{ fecha.etiqueta }}</span>
+    </ion-slide>
+  </ng-container>
+</ion-slides>

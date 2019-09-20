@@ -1,7 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 // Servicios
 import { FechasService  } from '../../services/fechas.service';
+
+// Interfaces
+import { Fecha } from '../../interfaces/fecha';
 
 // jQuery
 declare var $: any;
@@ -11,33 +14,33 @@ declare var $: any;
   templateUrl: './otras-fechas.component.html',
   styleUrls: ['./otras-fechas.component.scss'],
 })
-export class OtrasFechasComponent implements OnInit, AfterViewInit {
+export class OtrasFechasComponent {
 
-  otrasFechas: Fecha[] = [];
+  @Input() id: number;
 
-  constructor(private servicioFechas: FechasService) {
+  fechas: Fecha[] = [];
+
+  // Configuración del carrusel
+  opcionesSlider = {
+    pagination: false,
+    spaceBetween: 5,
+    slidesPerView: 5,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 3,
+      }
+    }
+  }
+
+  constructor( private servicioFechas: FechasService ) {
     
-    // Guardamos las fechas en una variable
-    this.servicioFechas.getFechas().subscribe( (data: Fecha[]) => {
-      this.otrasFechas = data;
+    // Guardamos en una variable todas las fechas
+    this.servicioFechas.getFechas().subscribe( ( data: Fecha[]) => {
+      this.fechas = data;
     });
   }
-
-  ngOnInit() {
-    $(window).on("load", function() {
-      $('.owl-carousel').owlCarousel();
-    });
-  }
-
-  ngAfterViewInit() {
-    $(window).on("load", function() {
-      $('.owl-carousel').owlCarousel();
-    });
-  }
-}
-
-export interface Fecha {
-  id: number;
-  etiqueta: string;
-  imagen: string;
 }
