@@ -16,8 +16,6 @@ import { FechasService } from '../../services/fechas.service';
 })
 export class InformacionPage {
 
-  idFechaURL: number;
-
   fecha: Fecha = {
     id: 0,
     etiqueta: '',
@@ -25,36 +23,18 @@ export class InformacionPage {
     imagen: ''
   };
   
+  idFechaURL  : number  = 0;
+  mostrarModal: boolean = false;
+
   otrasFechas   : Fecha    [] = [];
   sentencias    : Sentencia[] = [];
   datosSentencia: Modal;
-
-  mostrarModal: boolean = false;
-
-  // Configuración del carrusel
-  opcionesSlider = {
-    pagination: false,
-    spaceBetween: 5,
-    slidesPerView: 5,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-    },
-    breakpoints: {
-      400: {
-        slidesPerView: 3,
-      },
-      768: {
-        slidesPerView: 3,
-      }
-    }
-  }
 
   // ─────────────── //
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor(private activatedRoute: ActivatedRoute, private servicioFechas: FechasService, private navController: NavController) {
+  constructor( private activatedRoute: ActivatedRoute, private servicioFechas: FechasService, private navController: NavController ) {
 
     // Guardamos en una variable todas las fechas
     this.servicioFechas.getFechas().subscribe( ( data: Fecha[]) => {
@@ -69,6 +49,7 @@ export class InformacionPage {
       // Guardamos en una variable los datos de la fecha cuyo ID se encuentra en la URL
       this.servicioFechas.getDatosFecha( parametroURL.id ).subscribe( (data: Fecha[]) => {
         this.fecha = data[0];
+        console.log(this.fecha)
       });
 
       // Guardamos en una variable las sentencias de la fecha cuyo ID se encuentra en la URL
