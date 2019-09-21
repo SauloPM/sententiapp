@@ -44,8 +44,12 @@ h1 {
 
 h2 {
     color: $text;
-    font-size: 15px;
-    font-weight: bold;
+    // font-size: 15px;
+    font-size: 20px;
+    // font-weight: bold;
+    font-weight: 800;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    text-transform: uppercase;
     margin-bottom: 25px;
 }
 
@@ -358,9 +362,13 @@ p {
             color: gray;
             font-size: 12px;
             line-height: 20px;
-            border-bottom: 1px solid rgb(235,235,235);
-            padding: 8px 15px 8px 5px;
-            margin: 0;
+            // border-bottom: 1px solid rgb(235,235,235);
+            border-radius: 5px;
+            box-shadow: 5px 5px 10px rgb(225,225,225);
+            // padding: 8px 15px 8px 5px;
+            padding: 15px 25px;
+            // margin: 0;
+            margin: 0 0 10px;
             position: relative;
             cursor: pointer;
 
