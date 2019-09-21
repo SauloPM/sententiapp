@@ -72,7 +72,7 @@ export class SentenciasComponent {
         icon: 'share',
         handler: () => {
           console.log('Compartir clicked');
-          this.socialSharing.share(this.sentencias[0].extractolatino, 'SententiApp', null, 'https://play.google.com');
+          this.socialSharing.share(`« ${ this.sentencias[0].extractolatino } »`, 'SententiApp', null, 'https://play.google.com');
         }
       }, {
         text: 'Cancelar',
