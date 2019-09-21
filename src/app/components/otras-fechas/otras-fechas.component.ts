@@ -6,9 +6,6 @@ import { FechasService  } from '../../services/fechas.service';
 // Interfaces
 import { Fecha } from '../../interfaces/fecha';
 
-// jQuery
-declare var $: any;
-
 @Component({
   selector: 'app-otras-fechas',
   templateUrl: './otras-fechas.component.html',
@@ -35,6 +32,10 @@ export class OtrasFechasComponent {
       }
     }
   }
+
+  // ─────────────── //
+  //     MÉTODOS     //
+  // ─────────────── //
 
   constructor( private servicioFechas: FechasService ) {
     
