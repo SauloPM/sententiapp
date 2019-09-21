@@ -9,6 +9,9 @@ import { FechasService  } from '../../services/fechas.service';
 import { Modal     } from '../../interfaces/modal';
 import { Sentencia } from '../../interfaces/sentencia';
 
+// Compartir en RRSS
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
 @Component({
   selector: 'app-sentencias',
   templateUrl: './sentencias.component.html',
@@ -30,7 +33,7 @@ export class SentenciasComponent {
     navigation: false
   };
 
-  constructor( private activatedRoute: ActivatedRoute, private servicioFechas: FechasService, private actionSheetController: ActionSheetController ) {
+  constructor( private activatedRoute: ActivatedRoute, private servicioFechas: FechasService, private actionSheetController: ActionSheetController, private socialSharing: SocialSharing ) {
 
     // Obtenemos los parámetros de la URL (en este caso solo es el id de la fecha)
     this.activatedRoute.params.subscribe( parametroURL => {
@@ -69,6 +72,7 @@ export class SentenciasComponent {
         icon: 'share',
         handler: () => {
           console.log('Compartir clicked');
+          this.socialSharing.share(this.sentencias[0].extractolatino, 'SententiApp', null, 'https://play.google.com');
         }
       }, {
         text: 'Cancelar',
