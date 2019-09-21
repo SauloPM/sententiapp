@@ -47,9 +47,8 @@ export class InformacionPage {
       this.idFechaURL = parametroURL.id;
 
       // Guardamos en una variable los datos de la fecha cuyo ID se encuentra en la URL
-      this.servicioFechas.getDatosFecha( parametroURL.id ).subscribe( (data: Fecha[]) => {
+      this.servicioFechas.getDatosFecha( parametroURL.id ).subscribe( ( data ) => {
         this.fecha = data[0];
-        console.log(this.fecha)
       });
 
       // Guardamos en una variable las sentencias de la fecha cuyo ID se encuentra en la URL
@@ -64,7 +63,7 @@ export class InformacionPage {
   // Abrir modal
   abrirModal( id: number ) {
 
-    this.servicioFechas.getDatosSentencia( id ).subscribe( ( data: Modal[] ) => {
+    this.servicioFechas.getDatosSentencia( id ).subscribe( ( data ) => {
       
       // Guardamos en una variable los datos de la sentencia seleccionada
       this.datosSentencia = data[0];

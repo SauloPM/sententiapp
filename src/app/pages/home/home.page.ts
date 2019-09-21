@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
   constructor(private router: Router, private servicioFechas: FechasService) {
 
     // Guardamos en una variable todas las fechas
-    this.servicioFechas.getFechas().subscribe( (data: Fecha[]) => {
+    this.servicioFechas.getFechas().subscribe( ( data ) => {
       this.fechas = data;
     });
   }
