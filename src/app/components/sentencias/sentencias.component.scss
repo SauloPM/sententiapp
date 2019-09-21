@@ -1,3 +1,9 @@
+// Colores
+$text        : rgb(50,50,50);
+$primary     : rgb(225,165,075);
+$darkprimary : rgb(175,115,025);
+$lightprimary: rgb(255,195,105);
+
 .sentencia {
     border-radius: 5px;
     box-shadow: 5px 5px 10px rgb(225,225,225);
@@ -14,6 +20,7 @@
         font-size: 12px;
         text-align: left;
         line-height: 20px;
+        padding: 0 5px;
 
         .idioma {
             font-weight: lighter;
@@ -23,14 +30,16 @@
     }
 
     .autor {
+        color: $primary;
         font-size: 8px;
         font-family: 'Montserrat', sans-serif;
         text-transform: uppercase;
         border-top: 1px solid rgb(225,225,225);
         letter-spacing: 2px;
         padding-top: 10px;
+        padding-left: 5px;
         margin-top: 7px;
-        opacity: .75;
+        opacity: .5;
     }
     
     .saber-mas {
@@ -46,9 +55,10 @@
         flex-direction: column;
         width: 5px;
         height: 21px;
+        opacity: .25;
         
         span {
-            background: rgb(225,225,225);
+            background: $primary;
             border-radius: 50%;
             width: 5px;
             height: 5px;
