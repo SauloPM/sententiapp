@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  urlApi: 'https://appstip.iatext.ulpgc.es/ServicioSententiApp/sentencias.asmx/',
+  urlApiLocal: 'http://localhost:55852/sentencias.asmx/'
 };
 
 /*

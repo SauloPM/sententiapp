@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { environment } from '../../environments/environment';
+
 // Interfaces
 import { Fecha     } from '../interfaces/fecha';
 import { Modal     } from '../interfaces/modal';
+import { Categoria } from '../interfaces/categoria';
 import { Sentencia } from '../interfaces/sentencia';
+
+// Variables
+const urlApi      = environment.urlApi;
+const urlApiLocal = environment.urlApiLocal;
 
 @Injectable({
   providedIn: 'root'
@@ -13,19 +20,47 @@ export class FechasService {
 
   constructor( private http: HttpClient ) {}
 
-  getFechas() { // Función que solicita un JSON mediante HTTP (método GET) con el ID, la etiqueta, el día y la imagen de toda las fechas 
-    return this.http.get<Fecha[]>('https://appstip.iatext.ulpgc.es/ServicioSententiApp/sentencias.asmx/MostrarFechas');
+  // ─────────────── //
+  //     PORTADA     //
+  // ─────────────── //
+
+  // Función que solicita un JSON mediante HTTP (método GET) con el ID, la etiqueta, el día y la imagen de toda las fechas 
+  getFechas() {
+    return this.ejecutarApi<Fecha[]>( 'MostrarFechas' );
   }
 
-  getDatosFecha( id: number ) { // Función que solicita un JSON mediante HTTP (método GET) con todos los datos de la fecha cuyo ID se envía como parámetro
-    return this.http.get<Fecha>(`https://appstip.iatext.ulpgc.es/ServicioSententiApp/sentencias.asmx/MostrarInformacionFecha?id=${ id }`);
+  // Función que solicita un JSON mediante HTTP (método GET) con la categoría de todas las fechas 
+  getCategorias() {
+    return this.ejecutarApi<Categoria[]>( 'MostrarCategorias', false );
   }
 
-  getSentencias( id: number ) { // Función que solicita un JSON mediante HTTP (método GET) con todas las sentencias y sus autores de la fecha cuyo ID se envía como parámetro
-    return this.http.get<Sentencia[]>(`https://appstip.iatext.ulpgc.es/ServicioSententiApp/sentencias.asmx/MostrarSentencias?id=${ id }`);
+  // ─────────────────── //
+  //     INFORMACIÓN     //
+  // ─────────────────── //
+
+  // Función que solicita un JSON mediante HTTP (método GET) con todos los datos de la fecha cuyo ID se envía como parámetro
+  getDatosFecha( id: number ) {
+    return this.ejecutarApi<Fecha>( `MostrarInformacionFecha?id=${ id }` );
+  }
+
+  // Función que solicita un JSON mediante HTTP (método GET) con todas las sentencias y sus autores de la fecha cuyo ID se envía como parámetro
+  getSentencias( id: number ) {
+    return this.ejecutarApi<Sentencia[]>(`${ urlApi }/MostrarSentencias?id=${ id }`);
   }
 
   getDatosSentencia( id: number ) {
-    return this.http.get<Modal>(`https://appstip.iatext.ulpgc.es/ServicioSententiApp/sentencias.asmx/MostrarInformacionSentencia?id=${ id }`);
+    return this.ejecutarApi<Modal>(`${ urlApi }/MostrarInformacionSentencia?id=${ id }`);
+  }
+
+  // ──────────────── //
+  //     AUXILIAR     //
+  // ──────────────── //
+
+  private ejecutarApi<T>( metodo: string, prod: boolean = true ) {
+
+    let url: string = prod ? urlApi + metodo : urlApiLocal + metodo;
+
+    return this.http.get<T>(`${ url }`);
+
   }
 }
