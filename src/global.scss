@@ -194,11 +194,15 @@ p {
         .categoria {
 
             .texto {
-                color: white;
+                color: rgba(255,255,255,.75);
                 font-size: 12px;
                 font-family: 'Lato', sans-serif;
                 text-transform: none;
                 line-height: 20px;
+            }
+
+            &.segment-button-checked .texto { // Categoría seleccionada
+                color: white;
             }
         }
     }
