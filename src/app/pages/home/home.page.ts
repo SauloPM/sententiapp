@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router    } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonSegment } from '@ionic/angular';
+import { Router     } from '@angular/router';
 
 // Interfaces
 import { Fecha } from '../../interfaces/fecha';
+import { Categoria } from 'src/app/interfaces/categoria';
 
 // Servicios
 import { FechasService } from '../../services/fechas.service';
@@ -17,7 +19,10 @@ declare var $: any;
 })
 export class HomePage implements OnInit {
 
+  @ViewChild(IonSegment) segmentoCategorias: IonSegment;
+
   fechas: Fecha[] = [];
+  categorias: Categoria[] = [];
 
   // ─────────────── //
   //     MÉTODOS     //
@@ -29,6 +34,19 @@ export class HomePage implements OnInit {
     this.servicioFechas.getFechas().subscribe( ( data ) => {
       this.fechas = data;
     });
+
+    // Guardamos en una variable todas las categorías
+    this.servicioFechas.getCategorias().subscribe( ( data ) => {
+      
+      this.categorias =  data;
+
+      // Insertamos el ítem por defecto
+      this.categorias.unshift({ categoria: 'Todos' })
+
+      // Seleccionamos el ítem por defecto
+      this.segmentoCategorias.value = this.categorias[0].categoria;
+    });
+
   }
 
   ngOnInit() {

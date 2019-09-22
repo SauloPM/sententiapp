@@ -19,6 +19,13 @@
 
       <img class="pagina-rota" src="assets/img/pagina-rota.png" alt="">
 
+      <!-- Categorías -->
+      <ion-segment class="categorias" scrollable mode="md">
+        <ion-segment-button class="categoria" *ngFor="let categoria of categorias" [value]="categoria.categoria" mode="md">
+          <ion-label class="texto">{{ categoria.categoria }}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
       <div class="contenedor">
 
         <!-- Buscador -->
