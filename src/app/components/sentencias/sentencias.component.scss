@@ -57,11 +57,15 @@ $lightprimary: rgb(255,195,105);
         height: 21px;
         opacity: .25;
         
-        span {
+        .circulo {
             background: $primary;
             border-radius: 50%;
             width: 5px;
             height: 5px;
+        }
+
+        &:active .circulo {
+            background: $darkprimary;
         }
     }
 
