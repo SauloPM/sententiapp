@@ -1,21 +1,32 @@
 <h2 *ngIf="sentencias.length">Sentencias</h2>
 
-<div class="sentencia" *ngFor="let sentencia of traducciones">
+<div class="sentencia" *ngFor="let sentencia of sentencias">
+
+  <!-- Carrusel de sentencias -->
   <ion-slides pager="true" [options]="configuracion">
-      <ion-slide class="extracto" *ngIf="sentencia.extractolatino.length">
-        {{ sentencia.extractolatino }}
-      </ion-slide>
-      <ion-slide class="extracto" *ngIf="sentencia.extractoespanol.length">
-        <span>{{ sentencia.extractoespanol }}&nbsp;<b class="idioma">[ es ]</b></span>
-      </ion-slide>
-      <ion-slide class="extracto" *ngIf="sentencia.extractoingles.length">
-        <span>{{ sentencia.extractoingles }}&nbsp;<b class="idioma">[ en ]</b></span>
-      </ion-slide>
-    </ion-slides>
+    <ion-slide class="extracto" *ngIf="sentencia.extractolatino.length">
+      {{ sentencia.extractolatino }}
+    </ion-slide>
+    <ion-slide class="extracto" *ngIf="sentencia.extractoespanol.length">
+      <span>{{ sentencia.extractoespanol }}&nbsp;<b class="idioma">[ es ]</b></span>
+    </ion-slide>
+    <ion-slide class="extracto" *ngIf="sentencia.extractoingles.length">
+      <span>{{ sentencia.extractoingles }}&nbsp;<b class="idioma">[ en ]</b></span>
+    </ion-slide>
+  </ion-slides>
+    
+  <!-- Footer -->
+  <div class="sentencia-footer">
     <div class="autor">{{ sentencia.autor }}</div>
     <div class="saber-mas" (click)="abrirMenu()">
       <span class="circulo"></span>
       <span class="circulo"></span>
       <span class="circulo"></span>
     </div>
+    <!-- <div class="iconos" (click)="abrirMenu( sentencia )">
+      <i class="estrella fa fa-star" aria-hidden="true"></i>
+      <i class="compartir fa fa-paper-plane" aria-hidden="true"></i>
+    </div> -->
+  </div>
+
 </div>

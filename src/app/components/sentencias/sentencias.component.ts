@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 
 // Servicios
-import { FechasService  } from '../../services/fechas.service';
+import { FechasService    } from '../../services/fechas.service';
+import { FavoritosService } from '../../services/favoritos.service'
 
 // Interfaces
-import { Modal     } from '../../interfaces/modal';
 import { Sentencia } from '../../interfaces/sentencia';
 
 // Compartir en RRSS
@@ -17,11 +16,11 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
   templateUrl: './sentencias.component.html',
   styleUrls: ['./sentencias.component.scss'],
 })
-export class SentenciasComponent {
+export class SentenciasComponent implements OnInit {
 
-  id          : number      = 0;
+  @Input() id: number = 0;
+
   sentencias  : Sentencia[] = [];
-  traducciones: Modal    [] = [];
 
   configuracion = {
     loop: true,
@@ -33,32 +32,21 @@ export class SentenciasComponent {
     navigation: false
   };
 
-  constructor( private activatedRoute: ActivatedRoute, private servicioFechas: FechasService, private actionSheetController: ActionSheetController, private socialSharing: SocialSharing ) {
+  constructor(
+    private socialSharing: SocialSharing,
+    private servicioFechas: FechasService,
+    private servicioFavoritos: FavoritosService,
+    private actionSheetController: ActionSheetController ) { }
 
-    // Obtenemos los parámetros de la URL (en este caso solo es el id de la fecha)
-    this.activatedRoute.params.subscribe( parametroURL => {
-
-      this.id = parametroURL.id;
-
-      // Guardamos en una variable las sentencias de la fecha cuyo ID se encuentra en la URL
-      this.servicioFechas.getSentencias( parametroURL.id ).subscribe( ( data: Sentencia[] ) => {
-        
-        this.sentencias = data;
-
-        this.sentencias.forEach( element => {
-          
-          this.servicioFechas.getDatosSentencia( element.id ).subscribe( ( data ) => {
-            
-            // Guardamos en una variable los datos de la sentencia seleccionada
-            this.traducciones.push(data[0]);
-
-          });
-        });
-      });
+  ngOnInit() {
+    
+    // Guardamos en una variable las sentencias de la fecha cuyo ID se encuentra en la URL
+    this.servicioFechas.getSentencias( this.id ).subscribe( ( data ) => {
+      this.sentencias = data;
     });
   }
 
-  async abrirMenu() {
+  async abrirMenu( sentencia: Sentencia ) {
 
     const actionSheet = await this.actionSheetController.create({
       buttons: [{
@@ -66,13 +54,15 @@ export class SentenciasComponent {
         icon: 'star',
         handler: () => {
           console.log('Guardar clicked');
+          console.log( sentencia )
+          this.servicioFavoritos.guardarFavoritos( this.sentencias[0] );
         }
       }, {
         text: 'Compartir',
         icon: 'share',
         handler: () => {
           console.log('Compartir clicked');
-          this.socialSharing.share(`« ${ this.sentencias[0].extractolatino } »`, 'SententiApp', null, 'https://play.google.com');
+          this.socialSharing.share(`« ${ sentencia.extractolatino } »`, 'SententiApp', 'https://sententiapp.iatext.ulpgc.es/img/spinner.svg', 'https://play.google.com');
         }
       }, {
         text: 'Cancelar',
