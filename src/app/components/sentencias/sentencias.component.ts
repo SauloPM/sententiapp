@@ -27,7 +27,6 @@ export class SentenciasComponent implements OnInit {
     spaceBetween: 0,
     slidesPerView: 1,
     autoHeight: true,
-    slideToClickedSlide: true,
     pagination: false,
     navigation: false
   };

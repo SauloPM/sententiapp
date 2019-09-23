@@ -5,8 +5,8 @@ $darkprimary : rgb(175,115,025);
 $lightprimary: rgb(255,195,105);
 
 .sentencia {
-    border-radius: 5px;
-    box-shadow: 5px 5px 10px rgb(225,225,225);
+    border: 1px solid whitesmoke;
+    border-radius: 2px;
     padding: 15px 25px;
     margin: 0 0 10px;
     position: relative;
@@ -23,9 +23,9 @@ $lightprimary: rgb(255,195,105);
         padding: 0 5px;
 
         .idioma {
+            color: whitesmoke;
             font-weight: lighter;
             white-space: nowrap;
-            opacity: .5;
         }
     }
 
@@ -33,10 +33,9 @@ $lightprimary: rgb(255,195,105);
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        border-top: 1px solid rgb(245,245,245);
+        border-top: 1px solid whitesmoke;
         padding: 10px 5px 0;
         margin-top: 7px;
-        // position: relative;
 
         .autor {
             color: $primary;

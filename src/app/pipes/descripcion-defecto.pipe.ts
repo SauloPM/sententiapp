@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DescripcionDefectoPipe implements PipeTransform {
 
-  transform(value: any, args?: any): any {
-    return null;
+  transform( texto: string ): string {
+    return texto.startsWith('Lorem ipsum') ? 'Esta fecha no contiene asociada ninguna descripción.' : texto;
   }
 
 }

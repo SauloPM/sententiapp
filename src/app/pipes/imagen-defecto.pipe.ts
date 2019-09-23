@@ -8,9 +8,6 @@ const url = 'http://sententiapp.iatext.ulpgc.es';
 export class ImagenDefectoPipe implements PipeTransform {
 
   transform( imagen: string ): string {
-    
     return imagen == '/img/fechas/default.jpg' ? './assets/img/default-image.jpg' : `${ url }${ imagen }`;
-
   }
-
 }
