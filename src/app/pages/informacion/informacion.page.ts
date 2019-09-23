@@ -24,7 +24,6 @@ export class InformacionPage {
   };
   
   idFechaURL  : number  = 0;
-  mostrarModal: boolean = false;
 
   otrasFechas   : Fecha    [] = [];
   sentencias    : Sentencia[] = [];
@@ -34,7 +33,9 @@ export class InformacionPage {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private activatedRoute: ActivatedRoute, private servicioFechas: FechasService, private navController: NavController ) {
+  constructor( private servicioFechas: FechasService, private activatedRoute: ActivatedRoute, private navController: NavController ) { }
+
+  ngOnInit() {
 
     // Guardamos en una variable todas las fechas
     this.servicioFechas.getFechas().subscribe( ( data: Fecha[]) => {
@@ -58,25 +59,6 @@ export class InformacionPage {
 
     });
 
-  }
-
-  // Abrir modal
-  abrirModal( id: number ) {
-
-    this.servicioFechas.getDatosSentencia( id ).subscribe( ( data ) => {
-      
-      // Guardamos en una variable los datos de la sentencia seleccionada
-      this.datosSentencia = data[0];
-      
-      // Mostramos el modal
-      this.mostrarModal = true;
-    });
-
-  }
-
-  // Cerrar modal
-  cerrarModal() {
-    this.mostrarModal = false;
   }
 
   // Volver a la página anterior
