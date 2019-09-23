@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 
 // Interfaces
 import { Fecha     } from '../../interfaces/fecha';
-import { Modal     } from '../../interfaces/modal';
 import { Sentencia } from '../../interfaces/sentencia';
 
 // Servicios
@@ -27,7 +26,6 @@ export class InformacionPage {
 
   otrasFechas   : Fecha    [] = [];
   sentencias    : Sentencia[] = [];
-  datosSentencia: Modal;
 
   // ─────────────── //
   //     MÉTODOS     //
