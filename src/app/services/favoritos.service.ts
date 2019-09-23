@@ -17,7 +17,7 @@ export class FavoritosService {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private storage: Storage ) { }
+  constructor( private storage: Storage ) { this.cargarFavoritos() }
 
   guardarFavoritos( sentencia: Sentencia ) {
 
@@ -27,10 +27,21 @@ export class FavoritosService {
       this.favoritos.unshift( sentencia );
       this.storage.set( 'favoritos', this.favoritos );
     }
+    
   }
 
-  cargarFavoritos() {
+  async cargarFavoritos() {
 
+    const favoritos = await this.storage.get( 'favoritos' );
+
+    if ( favoritos ) {
+      this.favoritos = favoritos;
+    }
+
+    // Código equivalente (es una promesa) a la instrucción de arriba que utiliza un await y async delante del identificador de la función
+    // this.storage.get( 'favoritos' ).then( favoritos => {
+      //   console.log('favoritos', favoritos)
+    // });
   }
 
 }

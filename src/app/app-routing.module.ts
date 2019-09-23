@@ -5,6 +5,7 @@ const routes: Routes = [
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
+  { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
 
   // Rutas con parámetros
   { path: 'informacion/:id', loadChildren: './pages/informacion/informacion.module#InformacionPageModule' },
