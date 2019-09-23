@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 // Servicios
 import { FechasService  } from '../../services/fechas.service';
@@ -11,7 +11,7 @@ import { Fecha } from '../../interfaces/fecha';
   templateUrl: './otras-fechas.component.html',
   styleUrls: ['./otras-fechas.component.scss'],
 })
-export class OtrasFechasComponent {
+export class OtrasFechasComponent implements OnInit {
 
   @Input() id: number;
 
@@ -37,11 +37,15 @@ export class OtrasFechasComponent {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private servicioFechas: FechasService ) {
-    
+  constructor( private servicioFechas: FechasService ) { }
+
+  ngOnInit() {
+
     // Guardamos en una variable todas las fechas
     this.servicioFechas.getFechas().subscribe( ( data: Fecha[]) => {
       this.fechas = data;
     });
+
   }
+
 }
