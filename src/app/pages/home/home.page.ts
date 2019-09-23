@@ -40,10 +40,10 @@ export class HomePage implements OnInit {
       
       this.categorias =  data;
 
-      // Insertamos el ítem por defecto
+      // Insertamos la categoría por defecto en el filtro de categorías
       this.categorias.unshift({ categoria: 'Todos' })
 
-      // Seleccionamos el ítem por defecto
+      // Seleccionamos la categoría por defecto en el filtro de categorías
       this.segmentoCategorias.value = this.categorias[0].categoria;
     });
 

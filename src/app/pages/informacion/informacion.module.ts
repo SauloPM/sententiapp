@@ -5,6 +5,9 @@ import { CommonModule         } from '@angular/common';
 import { InformacionPage      } from './informacion.page';
 import { Routes, RouterModule } from '@angular/router';
 
+// Pipes
+import { PipesModule } from 'src/app/pipes/pipes.module';
+
 // Componentes
 import { ComponentsModule } from '../../components/components.module';
 
@@ -20,8 +23,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    ComponentsModule
+    PipesModule,
+    ComponentsModule,
+    RouterModule.forChild(routes)
   ],
   declarations: [
     InformacionPage

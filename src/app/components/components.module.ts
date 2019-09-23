@@ -7,6 +7,9 @@ import { FooterComponent      } from './footer/footer.component';
 import { SentenciasComponent  } from './sentencias/sentencias.component';
 import { OtrasFechasComponent } from './otras-fechas/otras-fechas.component';
 
+// Pipes
+import { PipesModule } from '../pipes/pipes.module';
+
 // Compartir en RRSS
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
@@ -18,7 +21,8 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    PipesModule
   ],
   exports: [
     FooterComponent,

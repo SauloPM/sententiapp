@@ -5,7 +5,7 @@
     <!--     CABECERA     -->
     <!-- ──────────────── -->
 
-    <div class="cabecera" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'">
+    <div class="cabecera" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'">
       
       <!-- Volver atrás -->
       <a class="volver volver-atras" (click)="volverAtras()">
