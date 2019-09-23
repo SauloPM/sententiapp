@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 
+// Pipes
+import { PipesModule } from 'src/app/pipes/pipes.module';
+
 // Componentes
 import { ComponentsModule } from '../../components/components.module';
 
@@ -15,6 +18,7 @@ import { ComponentsModule } from '../../components/components.module';
     FormsModule,
     IonicModule,
     ComponentsModule,
+    PipesModule,
     RouterModule.forChild([
       {
         path: '',
