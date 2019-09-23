@@ -5,7 +5,6 @@ import { environment } from '../../environments/environment';
 
 // Interfaces
 import { Fecha     } from '../interfaces/fecha';
-import { Modal     } from '../interfaces/modal';
 import { Categoria } from '../interfaces/categoria';
 import { Sentencia } from '../interfaces/sentencia';
 
@@ -31,11 +30,11 @@ export class FechasService {
 
   // Función que solicita un JSON mediante HTTP (método GET) con la categoría de todas las fechas 
   getCategorias() {
-    return this.ejecutarApi<Categoria[]>( 'MostrarCategorias', false );
+    return this.ejecutarApi<Categoria[]>( 'MostrarCategorias' );
   }
 
   getFechasPorCategoria( categoria: string ) {
-    return this.ejecutarApi<Fecha[]>( `MostrarFechasPorCategoria?categoria=${ categoria }`, false );
+    return this.ejecutarApi<Fecha[]>( `MostrarFechasPorCategoria?categoria=${ categoria }` );
   }
 
   // ─────────────────── //
@@ -49,7 +48,7 @@ export class FechasService {
 
   // Función que solicita un JSON mediante HTTP (método GET) con todas las sentencias y sus autores de la fecha cuyo ID se envía como parámetro
   getSentencias( id: number ) {
-    return this.ejecutarApi<Sentencia[]>(`MostrarSentencias?id=${ id }`, false);
+    return this.ejecutarApi<Sentencia[]>(`MostrarSentencias?id=${ id }`);
   }
 
   // ──────────────── //
