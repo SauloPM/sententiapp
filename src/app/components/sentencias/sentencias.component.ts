@@ -53,15 +53,12 @@ export class SentenciasComponent implements OnInit {
         text: 'Guardar',
         icon: 'star',
         handler: () => {
-          console.log('Guardar clicked');
-          console.log( sentencia )
-          this.servicioFavoritos.guardarFavoritos( this.sentencias[0] );
+          this.servicioFavoritos.guardarFavoritos( sentencia );
         }
       }, {
         text: 'Compartir',
         icon: 'share',
         handler: () => {
-          console.log('Compartir clicked');
           this.socialSharing.share(`« ${ sentencia.extractolatino } »`, 'SententiApp', 'https://sententiapp.iatext.ulpgc.es/img/spinner.svg', 'https://play.google.com');
         }
       }, {

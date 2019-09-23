@@ -18,6 +18,9 @@ import { ComponentsModule } from './components/components.module';
 // Notificaciones PUSH
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 
+// BD local
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -28,7 +31,8 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    ComponentsModule
+    ComponentsModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,
