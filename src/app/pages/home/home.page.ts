@@ -140,4 +140,23 @@ export class HomePage implements OnInit {
       });
     }
   }
+
+  cambiarCategoria( event ) {
+
+    const categoriaSeleccionada = event.detail.value;
+
+    // Guardamos en una variable todas las fechas
+    if ( categoriaSeleccionada == this.categorias[0].categoria ) {
+      this.servicioFechas.getFechas().subscribe( ( data ) => {
+        this.fechas = data;
+      });
+    }
+
+    // Guardamos en una variable todas las fechas que tengan sentencias pertenecientes a la categoría seleccionada
+    else {
+      this.servicioFechas.getFechasPorCategoria( categoriaSeleccionada ).subscribe( ( data ) => {
+        this.fechas = data;
+      });
+    }
+  }
 }

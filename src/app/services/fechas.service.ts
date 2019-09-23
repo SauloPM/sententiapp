@@ -64,8 +64,6 @@ export class FechasService {
 
     let url: string = prod ? urlApi + metodo : urlApiLocal + metodo;
 
-    console.log(url)
-
     return this.http.get<T>(`${ url }`);
 
   }

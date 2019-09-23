@@ -20,7 +20,7 @@
       <img class="pagina-rota" src="assets/img/pagina-rota.png" alt="">
 
       <!-- Categorías -->
-      <ion-segment class="categorias" scrollable mode="md">
+      <ion-segment class="categorias" scrollable mode="md" (ionChange)="cambiarCategoria( $event )">
         <ion-segment-button class="categoria" *ngFor="let categoria of categorias" [value]="categoria.categoria" mode="md">
           <ion-label class="texto">{{ categoria.categoria }}</ion-label>
         </ion-segment-button>

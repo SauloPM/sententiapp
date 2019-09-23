@@ -194,7 +194,7 @@ p {
         .categoria {
 
             .texto {
-                color: rgba(255,255,255,.75);
+                color: rgba(255,255,255,.5);
                 font-size: 12px;
                 font-family: 'Lato', sans-serif;
                 text-transform: none;
@@ -205,10 +205,6 @@ p {
                 color: white;
             }
         }
-    }
-
-    .segment-button-checked {
-        color: $darkprimary;
     }
 
     // Fechas
