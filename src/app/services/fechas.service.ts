@@ -34,6 +34,10 @@ export class FechasService {
     return this.ejecutarApi<Categoria[]>( 'MostrarCategorias', false );
   }
 
+  getFechasPorCategoria( categoria: string ) {
+    return this.ejecutarApi<Fecha[]>( `MostrarFechasPorCategoria?categoria=${ categoria }`, false );
+  }
+
   // ─────────────────── //
   //     INFORMACIÓN     //
   // ─────────────────── //
@@ -45,11 +49,11 @@ export class FechasService {
 
   // Función que solicita un JSON mediante HTTP (método GET) con todas las sentencias y sus autores de la fecha cuyo ID se envía como parámetro
   getSentencias( id: number ) {
-    return this.ejecutarApi<Sentencia[]>(`${ urlApi }/MostrarSentencias?id=${ id }`);
+    return this.ejecutarApi<Sentencia[]>(`MostrarSentencias?id=${ id }`);
   }
 
   getDatosSentencia( id: number ) {
-    return this.ejecutarApi<Modal>(`${ urlApi }/MostrarInformacionSentencia?id=${ id }`);
+    return this.ejecutarApi<Modal>(`MostrarInformacionSentencia?id=${ id }`);
   }
 
   // ──────────────── //
@@ -59,6 +63,8 @@ export class FechasService {
   private ejecutarApi<T>( metodo: string, prod: boolean = true ) {
 
     let url: string = prod ? urlApi + metodo : urlApiLocal + metodo;
+
+    console.log(url)
 
     return this.http.get<T>(`${ url }`);
 
