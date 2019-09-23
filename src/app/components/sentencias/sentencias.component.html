@@ -2,8 +2,10 @@
 
 <div class="sentencia" *ngFor="let sentencia of sentencias">
 
-  <!-- Carrusel de sentencias -->
+  <!-- Carrusel de extractos -->
   <ion-slides pager="true" [options]="configuracion">
+
+    <!-- Extractos -->
     <ion-slide class="extracto" *ngIf="sentencia.extractolatino.length">
       {{ sentencia.extractolatino }}
     </ion-slide>
@@ -13,7 +15,16 @@
     <ion-slide class="extracto" *ngIf="sentencia.extractoingles.length">
       <span>{{ sentencia.extractoingles }}&nbsp;<b class="idioma">[ en ]</b></span>
     </ion-slide>
+    
   </ion-slides>
+
+  <!-- Flechas -->
+  <div class="flecha flecha-derecha">
+    <i class="fa fa-angle-right" aria-hidden="true"></i>
+  </div>
+  <div class="flecha flecha-izquierda">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
     
   <!-- Footer -->
   <div class="sentencia-footer">

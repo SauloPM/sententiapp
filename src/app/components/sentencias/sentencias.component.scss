@@ -12,6 +12,8 @@ $lightprimary: rgb(255,195,105);
     position: relative;
     overflow: hidden;
     
+    // Extractos
+
     .extracto {
         display: flex;
         align-items: center;
@@ -28,6 +30,26 @@ $lightprimary: rgb(255,195,105);
             white-space: nowrap;
         }
     }
+
+    // Flechas
+
+    .flecha {
+        color: whitesmoke;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        &.flecha-derecha {
+            right: 10px;
+        }
+
+        &.flecha-izquierda {
+            left: 10px;
+        }
+    }
+
+    // Footer
 
     .sentencia-footer {
         display: flex;
