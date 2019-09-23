@@ -7,52 +7,65 @@
     <!--     CABECERA     -->
     <!-- ──────────────── -->
 
-    <div class="portada">
-        <img class="logotipo" src="assets/img/logotipo.svg" alt="">
-    </div>
+    <div style="display: flex; justify-content: space-between; flex-direction: column; min-height: 100vh">
 
-    <!-- ────────────── -->
-    <!--     CUERPO     -->
-    <!-- ────────────── -->
-    
-    <div class="relative">
-
-      <img class="pagina-rota" src="assets/img/pagina-rota.png" alt="">
-
-      <!-- Categorías -->
-      <ion-segment class="categorias" scrollable mode="md" (ionChange)="cambiarCategoria( $event )">
-        <ion-segment-button class="categoria" *ngFor="let categoria of categorias" [value]="categoria.categoria" mode="md">
-          <ion-label class="texto">{{ categoria.categoria }}</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-
-      <div class="contenedor">
-
-        <!-- Buscador -->
-        <div class="buscador cerrado">
-          <input type="text" class="entrada">
-          <div class="mango"></div>
-          <div class="cierre">×</div>
+      <div>
+        <div class="portada">
+            <img class="logotipo" src="assets/img/logotipo.svg" alt="">
+            <span class="advertencia">
+                SententiApp selecciona sentencias de autores latinos traducidas al español e inglés sobre temas de actualidad como ejemplos de la pervivencia y de la transformación del pensamiento clásico en la sociedad occidental. Léelas, da tu opinión y utilízalas para tus argumentos.
+            </span>
         </div>
 
-        <!-- Fechas -->
-        <a class="fecha" [routerLink]="['/informacion', fecha.id]" *ngFor="let fecha of fechas">
-          <div class="imagen" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
-          <div>
-            <div class="etiqueta">{{ fecha.etiqueta }}</div>
-            <div class="dia">{{ fecha.dia }}</div>
-          </div>
-        </a>
+      <!-- ────────────── -->
+      <!--     CUERPO     -->
+      <!-- ────────────── -->
+      
+        <div class="relative">
 
+          <img class="pagina-rota volteo-vertical" src="assets/img/pagina-rota.png" alt="">
+
+          <!-- Categorías -->
+          <ion-segment class="categorias" scrollable mode="md" (ionChange)="cambiarCategoria( $event )">
+            <ion-segment-button class="categoria" *ngFor="let categoria of categorias" [value]="categoria.categoria" mode="md">
+              <ion-label class="texto">{{ categoria.categoria }}</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+
+          <div class="contenedor">
+
+            <!-- Buscador -->
+            <div class="buscador cerrado">
+              <input type="text" class="entrada">
+              <div class="mango"></div>
+              <div class="cierre">×</div>
+            </div>
+
+            <!-- Fechas -->
+            <a class="fecha" [routerLink]="['/informacion', fecha.id]" *ngFor="let fecha of fechas">
+              <div class="imagen" [style.backgroundImage]="'url(http://sententiapp.iatext.ulpgc.es' + fecha.imagen + ')'"></div>
+              <div>
+                <div class="etiqueta">{{ fecha.etiqueta }}</div>
+                <div class="dia">{{ fecha.dia }}</div>
+              </div>
+            </a>
+
+          </div>
+
+          
+        </div>
       </div>
       
+      <!-- ────────────── -->
+      <!--     FOOTER     -->
+      <!-- ────────────── -->
+      
+      <div>
+        <img class="pagina-rota" src="assets/img/pagina-rota.png" alt="">
+        <app-footer></app-footer>
+      </div>
+
     </div>
-
-    <!-- ────────────── -->
-    <!--     FOOTER     -->
-    <!-- ────────────── -->
-
-    <app-footer></app-footer>
 
   </section>
 </ion-content>
