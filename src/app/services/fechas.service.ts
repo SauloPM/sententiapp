@@ -49,11 +49,7 @@ export class FechasService {
 
   // Función que solicita un JSON mediante HTTP (método GET) con todas las sentencias y sus autores de la fecha cuyo ID se envía como parámetro
   getSentencias( id: number ) {
-    return this.ejecutarApi<Sentencia[]>(`MostrarSentencias?id=${ id }`);
-  }
-
-  getDatosSentencia( id: number ) {
-    return this.ejecutarApi<Modal>(`MostrarInformacionSentencia?id=${ id }`);
+    return this.ejecutarApi<Sentencia[]>(`MostrarSentencias?id=${ id }`, false);
   }
 
   // ──────────────── //
