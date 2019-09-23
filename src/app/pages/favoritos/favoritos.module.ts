@@ -1,11 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule             } from '@angular/core';
+import { FormsModule          } from '@angular/forms';
+import { CommonModule         } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+
+import { FavoritosPage } from './favoritos.page';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FavoritosPage } from './favoritos.page';
+// Componentes
+import { ComponentsModule } from '../../components/components.module';
 
 const routes: Routes = [
   {
@@ -19,6 +22,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [FavoritosPage]

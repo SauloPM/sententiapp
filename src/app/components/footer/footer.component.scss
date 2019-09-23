@@ -1,0 +1,37 @@
+// Colores
+$text        : rgb(50,50,50);
+$primary     : rgb(225,165,075);
+$darkprimary : rgb(175,115,025);
+$lightprimary: rgb(255,195,105);
+
+// Dimensiones
+$mobile: 468px;
+$tablet: 768px;
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 25;
+    width: 100%;
+    height: 50px;
+
+    .copyright {
+        color: white;
+        font-size: 8px;
+        font-family: 'Montserrat', sans-serif;
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 5px;
+
+        &.negro {
+            color: $text
+        }
+
+        &.blanco {
+            color: white;
+        }
+    }
+}
