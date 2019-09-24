@@ -3,7 +3,7 @@
 <div class="sentencia" *ngFor="let sentencia of sentencias">
 
   <!-- Carrusel de extractos -->
-  <ion-slides pager="true" [options]="configuracion">
+  <ion-slides [options]="configuracion">
 
     <!-- Extractos -->
     <ion-slide class="extracto" *ngIf="sentencia.extractolatino.length">

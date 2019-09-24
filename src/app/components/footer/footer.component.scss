@@ -54,12 +54,8 @@ $tablet: 768px;
 // Mobile First
 
 @media only screen and (min-width: $mobile) {
-    .footer {
-        padding: 0 0 25px;
-
-        .logo {
-            margin-right: 25px;
-            height: 35px;
-        }
+    .footer .logo {
+        margin-right: 25px;
+        height: 35px;
     }
 }

@@ -1,21 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 // Servicios
 import { FavoritosService } from '../../services/favoritos.service'
 
-// Interfaces
-import { Sentencia } from 'src/app/interfaces/sentencia';
+// Compartir en RRSS
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'app-favoritos',
   templateUrl: './favoritos.page.html'
 })
-export class FavoritosPage implements OnInit {
+export class FavoritosPage {
 
-  sentenciasFavoritas: Sentencia[] = [];
+  configuracion = {
+    loop: true,
+    spaceBetween: 0,
+    slidesPerView: 1,
+    autoHeight: true,
+    pagination: false,
+    navigation: false
+  };
 
-  constructor( public favoritosService: FavoritosService ) { }
+  constructor( public favoritosService: FavoritosService, private socialSharing: SocialSharing ) { }
 
-  ngOnInit() { }
+  compartir( extracto: string ) {
+    console.log(extracto)
+    this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es');
+  }
 
 }
