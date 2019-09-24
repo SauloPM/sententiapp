@@ -30,7 +30,7 @@ export class FechasService {
 
   // Función que solicita un JSON mediante HTTP (método GET) con la categoría de todas las fechas 
   getCategorias() {
-    return this.ejecutarApi<Categoria[]>( 'MostrarCategorias' );
+    return this.ejecutarApi<Categoria[]>( 'MostrarCategorias', false );
   }
 
   getFechasPorCategoria( categoria: string ) {
@@ -48,7 +48,7 @@ export class FechasService {
 
   // Función que solicita un JSON mediante HTTP (método GET) con todas las sentencias y sus autores de la fecha cuyo ID se envía como parámetro
   getSentencias( id: number ) {
-    return this.ejecutarApi<Sentencia[]>(`MostrarSentencias?id=${ id }`);
+    return this.ejecutarApi<Sentencia[]>(`MostrarSentencias?id=${ id }`, false);
   }
 
   // ──────────────── //
