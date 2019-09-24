@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-bottombar',
@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./bottombar.component.scss'],
 })
 export class BottombarComponent {
+
+  @Input() color: string = 'dorado';
 
   constructor() { }
 
