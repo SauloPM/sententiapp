@@ -33,7 +33,7 @@
 
             <!-- Filtro de categorías -->
             <ion-slides class="categorias" [options]="configuracion">
-              <ion-slide class="categoria" *ngFor="let categoria of categorias; index as i" [ngClass]="{ 'seleccionada' : i == 0 }" (click)="cambiarDeCategoria( categoria.categoria )">
+              <ion-slide class="categoria" *ngFor="let categoria of categorias; index as i" [ngClass]="{ 'seleccionada' : i == 0 }" (click)="cambiarCategoria( categoria.categoria )">
                 {{ categoria.categoria }}
               </ion-slide>
             </ion-slides>

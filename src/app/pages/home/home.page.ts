@@ -126,7 +126,7 @@ export class HomePage implements OnInit {
 
     $(document).on('click', '.categorias .categoria', function() {
       $('.categorias .categoria.seleccionada').removeClass('seleccionada');
-      $(this).addClass('active');
+      $(this).addClass('seleccionada');
     });
 
     function filtrar() {
@@ -151,7 +151,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  cambiarDeCategoria( categoriaSeleccionada: string ) {
+  cambiarCategoria( categoriaSeleccionada: string ) {
 
     // Guardamos en una variable todas las fechas
     if ( categoriaSeleccionada == this.categorias[0].categoria ) {
