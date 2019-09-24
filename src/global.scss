@@ -309,6 +309,13 @@ p {
         padding: 35px 25px;
     }
 
+    .vacio {
+        color: $text;
+        font-size: 12px;
+        text-align: center;
+        line-height: 20px;
+    }
+
     .titulo {
         margin: 0 0 25px;
     }
@@ -373,8 +380,16 @@ p {
                 display: flex;
                 align-items: center;
 
-                .icono:first-child {
-                    margin-right: 10px;
+                .icono {
+                    transition: .5s;
+
+                    &:active {
+                        color: red;
+                    }
+
+                    &:first-child {
+                        margin-right: 10px;
+                    }
                 }
             }
         }

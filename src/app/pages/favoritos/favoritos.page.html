@@ -8,37 +8,45 @@
     <div class="contenedor">
 
       <h1 class="titulo">Sentencias favoritas</h1>
-
-      <div class="sentencia" *ngFor="let sentencia of favoritosService.favoritos">
-
-        <!-- Carrusel de extractos -->
-        <ion-slides [options]="configuracion">
-          <ion-slide class="extracto" *ngIf="sentencia.extractolatino.length">
-            {{ sentencia.extractolatino }}
-          </ion-slide>
-          <ion-slide class="extracto" *ngIf="sentencia.extractoespanol.length">
-            <span>{{ sentencia.extractoespanol }}&nbsp;<b class="idioma">[ es ]</b></span>
-          </ion-slide>
-          <ion-slide class="extracto" *ngIf="sentencia.extractoingles.length">
-            <span>{{ sentencia.extractoingles }}&nbsp;<b class="idioma">[ en ]</b></span>
-          </ion-slide>
-        </ion-slides>
-
-        <!-- Flechas -->
-        <i class="flecha derecha fa fa-angle-right" aria-hidden="true"></i>
-        <i class="flecha izquierda fa fa-angle-left" aria-hidden="true"></i>
-
-        <!-- Footer -->
-        <div class="footer">
-          <div class="autor">
-            {{ sentencia.autor }}
-          </div>
-          <div class="iconos">
-            <i class="icono fa fa-star-o" aria-hidden="true" (click)="eliminarFavorito()"></i>
-            <i class="icono fa fa-paper-plane-o" aria-hidden="true" (click)="compartir( sentencia.extractolatino )"></i>
+      
+      <!-- Listado de sentencias -->
+      <div class="sentencias" *ngIf="favoritosService.favoritos.length > 0">
+        <div class="sentencia" *ngFor="let sentencia of favoritosService.favoritos">
+  
+          <!-- Carrusel de extractos -->
+          <ion-slides [options]="configuracion">
+            <ion-slide class="extracto" *ngIf="sentencia.extractolatino.length">
+              {{ sentencia.extractolatino }}
+            </ion-slide>
+            <ion-slide class="extracto" *ngIf="sentencia.extractoespanol.length">
+              <span>{{ sentencia.extractoespanol }}&nbsp;<b class="idioma">[ es ]</b></span>
+            </ion-slide>
+            <ion-slide class="extracto" *ngIf="sentencia.extractoingles.length">
+              <span>{{ sentencia.extractoingles }}&nbsp;<b class="idioma">[ en ]</b></span>
+            </ion-slide>
+          </ion-slides>
+  
+          <!-- Flechas -->
+          <i class="flecha derecha fa fa-angle-right" aria-hidden="true"></i>
+          <i class="flecha izquierda fa fa-angle-left" aria-hidden="true"></i>
+  
+          <!-- Footer -->
+          <div class="footer">
+            <div class="autor">
+              {{ sentencia.autor }}
+            </div>
+            <div class="iconos">
+              <i class="icono fa fa-star-o" aria-hidden="true" (click)="eliminarFavorito( sentencia.id )"></i>
+              <i class="icono fa fa-paper-plane-o" aria-hidden="true" (click)="compartir( sentencia.extractolatino )"></i>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="vacio" *ngIf="favoritosService.favoritos.length === 0">
+        No se ha encontrado ninguna sentencia
+      </div>
+
     </div>
 
     <!-- ────────────── -->

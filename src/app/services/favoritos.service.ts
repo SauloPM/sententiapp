@@ -5,6 +5,7 @@ import { Sentencia } from '../interfaces/sentencia';
 
 // BD local
 import { Storage } from '@ionic/storage';
+import { isNgTemplate } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,11 @@ export class FavoritosService {
       this.favoritos.unshift( sentencia );
       this.storage.set( 'favoritos', this.favoritos );
     }
-    
+  }
+
+  eliminarFavorito( id: number ) {
+    this.favoritos = this.favoritos.filter( item => item.id != id  );
+    this.storage.set( 'favoritos', this.favoritos );
   }
 
   async cargarFavoritos() {

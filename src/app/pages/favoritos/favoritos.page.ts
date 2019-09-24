@@ -28,4 +28,8 @@ export class FavoritosPage {
     this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es');
   }
 
+  eliminarFavorito ( id: number ) {
+    this.favoritosService.eliminarFavorito( id )
+  }
+
 }
