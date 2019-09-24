@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSegment } from '@ionic/angular';
-import { Router     } from '@angular/router';
+import { Router            } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 // Interfaces
-import { Fecha } from '../../interfaces/fecha';
+import { Fecha     } from '../../interfaces/fecha';
 import { Categoria } from 'src/app/interfaces/categoria';
 
 // Servicios
@@ -11,7 +10,6 @@ import { FechasService } from '../../services/fechas.service';
 
 // jQuery
 declare var $: any;
-// import * as $ from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -19,10 +17,19 @@ declare var $: any;
 })
 export class HomePage implements OnInit {
 
-  @ViewChild(IonSegment) segmentoCategorias: IonSegment;
-
   fechas: Fecha[] = [];
   categorias: Categoria[] = [];
+
+  configuracion = {
+    loop: true,
+    spaceBetween: 0,
+    slidesPerView: 'auto',
+    freeMode: true,
+    centeredSlides: true,
+    autoHeight: true,
+    pagination: false,
+    navigation: false
+  };
 
   // ─────────────── //
   //     MÉTODOS     //
@@ -43,8 +50,6 @@ export class HomePage implements OnInit {
       // Insertamos la categoría por defecto en el filtro de categorías
       this.categorias.unshift({ categoria: 'Todos' })
 
-      // Seleccionamos la categoría por defecto en el filtro de categorías
-      this.segmentoCategorias.value = this.categorias[0].categoria;
     });
 
   }
@@ -119,6 +124,11 @@ export class HomePage implements OnInit {
       filtrar();
     });
 
+    $(document).on('click', '.categorias .categoria', function() {
+      $('.categorias .categoria.seleccionada').removeClass('seleccionada');
+      $(this).addClass('active');
+    });
+
     function filtrar() {
 
       var etiqueta      = "";
@@ -141,9 +151,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  cambiarCategoria( event ) {
-
-    const categoriaSeleccionada = event.detail.value;
+  cambiarDeCategoria( categoriaSeleccionada: string ) {
 
     // Guardamos en una variable todas las fechas
     if ( categoriaSeleccionada == this.categorias[0].categoria ) {
@@ -158,5 +166,6 @@ export class HomePage implements OnInit {
         this.fechas = data;
       });
     }
+
   }
 }

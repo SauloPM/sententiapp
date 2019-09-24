@@ -12,9 +12,6 @@
       <div>
         <div class="portada">
             <img class="logotipo" src="assets/img/logotipo.svg" alt="">
-            <span class="advertencia">
-                SententiApp selecciona sentencias de autores latinos traducidas al español e inglés sobre temas de actualidad como ejemplos de la pervivencia y de la transformación del pensamiento clásico en la sociedad occidental. Léelas, da tu opinión y utilízalas para tus argumentos.
-            </span>
         </div>
 
       <!-- ────────────── -->
@@ -25,13 +22,6 @@
 
           <img class="pagina-rota volteo-vertical" src="assets/img/pagina-rota.png" alt="">
 
-          <!-- Categorías -->
-          <ion-segment class="categorias" scrollable mode="md" (ionChange)="cambiarCategoria( $event )">
-            <ion-segment-button class="categoria" *ngFor="let categoria of categorias" [value]="categoria.categoria" mode="md">
-              <ion-label class="texto">{{ categoria.categoria }}</ion-label>
-            </ion-segment-button>
-          </ion-segment>
-
           <div class="contenedor">
 
             <!-- Buscador -->
@@ -40,6 +30,13 @@
               <div class="mango"></div>
               <div class="cierre">×</div>
             </div>
+
+            <!-- Filtro de categorías -->
+            <ion-slides class="categorias" [options]="configuracion">
+              <ion-slide class="categoria" *ngFor="let categoria of categorias; index as i" [ngClass]="{ 'seleccionada' : i == 0 }" (click)="cambiarDeCategoria( categoria.categoria )">
+                {{ categoria.categoria }}
+              </ion-slide>
+            </ion-slides>
 
             <!-- Fechas -->
             <a class="fecha" [routerLink]="['/informacion', fecha.id]" *ngFor="let fecha of fechas">

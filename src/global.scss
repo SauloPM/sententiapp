@@ -134,17 +134,6 @@ p {
             width: 100%;
             max-width: 450px;
         }
-
-        .advertencia {
-            color: $primary;
-            font-size: 10px;
-            text-align: center;
-            line-height: 15px;
-            margin-top: 25px;
-            opacity: .75;
-            width: 100%;
-            max-width: 450px;
-        }
     }
 
     // Buscador
@@ -200,20 +189,20 @@ p {
     // Categorias
     
     .categorias {
-        margin-top: 25px;
-        box-shadow: 0 5px 5px rgb(200,140,60);
+        margin-bottom: 35px;
 
         .categoria {
+            color: rgba(255,255,255,.5);
+            font-size: 12px;
+            font-family: 'Lato', sans-serif;
+            text-transform: none;
+            border-top: 1px solid rgba(255,255,255,.1);
+            border-bottom: 1px solid rgba(255,255,255,.1);
+            line-height: 20px;
+            padding: 10px 25px;
+            width: fit-content;
 
-            .texto {
-                color: rgba(255,255,255,.5);
-                font-size: 12px;
-                font-family: 'Lato', sans-serif;
-                text-transform: none;
-                line-height: 20px;
-            }
-
-            &.segment-button-checked .texto { // Categoría seleccionada
+            &.seleccionada {
                 color: white;
             }
         }
