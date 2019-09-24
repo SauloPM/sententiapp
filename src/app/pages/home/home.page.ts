@@ -21,11 +21,11 @@ export class HomePage implements OnInit {
   categorias: Categoria[] = [];
 
   configuracion = {
-    loop: true,
+    // loop: true,
     spaceBetween: 0,
     slidesPerView: 'auto',
     freeMode: true,
-    centeredSlides: true,
+    // centeredSlides: true,
     autoHeight: true,
     pagination: false,
     navigation: false
@@ -35,8 +35,8 @@ export class HomePage implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor(private router: Router, private servicioFechas: FechasService) {
-
+  constructor( private servicioFechas: FechasService ) {
+    
     // Guardamos en una variable todas las fechas
     this.servicioFechas.getFechas().subscribe( ( data ) => {
       this.fechas = data;
@@ -152,7 +152,7 @@ export class HomePage implements OnInit {
   }
 
   cambiarCategoria( categoriaSeleccionada: string ) {
-
+    
     // Guardamos en una variable todas las fechas
     if ( categoriaSeleccionada == this.categorias[0].categoria ) {
       this.servicioFechas.getFechas().subscribe( ( data ) => {
@@ -166,6 +166,11 @@ export class HomePage implements OnInit {
         this.fechas = data;
       });
     }
-
   }
 }
+
+
+
+
+
+
