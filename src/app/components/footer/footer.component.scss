@@ -9,22 +9,37 @@ $mobile: 468px;
 $tablet: 768px;
 
 .footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background: white;
     padding: 15px 0 25px;
     position: relative;
     z-index: 25;
     width: 100%;
+    
+    .advertencia {
+        color: $primary;
+        font-size: 10px;
+        text-align: center;
+        line-height: 15px;
+        padding: 0 35px 35px;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 450px;
+        opacity: .75;
+    }
 
-    .logo {
-        width: auto;
-        height: 25px;
-        margin-right: 10px;
+    .logos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        &:last-child {
-            margin: 0;
+        .logo {
+            width: auto;
+            height: 25px;
+            margin-right: 10px;
+    
+            &:last-child {
+                margin: 0;
+            }
         }
     }
 }
