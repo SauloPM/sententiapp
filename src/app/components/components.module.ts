@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 // Componentes
 import { FooterComponent      } from './footer/footer.component';
+import { BottombarComponent   } from './bottombar/bottombar.component';
 import { SentenciasComponent  } from './sentencias/sentencias.component';
 import { OtrasFechasComponent } from './otras-fechas/otras-fechas.component';
 
@@ -16,6 +17,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 @NgModule({
   declarations: [
     FooterComponent,
+    BottombarComponent,
     SentenciasComponent,
     OtrasFechasComponent
   ],
@@ -26,6 +28,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
   ],
   exports: [
     FooterComponent,
+    BottombarComponent,
     SentenciasComponent,
     OtrasFechasComponent
   ],
