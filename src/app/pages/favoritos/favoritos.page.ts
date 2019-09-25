@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 // Servicios
 import { FavoritosService } from '../../services/favoritos.service'
 
+// Interfaces
+import { Sentencia } from 'src/app/interfaces/sentencia';
+
 // Compartir en RRSS
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
@@ -27,8 +30,8 @@ export class FavoritosPage {
     this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es');
   }
 
-  eliminarFavorito ( id: number ) {
-    this.servicioFavoritos.eliminarFavorito( id )
+  eliminarFavorito ( sentencia: Sentencia ) {
+    this.servicioFavoritos.eliminarFavorito( sentencia.id )
   }
 
 }

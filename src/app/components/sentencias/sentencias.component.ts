@@ -54,8 +54,9 @@ export class SentenciasComponent implements OnInit {
     this.servicioFavoritos.guardarFavoritos( sentencia );
   }
 
-  eliminarFavorito ( id: number ) {
-    this.servicioFavoritos.eliminarFavorito( id )
+  eliminarFavorito ( sentencia: Sentencia ) {
+    sentencia.esFavorito = false;
+    this.servicioFavoritos.eliminarFavorito( sentencia.id )
   }
 
   esFavorito( id: number ) {
