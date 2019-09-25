@@ -73,6 +73,7 @@ p {
 
 .contenedor {
     margin: 0 auto;
+    width: 100%;
     max-width: 400px;
 }
 
@@ -115,6 +116,47 @@ p {
         &.volteo-vertical {
             top: -1px;
             transform: rotateZ(180deg);
+        }
+    }
+
+    #advertencia {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: $primary;
+        background: white;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 500;
+        width: 100%;
+
+        .texto {
+            font-size: 12px;
+            line-height: 20px;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .boton {
+            color: $primary;
+            font-size: 50px;
+            font-weight: 100;
+            font-family: 'Lato', sans-serif;
+            background: none;
+            outline: none;
+            padding: 0;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+        }
+
+        &.cerrada {
+            display: none;
         }
     }
 
