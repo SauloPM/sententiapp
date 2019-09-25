@@ -35,7 +35,7 @@ export class HomePage implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private servicioFechas: FechasService ) {
+  constructor( public servicioFechas: FechasService ) {
     
     // Guardamos en una variable todas las fechas
     this.servicioFechas.getFechas().subscribe( ( data ) => {
@@ -56,7 +56,9 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
 
+    // Abrir buscador
     $(document).on("click", ".buscador.cerrado", function() {
+
 
       if ($(".cierre").css("display") == "flex")
         return;
@@ -88,6 +90,7 @@ export class HomePage implements OnInit {
       }, 1750);
     });
 
+    // Cerrar buscador
     $(document).on("click", ".buscador.abierto .cierre", function() {
       
       // Vaciamos la entrada
@@ -120,10 +123,12 @@ export class HomePage implements OnInit {
       }, 1500);
     })
 
+    // Escribir algo en el buscador
     $(document).on("input", ".entrada", function () {
       filtrar();
     });
 
+    // Seleccionar categoría del filtro
     $(document).on('click', '.categorias .categoria', function() {
       $('.categorias .categoria.seleccionada').removeClass('seleccionada');
       $(this).addClass('seleccionada');
@@ -166,6 +171,15 @@ export class HomePage implements OnInit {
         this.fechas = data;
       });
     }
+  }
+
+  cerrarAdvertencia() {
+    
+    // Ocultamos la advertencia
+    document.getElementById('advertencia').classList.add("cerrada");
+
+    // Almacenamos la decisión del usuario en la BD para que la advertencia no aparezca todas las veces que acceda a la página de inicio
+    this.servicioFechas.cerrarAdvertencia();
   }
 }
 

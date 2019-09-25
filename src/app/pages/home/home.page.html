@@ -66,5 +66,12 @@
 
     </div>
 
+    <div id="advertencia" [ngClass]="{ 'cerrada': servicioFechas.estadoAdvertencia == 'cerrada' }">
+      <span class="texto">
+        SententiApp selecciona sentencias de autores latinos traducidas al español e inglés sobre temas de actualidad como ejemplos de la pervivencia y de la transformación del pensamiento clásico en la sociedad occidental. Léelas, da tu opinión y utilízalas para tus argumentos.
+      </span>
+      <button class="boton" type="button" (click)="cerrarAdvertencia()">&times;</button>
+    </div>
+
   </section>
 </ion-content>
