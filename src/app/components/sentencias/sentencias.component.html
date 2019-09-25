@@ -4,8 +4,6 @@
 
   <!-- Carrusel de extractos -->
   <ion-slides [options]="configuracion">
-
-    <!-- Extractos -->
     <ion-slide class="extracto" *ngIf="sentencia.extractolatino.length">
       {{ sentencia.extractolatino }}
     </ion-slide>
@@ -15,29 +13,18 @@
     <ion-slide class="extracto" *ngIf="sentencia.extractoingles.length">
       <span>{{ sentencia.extractoingles }}&nbsp;<b class="idioma">[ en ]</b></span>
     </ion-slide>
-    
   </ion-slides>
 
   <!-- Flechas -->
-  <div class="flecha flecha-derecha">
-    <i class="fa fa-angle-right" aria-hidden="true"></i>
-  </div>
-  <div class="flecha flecha-izquierda">
-    <i class="fa fa-angle-left" aria-hidden="true"></i>
-  </div>
+  <i class="flecha derecha fa fa-angle-right"  aria-hidden="true"></i>
+  <i class="flecha izquierda fa fa-angle-left" aria-hidden="true"></i>
     
   <!-- Footer -->
-  <div class="sentencia-footer">
+  <div class="footer">
     <div class="autor">{{ sentencia.autor }}</div>
-    <div class="saber-mas" (click)="abrirMenu( sentencia )">
-      <span class="circulo"></span>
-      <span class="circulo"></span>
-      <span class="circulo"></span>
+    <div class="iconos">
+      <i class="icono fa fa-star-o" aria-hidden="true" (click)="guardarFavorito( sentencia )"></i>
+      <i class="icono fa fa-paper-plane-o" aria-hidden="true" (click)="compartir( sentencia.extractolatino )"></i>
     </div>
-    <!-- <div class="iconos" (click)="abrirMenu( sentencia )">
-      <i class="estrella fa fa-star" aria-hidden="true"></i>
-      <i class="compartir fa fa-paper-plane" aria-hidden="true"></i>
-    </div> -->
   </div>
-
 </div>

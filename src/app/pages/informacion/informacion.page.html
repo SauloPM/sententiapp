@@ -10,13 +10,8 @@
     <div class="cabecera" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'">
       
       <!-- Volver atrás -->
-      <a class="volver volver-atras" (click)="volverAtras()">
+      <a class="volver" (click)="volverAtras()">
         <i class="fa fa-angle-left" aria-hidden="true"></i>
-      </a>
-
-      <!-- Volver a inicio -->
-      <a class="volver volver-inicio" (click)="volverInicio()">
-        <i class="fa fa-list" aria-hidden="true"></i>
       </a>
 
       <img class="pagina-rota" src="assets/img/pagina-rota.png" alt="">

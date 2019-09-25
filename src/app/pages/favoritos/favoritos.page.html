@@ -27,14 +27,12 @@
           </ion-slides>
   
           <!-- Flechas -->
-          <i class="flecha derecha fa fa-angle-right" aria-hidden="true"></i>
+          <i class="flecha derecha fa fa-angle-right"  aria-hidden="true"></i>
           <i class="flecha izquierda fa fa-angle-left" aria-hidden="true"></i>
   
           <!-- Footer -->
           <div class="footer">
-            <div class="autor">
-              {{ sentencia.autor }}
-            </div>
+            <div class="autor">{{ sentencia.autor }}</div>
             <div class="iconos">
               <i class="icono fa fa-star-o" aria-hidden="true" (click)="eliminarFavorito( sentencia.id )"></i>
               <i class="icono fa fa-paper-plane-o" aria-hidden="true" (click)="compartir( sentencia.extractolatino )"></i>

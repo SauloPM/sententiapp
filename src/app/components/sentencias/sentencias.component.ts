@@ -45,32 +45,11 @@ export class SentenciasComponent implements OnInit {
     });
   }
 
-  async abrirMenu( sentencia: Sentencia ) {
+  guardarFavorito( sentencia: Sentencia ) {
+    this.servicioFavoritos.guardarFavoritos( sentencia );
+  }
 
-    const actionSheet = await this.actionSheetController.create({
-      buttons: [{
-        text: 'Guardar',
-        icon: 'star',
-        handler: () => {
-          this.servicioFavoritos.guardarFavoritos( sentencia );
-        }
-      }, {
-        text: 'Compartir',
-        icon: 'share',
-        handler: () => {
-          this.socialSharing.share(`« ${ sentencia.extractolatino } »`, 'SententiApp', 'https://sententiapp.iatext.ulpgc.es/img/spinner.svg', 'https://play.google.com');
-        }
-      }, {
-        text: 'Cancelar',
-        icon: 'close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancelar clicked');
-        }
-      }]
-    });
-
-    await actionSheet.present();
-
+  compartir( extracto: string ) {
+    this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es');
   }
 }

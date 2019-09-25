@@ -384,7 +384,7 @@ p {
                     transition: .5s;
 
                     &:active {
-                        color: red;
+                        color: $darkprimary;
                     }
 
                     &:first-child {
@@ -429,20 +429,11 @@ p {
 
         .volver {
             color: white;
+            font-size: 50px;
+            font-weight: bold;
             position: absolute;
-            
-            &.volver-atras {
-                font-size: 50px;
-                font-weight: bold;
-                top: 10px;
-                left: 25px;
-            }
-            
-            &.volver-inicio {
-                font-size: 35px;
-                top: 20px;
-                right: 25px;
-            }
+            top: 10px;
+            left: 25px;
         }
     }
 

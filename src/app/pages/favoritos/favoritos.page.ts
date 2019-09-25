@@ -24,7 +24,6 @@ export class FavoritosPage {
   constructor( public favoritosService: FavoritosService, private socialSharing: SocialSharing ) { }
 
   compartir( extracto: string ) {
-    console.log(extracto)
     this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es');
   }
 

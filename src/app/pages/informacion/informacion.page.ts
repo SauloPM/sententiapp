@@ -65,8 +65,8 @@ export class InformacionPage {
   }
 
   // Volver a la página de inicio
-  volverInicio() {
-    this.navController.navigateBack('/');
-  }
+  // volverInicio() {
+  //   this.navController.navigateBack('/');
+  // }
 
 }
