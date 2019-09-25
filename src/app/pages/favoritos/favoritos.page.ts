@@ -21,14 +21,14 @@ export class FavoritosPage {
     navigation: false
   };
 
-  constructor( public favoritosService: FavoritosService, private socialSharing: SocialSharing ) { }
+  constructor( public servicioFavoritos: FavoritosService, private socialSharing: SocialSharing ) { }
 
   compartir( extracto: string ) {
     this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es');
   }
 
   eliminarFavorito ( id: number ) {
-    this.favoritosService.eliminarFavorito( id )
+    this.servicioFavoritos.eliminarFavorito( id )
   }
 
 }

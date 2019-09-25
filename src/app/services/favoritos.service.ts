@@ -35,6 +35,10 @@ export class FavoritosService {
     this.storage.set( 'favoritos', this.favoritos );
   }
 
+  existe( id: number ) {
+    return this.favoritos.find( item => item.id == id ) ? true : false;
+  }
+
   async cargarFavoritos() {
 
     const favoritos = await this.storage.get( 'favoritos' );

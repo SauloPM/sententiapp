@@ -10,8 +10,8 @@
       <h1 class="titulo">Sentencias favoritas</h1>
       
       <!-- Listado de sentencias -->
-      <div class="sentencias" *ngIf="favoritosService.favoritos.length > 0">
-        <div class="sentencia" *ngFor="let sentencia of favoritosService.favoritos">
+      <div class="sentencias" *ngIf="servicioFavoritos.favoritos.length > 0">
+        <div class="sentencia" *ngFor="let sentencia of servicioFavoritos.favoritos">
   
           <!-- Carrusel de extractos -->
           <ion-slides [options]="configuracion">
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="vacio" *ngIf="favoritosService.favoritos.length === 0">
+      <div class="vacio" *ngIf="servicioFavoritos.favoritos.length === 0">
         No se ha encontrado ninguna sentencia
       </div>
 
