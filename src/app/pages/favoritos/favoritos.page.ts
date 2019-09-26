@@ -26,8 +26,8 @@ export class FavoritosPage {
 
   constructor( public servicioFavoritos: FavoritosService, private socialSharing: SocialSharing ) { }
 
-  compartir( extracto: string ) {
-    this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es');
+  compartir( extractoLatin: string, extractoEspanol: string ) {
+    this.socialSharing.share(`« ${ extractoLatin } » | « ${ extractoEspanol } »`, 'SententiApp', null, 'https://iatext.ulpgc.es');
   }
 
   eliminarFavorito ( sentencia: Sentencia ) {
