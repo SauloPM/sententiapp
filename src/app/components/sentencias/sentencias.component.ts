@@ -63,8 +63,7 @@ export class SentenciasComponent implements OnInit {
     return this.servicioFavoritos.existe( id );
   }
 
-  compartir( extractoLatin: string, extractoEspanol: string ) {
-    this.socialSharing.share(`« ${ extractoLatin } » | « ${ extractoEspanol } »`, 'SententiApp', null, 'https://iatext.ulpgc.es');
+  compartir( sentencia: Sentencia ) {
+    this.socialSharing.share(`« ${ sentencia.extractolatino } » | « ${ sentencia.extractoespanol } »`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
   }
-  
 }
