@@ -172,15 +172,6 @@ export class HomePage implements OnInit {
       });
     }
   }
-
-  cerrarAdvertencia() {
-    
-    // Ocultamos la advertencia
-    document.getElementById('advertencia').classList.add("cerrada");
-
-    // Almacenamos la decisión del usuario en la BD para que la advertencia no aparezca todas las veces que acceda a la página de inicio
-    this.servicioFechas.cerrarAdvertencia();
-  }
 }
 
 
