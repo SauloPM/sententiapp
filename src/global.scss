@@ -44,7 +44,8 @@ h1 {
 
 h2 {
     color: $text;
-    font-size: 15px;
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
     font-weight: bold;
     margin: 0 0 25px;
 }
@@ -220,8 +221,9 @@ p {
         .entrada {
             display: none;
             color: white;
-            font-size: 12px;
-            line-height: 20px;
+            font-size: 13px;
+            font-family: 'Lato', sans-serif;
+            line-height: 25px;
             background: transparent;
             border: none;
             outline: none;
@@ -238,8 +240,9 @@ p {
 
         .categoria {
             color: rgba(255,255,255,.5);
-            font-size: 12px;
+            font-size: 13px;
             font-family: 'Lato', sans-serif;
+            line-height: 25px;
             text-transform: none;
             border-top: 1px solid rgba(255,255,255,.1);
             border-bottom: 1px solid rgba(255,255,255,.1);
@@ -282,7 +285,9 @@ p {
 
         .etiqueta {
             color: white;
-            font-size: 12px;
+            font-size: 13px;
+            font-family: 'Lato', sans-serif;
+            line-height: 25px;
             text-align: left;
             line-height: 20px;
         }
@@ -356,9 +361,10 @@ p {
 
     .vacio {
         color: $text;
-        font-size: 12px;
+        font-size: 13px;
+        font-family: 'Lato', sans-serif;
         text-align: center;
-        line-height: 20px;
+        line-height: 25px;
     }
 
     .titulo {
@@ -381,9 +387,10 @@ p {
             align-items: center;
             justify-content: flex-start;
             color: $text;
-            font-size: 12px;
+            font-size: 13px;
+            font-family: 'Lato', sans-serif;
             text-align: left;
-            line-height: 20px;
+            line-height: 25px;
             padding: 0 5px;
 
             .idioma {
@@ -418,7 +425,9 @@ p {
             margin-top: 7px;
 
             .autor {
-                font-size: 10px;
+                font-size: 11px;
+                font-family: 'Lato', sans-serif;
+                white-space: nowrap;
             }
 
             .iconos {
@@ -487,8 +496,9 @@ p {
     }
 
     .descripcion {
-        font-size: 12px;
-        line-height: 20px;
+        font-size: 13px;
+        font-family: 'Lato', sans-serif;
+        line-height: 25px;
         margin-bottom: 25px;
     }
 }
@@ -504,11 +514,6 @@ p {
         
         .cabecera {
             height: 350px;
-        }
-
-        .descripcion {
-            font-size: 12px;
-            line-height: 20px;
         }
     }
 }

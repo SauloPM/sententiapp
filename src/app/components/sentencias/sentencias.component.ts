@@ -17,7 +17,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 })
 export class SentenciasComponent implements OnInit {
 
-  @Input() id: number = 0;
+  @Input() id: number;
 
   sentencias  : Sentencia[] = [];
 

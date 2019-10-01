@@ -40,8 +40,9 @@ $lightprimary: rgb(255,195,105);
         }
 
         .texto {
-            font-size: 12px;
-            line-height: 20px;
+            font-size: 13px;
+            font-family: 'Lato', sans-serif;
+            line-height: 25px;
         }
 
         &:first-child::after {
