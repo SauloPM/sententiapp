@@ -12,19 +12,12 @@ import { Sentencia } from '../interfaces/sentencia';
 const urlApi      = environment.urlApi;
 const urlApiLocal = environment.urlApiLocal;
 
-// BD local
-import { Storage } from '@ionic/storage';
-
 @Injectable({
   providedIn: 'root'
 })
 export class FechasService {
 
-  estadoAdvertencia: string;
-
-  constructor( private http: HttpClient, private storage: Storage ) {
-    this.cargarEstadoAdvertencia();
-  }
+  constructor( private http: HttpClient ) { }
 
   // ─────────────── //
   //     PORTADA     //
@@ -42,19 +35,6 @@ export class FechasService {
 
   getFechasPorCategoria( categoria: string ) {
     return this.ejecutarApi<Fecha[]>( `MostrarFechasPorCategoria?categoria=${ categoria }` );
-  }
-
-  cerrarAdvertencia() {
-    this.storage.set( 'advertencia', 'cerrada' );
-  }
-
-  async cargarEstadoAdvertencia() {
-
-    const estadoAdvertencia = await this.storage.get( 'advertencia' );
-
-    if ( estadoAdvertencia == 'cerrada' ) {
-      this.estadoAdvertencia = estadoAdvertencia;
-    }
   }
 
   // ─────────────────── //
@@ -80,6 +60,5 @@ export class FechasService {
     let url: string = prod ? urlApi + metodo : urlApiLocal + metodo;
 
     return this.http.get<T>(`${ url }`);
-
   }
 }
