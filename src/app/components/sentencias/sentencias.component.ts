@@ -17,9 +17,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 })
 export class SentenciasComponent implements OnInit {
 
-  @Input() id: number;
-
-  sentencias  : Sentencia[] = [];
+  @Input() sentencias: Sentencia[] = [];
 
   configuracion = {
     loop: true,
@@ -37,16 +35,11 @@ export class SentenciasComponent implements OnInit {
 
   ngOnInit() {
     
-    this.servicioFechas.getSentencias( this.id ).subscribe( ( data ) => {
-
-      // Guardamos en una variable las sentencias de la fecha cuyo ID se encuentra en la URL
-      this.sentencias = data;
-
-      // Marcamos las sentencias favoritas
-      this.sentencias.forEach( ( sentencia ) => {
-        sentencia.esFavorito = this.esFavorito( sentencia.id );
-      });
+    // Marcamos las sentencias favoritas
+    this.sentencias.forEach( ( sentencia ) => {
+      sentencia.esFavorito = this.esFavorito( sentencia.id );
     });
+    
   }
 
   guardarFavorito( sentencia: Sentencia ) {

@@ -61,6 +61,10 @@ p {
 //     UTILS     //
 // ───────────── //
 
+.titulo {
+    margin: 0 0 25px;
+}
+
 .ruido,
 .overlay,
 .imagen-difuminada {
@@ -359,98 +363,12 @@ p {
         padding: 35px 25px;
     }
 
-    .vacio {
+    .sin-favoritos {
         color: $text;
         font-size: 13px;
         font-family: 'Lato', sans-serif;
         text-align: center;
         line-height: 25px;
-    }
-
-    .titulo {
-        margin: 0 0 25px;
-    }
-
-    // Sentencias
-
-    .sentencia {
-        border: 1px solid rgb(235,235,235);
-        border-radius: 2px;
-        outline: none;
-        padding: 15px 25px;
-        margin-bottom: 15px;
-        position: relative;
-        z-index: 25;
-
-        .extracto {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            color: $text;
-            font-size: 13px;
-            font-family: 'Lato', sans-serif;
-            text-align: left;
-            line-height: 25px;
-            padding: 0 5px;
-
-            .idioma {
-                color: rgb(235,235,235);
-                font-weight: normal;
-                white-space: nowrap;
-            }
-        }
-
-        .flecha {
-            color: rgb(235,235,235);
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-
-            &.derecha {
-                right: 5px;
-            }
-
-            &.izquierda {
-                left: 5px;
-            }
-        }
-
-        .footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: $primary;
-            border-top: 1px solid rgb(235,235,235);
-            padding: 10px 5px 0;
-            margin-top: 7px;
-
-            .autor {
-                font-size: 11px;
-                font-family: 'Lato', sans-serif;
-                white-space: nowrap;
-            }
-
-            .iconos {
-                display: flex;
-                align-items: center;
-
-                .icono {
-                    transition: .5s;
-
-                    &:active {
-                        color: $darkprimary;
-                    }
-
-                    &:first-child {
-                        margin-right: 10px;
-                    }
-                }
-            }
-        }
-
-        &:last-child {
-            margin: 0;
-        }
     }
 }
 
@@ -489,10 +407,6 @@ p {
             top: 10px;
             left: 25px;
         }
-    }
-
-    .titulo {
-        margin: 0 0 25px;
     }
 
     .descripcion {

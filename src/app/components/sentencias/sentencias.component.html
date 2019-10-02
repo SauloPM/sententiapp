@@ -23,8 +23,8 @@
   <div class="footer">
     <div class="autor">{{ sentencia.autor }}</div>
     <div class="iconos">
-      <i class="icono fa fa-star" aria-hidden="true" *ngIf="sentencia.esFavorito" (click)="eliminarFavorito( sentencia )"></i>
-      <i class="icono fa fa-star-o" aria-hidden="true" *ngIf="!sentencia.esFavorito" (click)="guardarFavorito( sentencia )"></i>
+      <i class="icono fa fa-star"   aria-hidden="true" *ngIf="sentencia.esFavorito"  (click)="eliminarFavorito( sentencia )"></i>
+      <i class="icono fa fa-star-o" aria-hidden="true" *ngIf="!sentencia.esFavorito" (click)="guardarFavorito ( sentencia )"></i>
       <i class="icono fa fa-paper-plane-o" aria-hidden="true" (click)="compartir( sentencia )"></i>
     </div>
   </div>

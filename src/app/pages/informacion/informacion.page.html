@@ -26,7 +26,7 @@
       <h1 class="titulo">{{ fecha.etiqueta }}</h1>
       <p class="descripcion">{{ fecha.descripcion | descripcionDefecto }}</p>
 
-      <app-sentencias [id]="idFechaURL" *ngIf="idFechaURL"></app-sentencias>
+      <app-sentencias [sentencias]="sentencias"></app-sentencias>
 
       <app-otras-fechas [id]="idFechaURL"></app-otras-fechas>
 
