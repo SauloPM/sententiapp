@@ -56,7 +56,7 @@ export class SentenciasComponent implements OnInit {
 
   eliminarFavorito ( sentencia: Sentencia ) {
     sentencia.esFavorito = false;
-    this.servicioFavoritos.eliminarFavorito( sentencia.id )
+    this.servicioFavoritos.eliminarFavorito( sentencia.id );
   }
 
   esFavorito( id: number ) {
@@ -64,6 +64,29 @@ export class SentenciasComponent implements OnInit {
   }
 
   compartir( sentencia: Sentencia ) {
-    this.socialSharing.share(`« ${ sentencia.extractolatino } » | « ${ sentencia.extractoespanol } »`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
+
+    let extracto = '';
+    let extractosActivos = document.getElementsByClassName('swiper-slide-active');
+
+    for (let i = 0; i < extractosActivos.length - 1 ; i++) {
+      
+      if ( extractosActivos[i].innerHTML.trim() === sentencia.extractolatino.trim() ) {
+        extracto = sentencia.extractolatino;
+        break;
+      }
+
+      if ( extractosActivos[i].innerHTML.trim() === sentencia.extractoespanol.trim() ) {
+        extracto = sentencia.extractoespanol;
+        break;
+      }
+
+      if ( extractosActivos[i].innerHTML.trim() === sentencia.extractoingles.trim() ) {
+        extracto = sentencia.extractoingles;
+        break;
+      }
+
+    }
+
+    this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
   }
 }
