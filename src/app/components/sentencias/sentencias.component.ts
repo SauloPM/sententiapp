@@ -65,9 +65,10 @@ export class SentenciasComponent implements OnInit {
 
   compartir( sentencia: Sentencia ) {
 
-    let extracto = '';
+    let extracto = sentencia.extractoespanol;
     let extractosActivos = document.getElementsByClassName('swiper-slide-active');
 
+    // Detectamos qué traducción del extraco se desea compartir
     for (let i = 0; i < extractosActivos.length - 1 ; i++) {
       
       if ( extractosActivos[i].innerHTML.trim() === sentencia.extractolatino.trim() ) {
