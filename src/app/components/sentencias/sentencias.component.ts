@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 // Servicios
 import { FechasService    } from '../../services/fechas.service';
-import { FavoritosService } from '../../services/favoritos.service'
+import { FavoritosService } from '../../services/favoritos.service';
 
 // Interfaces
 import { Sentencia } from '../../interfaces/sentencia';
@@ -17,9 +17,9 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 })
 export class SentenciasComponent implements OnInit {
 
-  @Input() id: number;
+  @Input() sentencias: Sentencia[] = [];
 
-  sentencias  : Sentencia[] = [];
+  estadosAbiertos: boolean = false;
 
   configuracion = {
     loop: true,
@@ -37,16 +37,16 @@ export class SentenciasComponent implements OnInit {
 
   ngOnInit() {
     
-    this.servicioFechas.getSentencias( this.id ).subscribe( ( data ) => {
-
-      // Guardamos en una variable las sentencias de la fecha cuyo ID se encuentra en la URL
-      this.sentencias = data;
-
-      // Marcamos las sentencias favoritas
-      this.sentencias.forEach( ( sentencia ) => {
-        sentencia.esFavorito = this.esFavorito( sentencia.id );
-      });
+    // Marcamos las sentencias favoritas
+    this.sentencias.forEach( ( sentencia ) => {
+      sentencia.esFavorito = this.esFavorito( sentencia.id );
     });
+    
+  }
+
+  abrirEstados( i: number ) {
+    let prueba = document.getElementById(`barra-estado${ i }`).innerHTML;
+    console.log(prueba);
   }
 
   guardarFavorito( sentencia: Sentencia ) {
@@ -56,7 +56,7 @@ export class SentenciasComponent implements OnInit {
 
   eliminarFavorito ( sentencia: Sentencia ) {
     sentencia.esFavorito = false;
-    this.servicioFavoritos.eliminarFavorito( sentencia.id )
+    this.servicioFavoritos.eliminarFavorito( sentencia.id );
   }
 
   esFavorito( id: number ) {
@@ -64,6 +64,30 @@ export class SentenciasComponent implements OnInit {
   }
 
   compartir( sentencia: Sentencia ) {
-    this.socialSharing.share(`« ${ sentencia.extractolatino } » | « ${ sentencia.extractoespanol } »`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
+
+    let extracto = sentencia.extractoespanol;
+    let extractosActivos = document.getElementsByClassName('swiper-slide-active');
+
+    // Detectamos qué traducción del extraco se desea compartir
+    for (let i = 0; i < extractosActivos.length - 1 ; i++) {
+      
+      if ( extractosActivos[i].innerHTML.trim() === sentencia.extractolatino.trim() ) {
+        extracto = sentencia.extractolatino;
+        break;
+      }
+
+      if ( extractosActivos[i].innerHTML.trim() === sentencia.extractoespanol.trim() ) {
+        extracto = sentencia.extractoespanol;
+        break;
+      }
+
+      if ( extractosActivos[i].innerHTML.trim() === sentencia.extractoingles.trim() ) {
+        extracto = sentencia.extractoingles;
+        break;
+      }
+
+    }
+
+    this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
   }
 }

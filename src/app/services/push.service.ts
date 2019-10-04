@@ -1,12 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { OneSignal  } from '@ionic-native/onesignal/ngx';
+
+// Get Device ID
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PushService {
 
-  constructor( private oneSignal: OneSignal ) { }
+  constructor( private oneSignal: OneSignal, private uniqueDeviceID: UniqueDeviceID ) {
+
+    // this.uniqueDeviceID.get()
+    //   .then (( uuid:  any ) => console.log('ID del dispositivo: ' + uuid))
+    //   .catch(( error: any ) => console.log(error));
+  }
+
+  // getDeviceID() {
+  //   return this.uniqueDeviceID;
+  // }
 
   configuracionInicial() {
     this.oneSignal.startInit('f7574e35-64d0-4866-8aff-30a13c65a78f', '271709238052');

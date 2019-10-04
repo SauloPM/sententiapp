@@ -1,6 +1,6 @@
-import { Component      } from '@angular/core';
-import { NavController  } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavController     } from '@ionic/angular';
+import { ActivatedRoute    } from '@angular/router';
 
 // Interfaces
 import { Fecha     } from '../../interfaces/fecha';
@@ -13,7 +13,7 @@ import { FechasService } from '../../services/fechas.service';
   selector: 'app-informacion',
   templateUrl: './informacion.page.html'
 })
-export class InformacionPage {
+export class InformacionPage implements OnInit {
 
   fecha: Fecha = {
     id: 0,
@@ -24,8 +24,8 @@ export class InformacionPage {
   
   idFechaURL  : number  = 0;
 
-  otrasFechas   : Fecha    [] = [];
-  sentencias    : Sentencia[] = [];
+  otrasFechas: Fecha    [] = [];
+  sentencias : Sentencia[] = [];
 
   // ─────────────── //
   //     MÉTODOS     //

@@ -8,40 +8,15 @@
     <div class="contenedor">
 
       <h1 class="titulo">Sentencias favoritas</h1>
+
       
       <!-- Listado de sentencias -->
       <div class="sentencias" *ngIf="servicioFavoritos.favoritos.length > 0">
-        <div class="sentencia" *ngFor="let sentencia of servicioFavoritos.favoritos">
-  
-          <!-- Carrusel de extractos -->
-          <ion-slides [options]="configuracion">
-            <ion-slide class="extracto" *ngIf="sentencia.extractolatino.length">
-              {{ sentencia.extractolatino }}
-            </ion-slide>
-            <ion-slide class="extracto" *ngIf="sentencia.extractoespanol.length">
-              <span>{{ sentencia.extractoespanol }}&nbsp;<b class="idioma">[ es ]</b></span>
-            </ion-slide>
-            <ion-slide class="extracto" *ngIf="sentencia.extractoingles.length">
-              <span>{{ sentencia.extractoingles }}&nbsp;<b class="idioma">[ en ]</b></span>
-            </ion-slide>
-          </ion-slides>
-  
-          <!-- Flechas -->
-          <i class="flecha derecha fa fa-angle-right"  aria-hidden="true"></i>
-          <i class="flecha izquierda fa fa-angle-left" aria-hidden="true"></i>
-  
-          <!-- Footer -->
-          <div class="footer">
-            <div class="autor">{{ sentencia.autor }}</div>
-            <div class="iconos">
-              <i class="icono fa fa-star-o" aria-hidden="true" (click)="eliminarFavorito( sentencia )"></i>
-              <i class="icono fa fa-paper-plane-o" aria-hidden="true" (click)="compartir( sentencia.extractolatino )"></i>
-            </div>
-          </div>
-        </div>
+        <app-sentencias [sentencias]="servicioFavoritos.favoritos"></app-sentencias>
       </div>
 
-      <div class="vacio" *ngIf="servicioFavoritos.favoritos.length === 0">
+      <!-- Mensaje de notificación cuando no existen sentencias favoritas -->
+      <div class="sin-favoritos" *ngIf="servicioFavoritos.favoritos.length === 0">
         No se ha encontrado ninguna sentencia
       </div>
 

@@ -21,6 +21,9 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
 // BD local
 import { IonicStorageModule } from '@ionic/storage';
 
+// Get Device ID
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -36,8 +39,9 @@ import { IonicStorageModule } from '@ionic/storage';
   ],
   providers: [
     StatusBar,
-    SplashScreen,
     OneSignal,
+    SplashScreen,
+    UniqueDeviceID,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }    
   ],
   bootstrap: [AppComponent]

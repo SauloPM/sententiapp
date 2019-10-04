@@ -1,3 +1,4 @@
+import { PushService } from './../../services/push.service';
 import { Component, OnInit } from '@angular/core';
 
 // Interfaces
@@ -7,6 +8,9 @@ import { Categoria } from 'src/app/interfaces/categoria';
 // Servicios
 import { FechasService } from '../../services/fechas.service';
 
+// Get Device ID
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+
 // jQuery
 declare var $: any;
 
@@ -15,6 +19,8 @@ declare var $: any;
   templateUrl: 'home.page.html'
 })
 export class HomePage implements OnInit {
+
+  deviceID: number = 0;
 
   fechas: Fecha[] = [];
   categorias: Categoria[] = [];
@@ -34,7 +40,7 @@ export class HomePage implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( public servicioFechas: FechasService ) {
+  constructor( public servicioFechas: FechasService, private pushService: PushService ) {
     
     // Guardamos en una variable todas las fechas
     this.servicioFechas.getFechas().subscribe( ( data ) => {
@@ -50,6 +56,10 @@ export class HomePage implements OnInit {
       this.categorias.unshift({ categoria: 'Todos' })
 
     });
+
+    // this.pushService.getDeviceID().get()
+    //   .then (( uuid:  any ) => console.log(uuid) )
+    //   .catch(( error: any ) => console.log(error));
 
   }
 
