@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 // Servicios
 import { FechasService    } from '../../services/fechas.service';
-import { FavoritosService } from '../../services/favoritos.service'
+import { FavoritosService } from '../../services/favoritos.service';
 
 // Interfaces
 import { Sentencia } from '../../interfaces/sentencia';
@@ -18,6 +18,8 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 export class SentenciasComponent implements OnInit {
 
   @Input() sentencias: Sentencia[] = [];
+
+  estadosAbiertos: boolean = false;
 
   configuracion = {
     loop: true,
@@ -40,6 +42,11 @@ export class SentenciasComponent implements OnInit {
       sentencia.esFavorito = this.esFavorito( sentencia.id );
     });
     
+  }
+
+  abrirEstados( i: number ) {
+    let prueba = document.getElementById(`barra-estado${ i }`).innerHTML;
+    console.log(prueba);
   }
 
   guardarFavorito( sentencia: Sentencia ) {
