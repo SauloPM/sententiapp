@@ -57,9 +57,9 @@ export class HomePage implements OnInit {
 
     });
 
-    // this.pushService.getDeviceID().get()
-    //   .then (( uuid:  any ) => console.log(uuid) )
-    //   .catch(( error: any ) => console.log(error));
+    this.pushService.getDeviceID().get()
+      .then (( uuid:  any ) => console.log(uuid) )
+      .catch(( error: any ) => console.log(error));
 
   }
 

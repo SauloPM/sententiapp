@@ -19,8 +19,6 @@ export class SentenciasComponent implements OnInit {
 
   @Input() sentencias: Sentencia[] = [];
 
-  estadosAbiertos: boolean = false;
-
   configuracion = {
     loop: true,
     spaceBetween: 0,
@@ -37,7 +35,7 @@ export class SentenciasComponent implements OnInit {
 
   ngOnInit() {
     
-    // Marcamos las sentencias favoritas
+    // Resaltamos las sentencias favoritas
     this.sentencias.forEach( ( sentencia ) => {
       sentencia.esFavorito = this.esFavorito( sentencia.id );
     });
@@ -45,8 +43,12 @@ export class SentenciasComponent implements OnInit {
   }
 
   abrirEstados( i: number ) {
-    let prueba = document.getElementById(`barra-estado${ i }`).innerHTML;
-    console.log(prueba);
+
+    let barraEstados    = document.getElementById(`barra-estados-${ i }`);
+    let estadosAbiertos = getComputedStyle( barraEstados, null ).display;
+
+    barraEstados.style.display = estadosAbiertos === 'block' ? 'none' : 'block';
+
   }
 
   guardarFavorito( sentencia: Sentencia ) {

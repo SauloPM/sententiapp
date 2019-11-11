@@ -16,9 +16,9 @@ export class PushService {
     //   .catch(( error: any ) => console.log(error));
   }
 
-  // getDeviceID() {
-  //   return this.uniqueDeviceID;
-  // }
+  getDeviceID() {
+    return this.uniqueDeviceID;
+  }
 
   configuracionInicial() {
     this.oneSignal.startInit('f7574e35-64d0-4866-8aff-30a13c65a78f', '271709238052');
