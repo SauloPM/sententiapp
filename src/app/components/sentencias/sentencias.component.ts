@@ -28,6 +28,10 @@ export class SentenciasComponent implements OnInit {
     navigation: false
   };
 
+  // ─────────────── //
+  //     MÉTODOS     //
+  // ─────────────── //
+
   constructor(
     private socialSharing: SocialSharing,
     private servicioFechas: FechasService,
@@ -61,10 +65,6 @@ export class SentenciasComponent implements OnInit {
     this.servicioFavoritos.eliminarFavorito( sentencia.id );
   }
 
-  esFavorito( id: number ) {
-    return this.servicioFavoritos.existe( id );
-  }
-
   compartir( sentencia: Sentencia ) {
 
     let extracto = sentencia.extractoespanol;
@@ -91,5 +91,13 @@ export class SentenciasComponent implements OnInit {
     }
 
     this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
+  }
+
+  // ──────────────── //
+  //     AUXILIAR     //
+  // ──────────────── //
+
+  esFavorito( id: number ) {
+    return this.servicioFavoritos.existe( id );
   }
 }
