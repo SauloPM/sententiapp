@@ -31,9 +31,9 @@
 
   <!-- Estados -->
   <div id="barra-estados-{{ i }}" class="estados">
-    <i class="icono fa fa-thumbs-o-up"     aria-hidden="true" (click)="guardarFavorito ( sentencia )"></i>
-    <i class="icono fa fa-heart-o"         aria-hidden="true" (click)="guardarFavorito ( sentencia )"></i>
-    <i class="icono fa fa-hand-scissors-o" aria-hidden="true" (click)="guardarFavorito ( sentencia )"></i>
-    <i class="icono fa fa-thumbs-o-down"   aria-hidden="true" (click)="guardarFavorito ( sentencia )"></i>
+    <i class="icono fa fa-thumbs-o-up"     aria-hidden="true" (click)="guardarFavorito ( sentencia, 'Me gusta'    )"></i>
+    <i class="icono fa fa-heart-o"         aria-hidden="true" (click)="guardarFavorito ( sentencia, 'Me enamora'  )"></i>
+    <i class="icono fa fa-hand-scissors-o" aria-hidden="true" (click)="guardarFavorito ( sentencia, 'Me divierte' )"></i>
+    <i class="icono fa fa-thumbs-o-down"   aria-hidden="true" (click)="guardarFavorito ( sentencia, 'No me gusta' )"></i>
   </div>
 </div>

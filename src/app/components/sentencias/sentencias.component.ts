@@ -55,12 +55,12 @@ export class SentenciasComponent implements OnInit {
 
   }
 
-  guardarFavorito( sentencia: Sentencia ) {
+  guardarFavorito( sentencia: Sentencia, estado: string ) {
     sentencia.esFavorito = true;
-    this.servicioFavoritos.guardarFavoritos( sentencia );
+    this.servicioFavoritos.guardarFavoritos( sentencia, estado );
   }
 
-  eliminarFavorito ( sentencia: Sentencia ) {
+  eliminarFavorito ( sentencia: Sentencia, estado: string ) {
     sentencia.esFavorito = false;
     this.servicioFavoritos.eliminarFavorito( sentencia.id );
   }

@@ -8,8 +8,14 @@
     <div class="contenedor">
 
       <h1 class="titulo">Sentencias favoritas</h1>
-
       
+      <!-- Filtro de estados -->
+      <ion-slides class="filtro negro" [options]="configuracion">
+        <ion-slide class="item" *ngFor="let estado of estados; index as i" [ngClass]="{ 'seleccionado' : i == 0 }" (click)="cambiarEstado( estado )">
+          {{ estado }}
+        </ion-slide>
+      </ion-slides>
+
       <!-- Listado de sentencias -->
       <div class="sentencias" *ngIf="servicioFavoritos.favoritos.length > 0">
         <app-sentencias [sentencias]="servicioFavoritos.favoritos"></app-sentencias>

@@ -138,9 +138,9 @@ export class HomePage implements OnInit {
     });
 
     // Seleccionar categoría del filtro
-    $(document).on('click', '.categorias .categoria', function() {
-      $('.categorias .categoria.seleccionada').removeClass('seleccionada');
-      $(this).addClass('seleccionada');
+    $(document).on('click', '.filtro .item', function() {
+      $('.filtro .item.seleccionado').removeClass('seleccionado');
+      $(this).addClass('seleccionado');
     });
 
     function filtrar() {

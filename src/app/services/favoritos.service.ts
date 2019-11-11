@@ -21,13 +21,15 @@ export class FavoritosService {
     this.cargarFavoritos()
   }
 
-  guardarFavoritos( sentencia: Sentencia ) {
+  guardarFavoritos( sentencia: Sentencia, estado: string ) {
 
     const existe = this.favoritos.find( item => item.id == sentencia.id ) ? true : false;
 
-    if (!existe) {
+    console.log( estado );
+
+    if ( !existe ) {
       this.favoritos.unshift( sentencia );
-      this.storage.set( 'favoritos', this.favoritos );
+      this.storage.set( estado, this.favoritos );
     }
   }
 
@@ -42,7 +44,7 @@ export class FavoritosService {
 
   async cargarFavoritos() {
 
-    const favoritos = await this.storage.get( 'favoritos' );
+    const favoritos = await this.storage.get( 'Me enamora' );
 
     if ( favoritos ) {
       this.favoritos = favoritos;
