@@ -4,6 +4,10 @@ $primary     : rgb(225,165,075);
 $darkprimary : rgb(175,115,025);
 $lightprimary: rgb(255,195,105);
 
+// Dimensiones
+$mobile: 468px;
+$tablet: 768px;
+
 .bottombar {
     display: flex;
     align-items: center;
@@ -70,6 +74,24 @@ $lightprimary: rgb(255,195,105);
             &:first-child::after {
                 background: rgba(50,50,50,.25);
             }
+        }
+    }
+}
+
+// Mobile First
+
+@media only screen and (min-width: $tablet) {
+
+    .bottombar .item {
+
+        .icono {
+            font-size: 12px;
+            width: 24px;
+            height: 24px;
+        }
+
+        .texto {
+            font-size: 15px;
         }
     }
 }

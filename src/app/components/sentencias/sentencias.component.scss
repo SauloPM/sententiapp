@@ -4,6 +4,10 @@ $primary     : rgb(225,165,075);
 $darkprimary : rgb(175,115,025);
 $lightprimary: rgb(255,195,105);
 
+// Dimensiones
+$mobile: 468px;
+$tablet: 768px;
+
 .sentencia {
     border: 1px solid rgb(235,235,235);
     border-radius: 2px;
@@ -65,11 +69,13 @@ $lightprimary: rgb(255,195,105);
             font-size: 11px;
             font-family: 'Lato', sans-serif;
             white-space: nowrap;
+            line-height: 15px;
         }
 
         .iconos {
             display: flex;
             align-items: center;
+            
 
             .icono {
                 transition: .5s;
@@ -88,6 +94,7 @@ $lightprimary: rgb(255,195,105);
     // Estados
 
     .estados {
+        line-height: 15px;
         margin-right: 15px;
 
         .icono {
@@ -114,5 +121,29 @@ $lightprimary: rgb(255,195,105);
 
     &:last-child {
         margin: 0 0 25px;
+    }
+}
+
+// Mobile First
+
+@media only screen and (min-width: $tablet) {
+
+    .sentencia {
+
+        .extracto {
+            font-size: 15px;
+            line-height: 30px;
+        }
+
+        .footer {
+
+            .autor {
+                font-size: 13px;
+            }
+
+            .iconos {
+                font-size: 20px;
+            }
+        }
     }
 }
