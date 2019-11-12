@@ -178,6 +178,15 @@ export class HomePage implements OnInit {
     else {
       this.servicioFechas.getFechasPorCategoria( categoriaSeleccionada ).subscribe( ( data ) => {
         this.fechas = data;
+
+        let fechaGenerica = this.fechas.find( item => item.id === 1 );
+        
+        // La fecha genérica se ha de poner al final a petición de Gregorio
+        if ( fechaGenerica ) {
+          this.fechas.shift();
+          this.fechas.push( fechaGenerica );
+        }
+
       });
     }
   }

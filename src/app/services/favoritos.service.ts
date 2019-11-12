@@ -72,6 +72,14 @@ export class FavoritosService {
 
   }
 
+  cambiarReaccion( id: number, reaccion: string) {
+    
+    let index = this.favoritos.findIndex( item => item.id === id );
+
+    this.favoritos[ index ].reaccion = reaccion;
+    
+  }
+
   async cargarFavoritos() {
 
     const favoritos = await this.storage.get( 'favoritos' );
