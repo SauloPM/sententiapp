@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 // Servicios
-import { FechasService    } from '../../services/fechas.service';
 import { FavoritosService } from '../../services/favoritos.service';
 
 // Interfaces
@@ -34,34 +33,26 @@ export class SentenciasComponent implements OnInit {
 
   constructor(
     private socialSharing: SocialSharing,
-    private servicioFechas: FechasService,
     private servicioFavoritos: FavoritosService ) { }
 
   ngOnInit() {
-    
+
     // Resaltamos las sentencias favoritas
-    this.sentencias.forEach( ( sentencia ) => {
-      sentencia.esFavorito = this.esFavorito( sentencia.id );
-    });
-    
+    setTimeout( () => {
+      this.sentencias.forEach( ( sentencia ) => {
+        sentencia.reaccion = this.servicioFavoritos.getReaccion( sentencia.id );
+        // console.log( sentencia.reaccion );
+      });
+    }, 500);
   }
 
-  abrirEstados( i: number ) {
-
-    let barraEstados    = document.getElementById(`barra-estados-${ i }`);
-    let estadosAbiertos = getComputedStyle( barraEstados, null ).display;
-
-    barraEstados.style.display = estadosAbiertos === 'block' ? 'none' : 'block';
-
+  guardarFavorito( sentencia: Sentencia, reaccion: string ) {
+    this.servicioFavoritos.guardarFavoritos( sentencia, reaccion );
+    sentencia.reaccion = reaccion;
   }
 
-  guardarFavorito( sentencia: Sentencia, estado: string ) {
-    sentencia.esFavorito = true;
-    this.servicioFavoritos.guardarFavoritos( sentencia, estado );
-  }
-
-  eliminarFavorito ( sentencia: Sentencia, estado: string ) {
-    sentencia.esFavorito = false;
+  eliminarFavorito ( sentencia: Sentencia ) {
+    sentencia.reaccion = '';
     this.servicioFavoritos.eliminarFavorito( sentencia.id );
   }
 
@@ -91,13 +82,5 @@ export class SentenciasComponent implements OnInit {
     }
 
     this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
-  }
-
-  // ──────────────── //
-  //     AUXILIAR     //
-  // ──────────────── //
-
-  esFavorito( id: number ) {
-    return this.servicioFavoritos.existe( id );
   }
 }

@@ -18,36 +18,70 @@ export class FavoritosService {
   // ─────────────── //
 
   constructor( private storage: Storage ) {
-    this.cargarFavoritos()
+    this.cargarFavoritos();
   }
 
-  guardarFavoritos( sentencia: Sentencia, estado: string ) {
+  guardarFavoritos( sentencia: Sentencia, reaccion: string ) {
 
-    const existe = this.favoritos.find( item => item.id == sentencia.id ) ? true : false;
-
-    console.log( estado );
+    const existe = this.favoritos.find( item => item.id === sentencia.id ) ? true : false;
 
     if ( !existe ) {
+      console.log( 'no existe' );
+      sentencia.reaccion = reaccion;
       this.favoritos.unshift( sentencia );
-      this.storage.set( estado, this.favoritos );
+      this.storage.set( 'favoritos', this.favoritos );
+    } else {
+
+      if ( sentencia.reaccion === reaccion ) {
+        console.log( 'existe' );
+        this.eliminarFavorito( sentencia.id );
+      } else {
+        console.log( 'existe, pero el estado es diferente' );
+        this.eliminarFavorito( sentencia.id );
+        sentencia.reaccion = reaccion;
+        this.favoritos.unshift( sentencia );
+        this.storage.set( 'favoritos', this.favoritos );
+      }
     }
   }
 
   eliminarFavorito( id: number ) {
-    this.favoritos = this.favoritos.filter( item => item.id != id  );
+
+    // Eliminamos la sentencia de la variable
+    this.favoritos = this.favoritos.filter( item => item.id !== id  );
+
+    // Volvemos a almacenar la variable en el local storage sin la sentencia eliminada
     this.storage.set( 'favoritos', this.favoritos );
+    
   }
 
-  existe( id: number ) {
-    return this.favoritos.find( item => item.id == id ) ? true : false;
+  getReaccion( id: number ) {
+    
+    // const EXISTE = this.favoritos.find( item => item.id === id ) ? true : false;
+    
+    let reaccion = '';
+
+    for ( let i = 0; i < this.favoritos.length; i++) {
+      if ( this.favoritos[i].id === id && this.favoritos[i].reaccion.length > 0 ) {
+        reaccion = this.favoritos[i].reaccion;
+        break;
+      }
+    }
+
+    return reaccion;
+
   }
 
   async cargarFavoritos() {
 
-    const favoritos = await this.storage.get( 'Me enamora' );
+    const favoritos = await this.storage.get( 'favoritos' );
 
     if ( favoritos ) {
       this.favoritos = favoritos;
+      console.log( 'Listado de favoritos:');
+      console.log( '──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────');
+      console.log( this.favoritos );
+      console.log( '──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────');
     }
 
     // Código equivalente (es una promesa) a la instrucción de arriba que utiliza un await y async delante del identificador de la función
@@ -55,5 +89,4 @@ export class FavoritosService {
       //   console.log('favoritos', favoritos)
     // });
   }
-
 }
