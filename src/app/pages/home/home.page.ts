@@ -25,6 +25,8 @@ export class HomePage implements OnInit {
   fechas: Fecha[] = [];
   categorias: Categoria[] = [];
 
+  categoriaActiva: Categoria = { categoria: 'Todos' };
+
   configuracion = {
     // loop: true,
     spaceBetween: 0,
@@ -53,7 +55,7 @@ export class HomePage implements OnInit {
       this.categorias =  data;
 
       // Insertamos la categoría por defecto en el filtro de categorías
-      this.categorias.unshift({ categoria: 'Todos' })
+      this.categorias.unshift({ categoria: 'Todos' });
 
     });
 
@@ -130,7 +132,7 @@ export class HomePage implements OnInit {
         $(".mango").animate({ opacity: '1' }, 250);
         $(".buscador").removeClass("abierto").addClass("cerrado");
       }, 1500);
-    })
+    });
 
     // Escribir algo en el buscador
     $(document).on("input", ".entrada", function () {
@@ -166,7 +168,9 @@ export class HomePage implements OnInit {
   }
 
   cambiarCategoria( categoriaSeleccionada: string ) {
-    
+
+    this.categoriaActiva.categoria = categoriaSeleccionada;
+
     // Cuando se selecciona la primera categoría del filtro, se muestran todas las fechas
     if ( categoriaSeleccionada === this.categorias[0].categoria ) {
       this.servicioFechas.getFechas().subscribe( ( data ) => {

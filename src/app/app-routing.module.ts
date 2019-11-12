@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
 
   // Rutas con parámetros
-  { path: 'informacion/:id', loadChildren: './pages/informacion/informacion.module#InformacionPageModule' },
+  { path: 'informacion/:id/:categoria', loadChildren: './pages/informacion/informacion.module#InformacionPageModule' },
 ];
 
 @NgModule({

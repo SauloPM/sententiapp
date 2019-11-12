@@ -86,10 +86,6 @@ export class FavoritosService {
 
     if ( favoritos ) {
       this.favoritos = favoritos;
-      console.log( 'Listado de favoritos:');
-      console.log( '──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────');
-      console.log( this.favoritos );
-      console.log( '──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────');
     }
 
     // Código equivalente (es una promesa) a la instrucción de arriba que utiliza un await y async delante del identificador de la función

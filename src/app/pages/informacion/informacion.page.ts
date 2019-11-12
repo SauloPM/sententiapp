@@ -22,7 +22,8 @@ export class InformacionPage implements OnInit {
     imagen: ''
   };
   
-  idFechaURL  : number  = 0;
+  idFechaURL  : number = 0;
+  categoriaURL: string = 'Todos';
 
   otrasFechas: Fecha    [] = [];
   sentencias : Sentencia[] = [];
@@ -43,7 +44,8 @@ export class InformacionPage implements OnInit {
     // Obtenemos los parámetros de la URL (en este caso solo es el id de la fecha)
     this.activatedRoute.params.subscribe( parametroURL => {
 
-      this.idFechaURL = parametroURL.id;
+      this.idFechaURL   = parametroURL.id;
+      this.categoriaURL = parametroURL.categoria;
 
       // Guardamos en una variable los datos de la fecha cuyo ID se encuentra en la URL
       this.servicioFechas.getDatosFecha( parametroURL.id ).subscribe( ( data ) => {
@@ -52,7 +54,7 @@ export class InformacionPage implements OnInit {
 
       // Guardamos en una variable las sentencias de la fecha cuyo ID se encuentra en la URL
       this.servicioFechas.getSentencias( parametroURL.id ).subscribe( ( data: Sentencia[] ) => {
-        this.sentencias = data;
+        this.sentencias = this.categoriaURL === 'Todos' ? data : data.filter ( item => item.categoria === this.categoriaURL );
       });
 
     });

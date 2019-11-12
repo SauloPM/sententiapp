@@ -4,5 +4,6 @@ export interface Sentencia {
     extractolatino: string;
     extractoespanol: string;
     extractoingles: string;
+    categoria?: string;
     reaccion: string;
 }
