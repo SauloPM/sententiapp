@@ -1,7 +1,8 @@
+import { Sentencia } from './../../interfaces/sentencia';
 import { Component, OnInit } from '@angular/core';
 
 // Servicios
-import { FavoritosService } from '../../services/favoritos.service'
+import { FavoritosService } from '../../services/favoritos.service';
 
 // jQuery
 declare var $: any;
@@ -12,7 +13,8 @@ declare var $: any;
 })
 export class FavoritosPage implements OnInit {
 
-  estados: string[] = [ 'Me gusta', 'Me enamora', 'Me divierte', 'No me gusta' ];
+  favoritos : Sentencia[] = [];
+  reacciones: string   [] = [ 'Todos', 'Me gusta', 'Me encanta', 'Me divierte', 'No me gusta' ];
 
   configuracion = {
     spaceBetween: 0,
@@ -31,6 +33,10 @@ export class FavoritosPage implements OnInit {
 
   ngOnInit() {
 
+    setTimeout( () => {
+      this.favoritos = this.servicioFavoritos.favoritos;
+    }, 500);
+
     // Seleccionar categoría del filtro
     $(document).on('click', '.filtro .item', function() {
       $('.filtro .item.seleccionado').removeClass('seleccionado');
@@ -38,7 +44,13 @@ export class FavoritosPage implements OnInit {
     });
   }
 
-  cambiarEstado( estado: string ) {
-    // console.log( estado )
+  cambiarReaccion( reaccion: string ) {
+
+    if ( reaccion === 'Todos' ) {
+      this.favoritos = this.servicioFavoritos.favoritos;
+    } else {
+      this.favoritos = this.servicioFavoritos.favoritos.filter( item => item.reaccion === reaccion );
+    }
+
   }
 }

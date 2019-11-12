@@ -167,14 +167,14 @@ export class HomePage implements OnInit {
 
   cambiarCategoria( categoriaSeleccionada: string ) {
     
-    // Guardamos en una variable todas las fechas
-    if ( categoriaSeleccionada == this.categorias[0].categoria ) {
+    // Cuando se selecciona la primera categoría del filtro, se muestran todas las fechas
+    if ( categoriaSeleccionada === this.categorias[0].categoria ) {
       this.servicioFechas.getFechas().subscribe( ( data ) => {
         this.fechas = data;
       });
     }
 
-    // Guardamos en una variable todas las fechas que tengan sentencias pertenecientes a la categoría seleccionada
+    // Cuando se seleccione cualquier otra, solo se muestran las fechas que correspondan a la categoría seleccionada
     else {
       this.servicioFechas.getFechasPorCategoria( categoriaSeleccionada ).subscribe( ( data ) => {
         this.fechas = data;
