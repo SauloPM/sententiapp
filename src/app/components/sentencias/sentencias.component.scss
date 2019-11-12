@@ -88,36 +88,27 @@ $lightprimary: rgb(255,195,105);
     // Estados
 
     .estados {
-        display: none;
-        background: white;
-        border: 1px solid rgb(235,235,235);
-        border-radius: 2px;
-        box-shadow: 2px 2px 5px rgb(235,235,235);
-        padding: 10px 15px;
-        position: absolute;
-        right: 2px;
-        bottom: -35px;
-        z-index: 50;
+        margin-right: 15px;
 
         .icono {
             color: $primary;
             margin-right: 10px;
 
+            &.negro {
+                color: $text;
+            }
+
             &:last-child {
-                margin: 0;
+                margin-right: 15px;
             }
         }
 
         &::after {
-            content: "";
-            background: white;
-            box-shadow: -1px -1px 0 0 rgb(235,235,235);
-            position: absolute;
-            top: -5px;
-            left: 50%;
-            width: 10px;
+            content: '';
+            display: inline-block;
+            background: rgb(235,235,235);
+            width: 1px;
             height: 10px;
-            transform: translateX(-50%) rotate(45deg);
         }
     }
 

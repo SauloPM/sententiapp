@@ -1,6 +1,6 @@
 <h2 *ngIf="sentencias.length">Sentencias</h2>
 
-<div class="sentencia" *ngFor="let sentencia of sentencias; let i = index" [ngStyle]="{ 'z-index': (sentencias.length - i) }">
+<div class="sentencia" *ngFor="let sentencia of sentencias; let i = index">
 
   <!-- Carrusel de extractos -->
   <ion-slides [options]="configuracion">
@@ -21,19 +21,25 @@
     
   <!-- Footer -->
   <div class="footer">
+
+    <!-- Autor -->
     <div class="autor">{{ sentencia.autor }}</div>
     <div class="iconos">
-      <i class="icono fa fa-star"   aria-hidden="true" *ngIf="sentencia.esFavorito"  (click)="eliminarFavorito( sentencia )"></i>
-      <i class="icono fa fa-star-o" aria-hidden="true" *ngIf="!sentencia.esFavorito" (click)="abrirEstados( i )"></i>
+
+      <!-- Estados -->
+      <div class="estados">
+        <i class="icono fa fa-thumbs-o-up"           *ngIf="sentencia.reaccion != 'Me gusta'   " (click)="guardarFavorito  ( sentencia, 'Me gusta' )"></i>
+        <i class="icono negro fa fa-thumbs-o-up"     *ngIf="sentencia.reaccion == 'Me gusta'   " (click)="eliminarFavorito ( sentencia )"></i>
+        <i class="icono fa fa-heart-o"               *ngIf="sentencia.reaccion != 'Me encanta' " (click)="guardarFavorito  ( sentencia, 'Me encanta' )"></i>
+        <i class="icono negro fa fa-heart-o"         *ngIf="sentencia.reaccion == 'Me encanta' " (click)="eliminarFavorito ( sentencia )"></i>
+        <i class="icono fa fa-hand-scissors-o"       *ngIf="sentencia.reaccion != 'Me divierte'" (click)="guardarFavorito  ( sentencia, 'Me divierte' )"></i>
+        <i class="icono negro fa fa-hand-scissors-o" *ngIf="sentencia.reaccion == 'Me divierte'" (click)="eliminarFavorito ( sentencia )"></i>
+        <i class="icono fa fa-thumbs-o-down"         *ngIf="sentencia.reaccion != 'No me gusta'" (click)="guardarFavorito  ( sentencia, 'No me gusta' )"></i>
+        <i class="icono negro fa fa-thumbs-o-down"   *ngIf="sentencia.reaccion == 'No me gusta'" (click)="eliminarFavorito ( sentencia )"></i>
+      </div>
+
+      <!-- Compartir -->
       <i class="icono fa fa-paper-plane-o" aria-hidden="true" (click)="compartir( sentencia )"></i>
     </div>
-  </div>
-
-  <!-- Estados -->
-  <div id="barra-estados-{{ i }}" class="estados">
-    <i class="icono fa fa-thumbs-o-up"     aria-hidden="true" (click)="guardarFavorito ( sentencia, 'Me gusta'    )"></i>
-    <i class="icono fa fa-heart-o"         aria-hidden="true" (click)="guardarFavorito ( sentencia, 'Me enamora'  )"></i>
-    <i class="icono fa fa-hand-scissors-o" aria-hidden="true" (click)="guardarFavorito ( sentencia, 'Me divierte' )"></i>
-    <i class="icono fa fa-thumbs-o-down"   aria-hidden="true" (click)="guardarFavorito ( sentencia, 'No me gusta' )"></i>
   </div>
 </div>
