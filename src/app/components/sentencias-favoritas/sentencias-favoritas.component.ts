@@ -33,13 +33,9 @@ export class SentenciasFavoritasComponent implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor(
-    private socialSharing: SocialSharing,
-    private servicioFavoritos: FavoritosService ) {
-
-      this.favoritoSeleccionado = new EventEmitter();
-
-    }
+  constructor( private socialSharing: SocialSharing, private servicioFavoritos: FavoritosService ) {
+    this.favoritoSeleccionado = new EventEmitter();
+  }
 
   ngOnInit() {
 
@@ -47,20 +43,25 @@ export class SentenciasFavoritasComponent implements OnInit {
     setTimeout( () => {
       this.sentencias.forEach( ( sentencia ) => {
         sentencia.reaccion = this.servicioFavoritos.getReaccion( sentencia.id );
-        // console.log( sentencia.reaccion );
       });
     }, 500);
   }
 
   cambiarReaccion( sentencia: Sentencia, reaccion: string ) {
-    this.servicioFavoritos.guardarFavoritos( sentencia, reaccion );
+
+    this.servicioFavoritos.actualizarFavorito( sentencia.id, reaccion );
     sentencia.reaccion = reaccion;
+
+    // Refrescamos
     this.favoritoSeleccionado.emit( this.sentencias );
   }
 
   eliminarFavorito ( sentencia: Sentencia ) {
+    
     sentencia.reaccion = '';
     this.servicioFavoritos.eliminarFavorito( sentencia.id );
+
+    // Refrescamos
     this.favoritoSeleccionado.emit( this.sentencias );
   }
 

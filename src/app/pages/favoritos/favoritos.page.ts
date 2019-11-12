@@ -16,6 +16,8 @@ export class FavoritosPage implements OnInit {
   favoritos : Sentencia[] = [];
   reacciones: string   [] = [ 'Todos', 'Me gusta', 'Me encanta', 'Me divierte', 'No me gusta' ];
 
+  reaccionSeleccionada: string = 'Todos';
+
   configuracion = {
     spaceBetween: 0,
     slidesPerView: 'auto',
@@ -29,8 +31,8 @@ export class FavoritosPage implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( public servicioFavoritos: FavoritosService ) { }
-
+  constructor( public servicioFavoritos: FavoritosService ) {}
+  
   ngOnInit() {
 
     setTimeout( () => {
@@ -45,18 +47,11 @@ export class FavoritosPage implements OnInit {
   }
 
   cambiarReaccion( reaccion: string ) {
-
-    if ( reaccion === 'Todos' ) {
-      this.favoritos = this.servicioFavoritos.favoritos;
-    } else {
-      this.favoritos = this.servicioFavoritos.favoritos.filter( item => item.reaccion === reaccion );
-    }
-
+    this.reaccionSeleccionada = reaccion;
+    this.favoritos = reaccion === 'Todos' ? this.servicioFavoritos.favoritos : this.servicioFavoritos.favoritos.filter( item => item.reaccion === reaccion );
   }
 
   actualizarFavoritos() {
-    
-    this.favoritos = this.servicioFavoritos.favoritos;
-
+    this.favoritos = this.reaccionSeleccionada === 'Todos' ? this.servicioFavoritos.favoritos : this.servicioFavoritos.favoritos.filter( item => item.reaccion === this.reaccionSeleccionada )
   }
 }

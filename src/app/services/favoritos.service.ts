@@ -55,6 +55,19 @@ export class FavoritosService {
     
   }
 
+  actualizarFavorito( id: number, reaccion: string ) {
+
+    // Localizamos la posición de la sentencia cuya reacción deseamos modificar
+    let i = this.favoritos.findIndex( item => item.id === id );
+
+    // Modificamos la reacción
+    this.favoritos[i].reaccion = reaccion;
+
+    // Volvemos a almacenar la variable en el local storage sin la sentencia eliminada
+    this.storage.set( 'favoritos', this.favoritos );
+
+  }
+
   getReaccion( id: number ) {
     
     // const EXISTE = this.favoritos.find( item => item.id === id ) ? true : false;
