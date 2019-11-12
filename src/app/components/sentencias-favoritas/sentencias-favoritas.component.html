@@ -28,13 +28,13 @@
 
       <!-- Estados -->
       <div class="estados">
-        <i class="icono far fa-smile"       *ngIf="sentencia.reaccion != 'Me gusta'   " (click)="guardarFavorito  ( sentencia, 'Me gusta' )"></i>
+        <i class="icono far fa-smile"       *ngIf="sentencia.reaccion != 'Me gusta'   " (click)="cambiarReaccion  ( sentencia, 'Me gusta' )"></i>
         <i class="icono fas fa-smile"       *ngIf="sentencia.reaccion == 'Me gusta'   " (click)="eliminarFavorito ( sentencia )"></i>
-        <i class="icono far fa-grin-hearts" *ngIf="sentencia.reaccion != 'Me encanta' " (click)="guardarFavorito  ( sentencia, 'Me encanta' )"></i>
+        <i class="icono far fa-grin-hearts" *ngIf="sentencia.reaccion != 'Me encanta' " (click)="cambiarReaccion  ( sentencia, 'Me encanta' )"></i>
         <i class="icono fas fa-grin-hearts" *ngIf="sentencia.reaccion == 'Me encanta' " (click)="eliminarFavorito ( sentencia )"></i>
-        <i class="icono far fa-grin-squint" *ngIf="sentencia.reaccion != 'Me divierte'" (click)="guardarFavorito  ( sentencia, 'Me divierte' )"></i>
+        <i class="icono far fa-grin-squint" *ngIf="sentencia.reaccion != 'Me divierte'" (click)="cambiarReaccion  ( sentencia, 'Me divierte' )"></i>
         <i class="icono fas fa-grin-squint" *ngIf="sentencia.reaccion == 'Me divierte'" (click)="eliminarFavorito ( sentencia )"></i>
-        <i class="icono far fa-frown"       *ngIf="sentencia.reaccion != 'No me gusta'" (click)="guardarFavorito  ( sentencia, 'No me gusta' )"></i>
+        <i class="icono far fa-frown"       *ngIf="sentencia.reaccion != 'No me gusta'" (click)="cambiarReaccion  ( sentencia, 'No me gusta' )"></i>
         <i class="icono fas fa-frown"       *ngIf="sentencia.reaccion == 'No me gusta'" (click)="eliminarFavorito ( sentencia )"></i>
       </div>
 

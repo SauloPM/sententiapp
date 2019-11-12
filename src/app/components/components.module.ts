@@ -7,6 +7,7 @@ import { FooterComponent      } from './footer/footer.component';
 import { BottombarComponent   } from './bottombar/bottombar.component';
 import { SentenciasComponent  } from './sentencias/sentencias.component';
 import { OtrasFechasComponent } from './otras-fechas/otras-fechas.component';
+import { SentenciasFavoritasComponent } from './sentencias-favoritas/sentencias-favoritas.component';
 
 // Pipes
 import { PipesModule } from '../pipes/pipes.module';
@@ -19,7 +20,8 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
     FooterComponent,
     BottombarComponent,
     SentenciasComponent,
-    OtrasFechasComponent
+    OtrasFechasComponent,
+    SentenciasFavoritasComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
     FooterComponent,
     BottombarComponent,
     SentenciasComponent,
-    OtrasFechasComponent
+    OtrasFechasComponent,
+    SentenciasFavoritasComponent
   ],
   providers: [
     SocialSharing

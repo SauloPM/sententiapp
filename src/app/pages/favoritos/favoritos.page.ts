@@ -53,4 +53,10 @@ export class FavoritosPage implements OnInit {
     }
 
   }
+
+  actualizarFavoritos() {
+    
+    this.favoritos = this.servicioFavoritos.favoritos;
+
+  }
 }

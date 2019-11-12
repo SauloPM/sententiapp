@@ -18,7 +18,7 @@
 
       <!-- Listado de sentencias -->
       <div class="sentencias" *ngIf="favoritos.length > 0">
-        <app-sentencias [sentencias]="favoritos"></app-sentencias>
+        <app-sentencias-favoritas [sentencias]="favoritos" (favoritoSeleccionado)="actualizarFavoritos( $event )"></app-sentencias-favoritas>
       </div>
 
       <!-- Mensaje de notificación cuando no existen sentencias favoritas -->
