@@ -15,6 +15,7 @@ $text        : rgb(50,50,50);
 $primary     : rgb(225,165,075);
 $darkprimary : rgb(175,115,025);
 $lightprimary: rgb(255,195,105);
+$lightgray   : rgb(235,235,235);
 
 // Dimensiones
 $mobile: 468px;
@@ -103,25 +104,25 @@ p {
     margin-bottom: 35px;
 
     .item {
-        color: rgba(255,255,255,.5);
+        color: $text;
         font-size: 13px;
         font-family: 'Lato', sans-serif;
         line-height: 25px;
         text-transform: none;
-        border-top: 1px solid rgba(255,255,255,.1);
-        border-bottom: 1px solid rgba(255,255,255,.1);
+        border-top: 1px solid rgba(50,50,50,.1);
+        border-bottom: 1px solid rgba(50,50,50,.1);
         line-height: 20px;
         padding: 10px 25px;
         width: fit-content;
 
         &.seleccionado {
-            color: white;
+            color: $primary;
         }
     }
 
     &.negro .item {
         color: $text;
-        border-top: 1px solid rgba(50,50,255,.1);
+        border-top: 1px solid rgba(50,50,50,.1);
         border-bottom: 1px solid rgba(50,50,50,.1);
 
         &.seleccionado {
@@ -203,9 +204,17 @@ p {
 // ────────────── //
 
 #inicio {
-    background: linear-gradient(45deg, $primary 20%, $lightprimary 55%);
     position: relative;
     min-height: 100vh;
+
+    .recuento {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        text-align: right;
+        padding: 0 8px 8px;
+        line-height: 10px;
+    }
 
     .contenedor {
         padding: 35px 25px;
@@ -249,7 +258,7 @@ p {
     // Buscador
 
     .buscador {
-        border: 4px solid white;
+        border: 4px solid $lightprimary;
         border-radius: 50%;
         outline: none;
         margin: 0 auto 35px;
@@ -260,7 +269,7 @@ p {
         opacity: .5;
 
         .mango {
-            background: white;
+            background: $lightprimary;
             width: 15px;
             height: 4px;
             position: absolute;
@@ -273,7 +282,7 @@ p {
             display: none;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: $lightprimary;
             font-size: 40px;
             position: absolute;
             top: 0;
@@ -284,7 +293,7 @@ p {
 
         .entrada {
             display: none;
-            color: white;
+            color: $text;
             font-size: 13px;
             font-family: 'Lato', sans-serif;
             line-height: 25px;
@@ -303,10 +312,12 @@ p {
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
         text-decoration: none;
-        background: rgba(255,255,255,.25);
         border-radius: 2px;
-        box-shadow: 1px 1px 5px $darkprimary;
+        border: 1px solid $lightgray;
         outline: none;
         padding: 15px 25px;
         margin-bottom: 15px;
@@ -320,6 +331,8 @@ p {
             background-size: cover;
             border-radius: 50%;
             margin-right: 25px;
+            position: relative;
+            z-index: 50;
             width: 50px;
             height: 50px;
         }
@@ -328,24 +341,35 @@ p {
             color: white;
             font-size: 13px;
             font-family: 'Lato', sans-serif;
-            line-height: 25px;
             text-align: left;
             line-height: 20px;
+            position: relative;
+            z-index: 50;
         }
 
         .dia {
-            color: white;
-            font-size: 8px;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            color: $lightprimary;
+            font-size: 10px;
             line-height: 15px;
             margin-top: 5px;
+            position: relative;
+            z-index: 50;
             opacity: .75;
         }
 
         &:last-child {
             margin: 0;
+        }
+
+        &::after {
+            content: '';
+            background: linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.8));
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 25;
         }
     }
 }

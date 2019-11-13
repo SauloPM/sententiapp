@@ -3,7 +3,7 @@
 
     <app-bottombar></app-bottombar>
 
-    <div class="ruido"></div>
+    <!-- <div class="ruido"></div> -->
 
     <div style="display: flex; justify-content: space-between; flex-direction: column; min-height: 100vh">
 
@@ -23,7 +23,7 @@
       
         <div class="relative">
 
-          <img class="pagina-rota volteo-vertical" src="assets/img/pagina-rota.png" alt="">
+          <!-- <img class="pagina-rota volteo-vertical" src="assets/img/pagina-rota.png" alt=""> -->
 
           <div class="contenedor">
 
@@ -42,7 +42,8 @@
             </ion-slides>
 
             <!-- Fechas -->
-            <a class="fecha" [routerLink]="['/informacion', fecha.id, categoriaActiva.categoria]" *ngFor="let fecha of fechas">
+            <small class="recuento">{{ recuento }} fecha(s)</small>
+            <a class="fecha" [routerLink]="['/informacion', fecha.id, categoriaActiva.categoria]" *ngFor="let fecha of fechas" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'">
               <div class="imagen" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'"></div>
               <div>
                 <div class="etiqueta">{{ fecha.etiqueta }}</div>

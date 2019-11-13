@@ -21,21 +21,18 @@ declare var $: any;
 export class HomePage implements OnInit {
 
   deviceID: number = 0;
+  recuento: number = 0;
 
-  fechas: Fecha[] = [];
+  fechas    : Fecha[]     = [];
   categorias: Categoria[] = [];
 
   categoriaActiva: Categoria = { categoria: 'Todos' };
 
   configuracion = {
-    // loop: true,
     spaceBetween: 0,
     slidesPerView: 'auto',
     freeMode: true,
-    // centeredSlides: true,
     autoHeight: true,
-    pagination: false,
-    navigation: false
   };
 
   // ─────────────── //
@@ -43,22 +40,8 @@ export class HomePage implements OnInit {
   // ─────────────── //
 
   constructor( public servicioFechas: FechasService, private pushService: PushService ) {
-    
-    // Guardamos en una variable todas las fechas
-    this.servicioFechas.getFechas().subscribe( ( data ) => {
-      this.fechas = data;
-    });
 
-    // Guardamos en una variable todas las categorías
-    this.servicioFechas.getCategorias().subscribe( ( data ) => {
-      
-      this.categorias =  data;
-
-      // Insertamos la categoría por defecto en el filtro de categorías
-      this.categorias.unshift({ categoria: 'Todos' });
-
-    });
-
+    // Notificaciones push (pendiente)
     this.pushService.getDeviceID().get()
       .then (( uuid:  any ) => console.log(uuid) )
       .catch(( error: any ) => console.log(error));
@@ -66,6 +49,10 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.getFechas(); // Guardamos en una variable todas las fechas
+
+    this.getCategorias(); // Guardamos en una variable todas las categorías
 
     // Abrir buscador
     $(document).on("click", ".buscador.cerrado", function() {
@@ -168,31 +155,43 @@ export class HomePage implements OnInit {
   }
 
   cambiarCategoria( categoriaSeleccionada: string ) {
-
+  
     this.categoriaActiva.categoria = categoriaSeleccionada;
 
-    // Cuando se selecciona la primera categoría del filtro, se muestran todas las fechas
-    if ( categoriaSeleccionada === this.categorias[0].categoria ) {
-      this.servicioFechas.getFechas().subscribe( ( data ) => {
-        this.fechas = data;
-      });
-    }
-
     // Cuando se seleccione cualquier otra, solo se muestran las fechas que correspondan a la categoría seleccionada
-    else {
-      this.servicioFechas.getFechasPorCategoria( categoriaSeleccionada ).subscribe( ( data ) => {
-        this.fechas = data;
+    this.servicioFechas.getFechasPorCategoria( categoriaSeleccionada ).subscribe( ( data ) => {
+      
+      this.fechas = data;
+      this.recuento = this.fechas.length;
 
-        let fechaGenerica = this.fechas.find( item => item.id === 1 );
+      let fechaGenerica = this.fechas.find( item => item.id === 1 );
         
-        // La fecha genérica se ha de poner al final a petición de Gregorio
-        if ( fechaGenerica ) {
-          this.fechas.shift();
-          this.fechas.push( fechaGenerica );
-        }
+      // La fecha genérica se ha de poner al final a petición de Gregorio
+      if ( fechaGenerica ) {
+        this.fechas.shift();
+        this.fechas.push( fechaGenerica );
+      }
 
-      });
-    }
+    });
+
+  }
+
+  // ──────────────── //
+  //     AUXILIAR     //
+  // ──────────────── //
+  
+  getFechas() {
+    this.servicioFechas.getFechas().subscribe( ( data ) => {
+      this.fechas = data;
+      this.recuento = this.fechas.length;
+    });
+  }
+
+  getCategorias() {
+    this.servicioFechas.getCategorias().subscribe( ( data ) => {
+      this.categorias =  data;
+      this.categorias.unshift({ categoria: 'Todos' });
+    });
   }
 }
 

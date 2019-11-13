@@ -34,7 +34,7 @@ export class FechasService {
   }
 
   getFechasPorCategoria( categoria: string ) {
-    return this.ejecutarApi<Fecha[]>( `MostrarFechasPorCategoria?categoria=${ categoria }` );
+    return categoria === 'Todos' ? this.ejecutarApi<Fecha[]>( 'MostrarFechas' ) : this.ejecutarApi<Fecha[]>( `MostrarFechasPorCategoria?categoria=${ categoria }` );
   }
 
   // ─────────────────── //
