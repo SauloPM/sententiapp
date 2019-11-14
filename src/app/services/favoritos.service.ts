@@ -75,25 +75,11 @@ export class FavoritosService {
 
   }
 
-  cambiarReaccion( id: number, reaccion: string) {
-    
-    let index = this.favoritos.findIndex( item => item.id === id );
-
-    this.favoritos[ index ].reaccion = reaccion;
-    
-  }
-
   async cargarFavoritos() {
 
     const favoritos = await this.storage.get( 'favoritos' );
 
-    if ( favoritos ) {
-      this.favoritos = favoritos;
-    }
+    this.favoritos = favoritos ? favoritos : [];
 
-    // Código equivalente (es una promesa) a la instrucción de arriba que utiliza un await y async delante del identificador de la función
-    // this.storage.get( 'favoritos' ).then( favoritos => {
-      //   console.log('favoritos', favoritos)
-    // });
   }
 }
