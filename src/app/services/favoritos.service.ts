@@ -21,51 +21,41 @@ export class FavoritosService {
     this.cargarFavoritos();
   }
 
-  guardarFavoritos( sentencia: Sentencia, reaccion: string ) {
+  crearFavorito( sentencia: Sentencia ) {
 
-    const existe = this.favoritos.find( item => item.id === sentencia.id ) ? true : false;
+    // Insertamos la sentencia al comienzo de la variable
+    this.favoritos.unshift( sentencia );
 
-    if ( !existe ) {
-      console.log( 'no existe' );
-      sentencia.reaccion = reaccion;
-      this.favoritos.unshift( sentencia );
-      this.storage.set( 'favoritos', this.favoritos );
-    } else {
+    // Sobreescribimos el campo de favoritos del local storage, ahora actualizado
+    this.storage.set( 'favoritos', this.favoritos );
 
-      if ( sentencia.reaccion === reaccion ) {
-        console.log( 'existe' );
-        this.eliminarFavorito( sentencia.id );
-      } else {
-        console.log( 'existe, pero el estado es diferente' );
-        this.eliminarFavorito( sentencia.id );
-        sentencia.reaccion = reaccion;
-        this.favoritos.unshift( sentencia );
-        this.storage.set( 'favoritos', this.favoritos );
-      }
-    }
   }
 
-  eliminarFavorito( id: number ) {
+  actualizarFavorito( sentencia: Sentencia ) {
+
+    // Localizamos la posición de la sentencia cuya reacción deseamos actualizar
+    let i = this.favoritos.findIndex( item => item.id === sentencia.id );
+
+    // Actualizamos la reacción
+    this.favoritos[i] = sentencia;
+
+    // Sobreescribimos el campo de favoritos del local storage, ahora actualizado
+    this.storage.set( 'favoritos', this.favoritos );
+
+  }
+
+  eliminarFavorito( sentencia: Sentencia ) {
 
     // Eliminamos la sentencia de la variable
-    this.favoritos = this.favoritos.filter( item => item.id !== id  );
+    this.favoritos = this.favoritos.filter( item => item.id !== sentencia.id  );
 
-    // Volvemos a almacenar la variable en el local storage sin la sentencia eliminada
+    // Sobreescribimos el campo de favoritos del local storage, ahora actualizado
     this.storage.set( 'favoritos', this.favoritos );
     
   }
 
-  actualizarFavorito( id: number, reaccion: string ) {
-
-    // Localizamos la posición de la sentencia cuya reacción deseamos modificar
-    let i = this.favoritos.findIndex( item => item.id === id );
-
-    // Modificamos la reacción
-    this.favoritos[i].reaccion = reaccion;
-
-    // Volvemos a almacenar la variable en el local storage sin la sentencia eliminada
-    this.storage.set( 'favoritos', this.favoritos );
-
+  existeFavorito( sentencia: Sentencia ) {
+    return this.favoritos.find( item => item.id === sentencia.id ) ? true : false;
   }
 
   getReaccion( id: number ) {

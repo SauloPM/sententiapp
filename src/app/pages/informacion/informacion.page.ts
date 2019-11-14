@@ -15,18 +15,18 @@ import { FechasService } from '../../services/fechas.service';
 })
 export class InformacionPage implements OnInit {
 
+  otrasFechas: Fecha    [];
+  sentencias : Sentencia[];
+
+  id       : number = 0;
+  categoria: string = 'Todos';
+
   fecha: Fecha = {
     id: 0,
     etiqueta: '',
     descripcion: 'Esta sentencia no contiene ninguna descripción.',
     imagen: ''
   };
-  
-  idFechaURL  : number = 0;
-  categoriaURL: string = 'Todos';
-
-  otrasFechas: Fecha    [] = [];
-  sentencias : Sentencia[] = [];
 
   // ─────────────── //
   //     MÉTODOS     //
@@ -36,28 +36,9 @@ export class InformacionPage implements OnInit {
 
   ngOnInit() {
 
-    // Guardamos en una variable todas las fechas
-    this.servicioFechas.getFechas().subscribe( ( data: Fecha[]) => {
-      this.otrasFechas = data;
-    });
+    this.getFechas(); // Guardamos en una variable todas las fechas
 
-    // Obtenemos los parámetros de la URL (en este caso solo es el id de la fecha)
-    this.activatedRoute.params.subscribe( parametroURL => {
-
-      this.idFechaURL   = parametroURL.id;
-      this.categoriaURL = parametroURL.categoria;
-
-      // Guardamos en una variable los datos de la fecha cuyo ID se encuentra en la URL
-      this.servicioFechas.getDatosFecha( parametroURL.id ).subscribe( ( data ) => {
-        this.fecha = data[0];
-      });
-
-      // Guardamos en una variable las sentencias de la fecha cuyo ID se encuentra en la URL
-      this.servicioFechas.getSentencias( parametroURL.id ).subscribe( ( data: Sentencia[] ) => {
-        this.sentencias = this.categoriaURL === 'Todos' ? data : data.filter ( item => item.categoria === this.categoriaURL );
-      });
-
-    });
+    this.getSentencias(); // Guardamos en una variable los datos de la fecha actual y en otra las sentencias    
 
   }
 
@@ -66,9 +47,32 @@ export class InformacionPage implements OnInit {
     this.navController.back();
   }
 
-  // Volver a la página de inicio
-  // volverInicio() {
-  //   this.navController.navigateBack('/');
-  // }
+  // ──────────────── //
+  //     AUXILIAR     //
+  // ──────────────── //
 
+  getFechas() {
+    this.servicioFechas.getFechas().subscribe( ( data: Fecha[]) => {
+      this.otrasFechas = data;
+    });
+  }
+
+  getSentencias() {
+    this.activatedRoute.params.subscribe( parametrosURL => {
+
+      this.id        = parametrosURL.id;
+      this.categoria = parametrosURL.categoria;
+
+      // Obtenemos el título y la descripción de la fecha actual
+      this.servicioFechas.getDatosFecha( parametrosURL.id ).subscribe( data => {
+        this.fecha = data[0];
+      });
+
+      // Obtenemos las sentencias de la fecha actual
+      this.servicioFechas.getSentencias( parametrosURL.id ).subscribe( ( data: Sentencia[] ) => {
+        this.sentencias = this.categoria === 'Todos' ? data : data.filter ( item => item.categoria === this.categoria );
+      });
+
+    });
+  }
 }

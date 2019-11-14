@@ -40,16 +40,14 @@ export class SentenciasFavoritasComponent implements OnInit {
   ngOnInit() {
 
     // Resaltamos las sentencias favoritas
-    setTimeout( () => {
-      this.sentencias.forEach( ( sentencia ) => {
-        sentencia.reaccion = this.servicioFavoritos.getReaccion( sentencia.id );
-      });
-    }, 500);
+    this.sentencias.forEach( ( sentencia ) => {
+      sentencia.reaccion = this.servicioFavoritos.getReaccion( sentencia.id );
+    });
   }
 
   cambiarReaccion( sentencia: Sentencia, reaccion: string ) {
 
-    this.servicioFavoritos.actualizarFavorito( sentencia.id, reaccion );
+    this.servicioFavoritos.actualizarFavorito( sentencia );
     sentencia.reaccion = reaccion;
 
     // Refrescamos
@@ -59,7 +57,7 @@ export class SentenciasFavoritasComponent implements OnInit {
   eliminarFavorito ( sentencia: Sentencia ) {
     
     sentencia.reaccion = '';
-    this.servicioFavoritos.eliminarFavorito( sentencia.id );
+    this.servicioFavoritos.eliminarFavorito( sentencia );
 
     // Refrescamos
     this.favoritoSeleccionado.emit( this.sentencias );

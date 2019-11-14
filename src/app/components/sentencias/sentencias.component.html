@@ -1,8 +1,6 @@
-<h2 *ngIf="sentencias.length">Sentencias</h2>
-
 <div class="sentencia" *ngFor="let sentencia of sentencias; let i = index">
 
-  <!-- Carrusel de extractos -->
+  <!-- Extractos -->
   <ion-slides [options]="configuracion">
     <ion-slide class="extracto" *ngIf="sentencia.extractolatino.length">
       {{ sentencia.extractolatino }}
@@ -15,7 +13,7 @@
     </ion-slide>
   </ion-slides>
 
-  <!-- Flechas -->
+  <!-- Navegación -->
   <i class="flecha derecha   fas fa-angle-right" aria-hidden="true"></i>
   <i class="flecha izquierda fas fa-angle-left"  aria-hidden="true"></i>
     
@@ -24,22 +22,24 @@
 
     <!-- Autor -->
     <div class="autor">{{ sentencia.autor }}</div>
+
     <div class="iconos">
 
       <!-- Estados -->
       <div class="estados">
-        <i class="icono far fa-smile"       *ngIf="sentencia.reaccion != 'Me gusta'   " (click)="guardarFavorito  ( sentencia, 'Me gusta' )"></i>
-        <i class="icono fas fa-smile"       *ngIf="sentencia.reaccion == 'Me gusta'   " (click)="eliminarFavorito ( sentencia )"></i>
-        <i class="icono far fa-grin-hearts" *ngIf="sentencia.reaccion != 'Me encanta' " (click)="guardarFavorito  ( sentencia, 'Me encanta' )"></i>
-        <i class="icono fas fa-grin-hearts" *ngIf="sentencia.reaccion == 'Me encanta' " (click)="eliminarFavorito ( sentencia )"></i>
+        <i class="icono far fa-thumbs-up"   *ngIf="sentencia.reaccion != 'Me gusta'   " (click)="guardarFavorito  ( sentencia, 'Me gusta' )"></i>
+        <i class="icono fas fa-thumbs-up"   *ngIf="sentencia.reaccion == 'Me gusta'   " (click)="eliminarFavorito ( sentencia )"></i>
+        <i class="icono far fa-heart"       *ngIf="sentencia.reaccion != 'Me encanta' " (click)="guardarFavorito  ( sentencia, 'Me encanta' )"></i>
+        <i class="icono fas fa-heart"       *ngIf="sentencia.reaccion == 'Me encanta' " (click)="eliminarFavorito ( sentencia )"></i>
         <i class="icono far fa-grin-squint" *ngIf="sentencia.reaccion != 'Me divierte'" (click)="guardarFavorito  ( sentencia, 'Me divierte' )"></i>
         <i class="icono fas fa-grin-squint" *ngIf="sentencia.reaccion == 'Me divierte'" (click)="eliminarFavorito ( sentencia )"></i>
-        <i class="icono far fa-frown"       *ngIf="sentencia.reaccion != 'No me gusta'" (click)="guardarFavorito  ( sentencia, 'No me gusta' )"></i>
-        <i class="icono fas fa-frown"       *ngIf="sentencia.reaccion == 'No me gusta'" (click)="eliminarFavorito ( sentencia )"></i>
+        <i class="icono far fa-thumbs-down" *ngIf="sentencia.reaccion != 'No me gusta'" (click)="guardarFavorito  ( sentencia, 'No me gusta' )"></i>
+        <i class="icono fas fa-thumbs-down" *ngIf="sentencia.reaccion == 'No me gusta'" (click)="eliminarFavorito ( sentencia )"></i>
       </div>
 
       <!-- Compartir -->
       <i class="icono fa fa-paper-plane-o" aria-hidden="true" (click)="compartir( sentencia )"></i>
+
     </div>
   </div>
 </div>

@@ -15,6 +15,7 @@
       </a>
 
       <img class="pagina-rota" src="assets/img/pagina-rota.png" alt="">
+      
     </div>
 
     <!-- ────────────── -->
@@ -23,12 +24,16 @@
 
     <div class="contenedor">
 
+      <!-- Título y descripción -->
       <h1 class="titulo">{{ fecha.etiqueta }}</h1>
       <p class="descripcion">{{ fecha.descripcion | descripcionDefecto }}</p>
 
-      <app-sentencias [sentencias]="sentencias"></app-sentencias>
+      <!-- Sentencias -->
+      <h2 *ngIf="sentencias">Sentencias</h2>
+      <app-sentencias [sentencias]="sentencias" *ngIf="sentencias"></app-sentencias>
 
-      <app-otras-fechas [id]="idFechaURL"></app-otras-fechas>
+      <!-- Otras fechas -->
+      <app-otras-fechas [id]="idFechaURL" *ngIf="otrasFechas"></app-otras-fechas>
 
     </div>
 

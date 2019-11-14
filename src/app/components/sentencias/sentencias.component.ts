@@ -16,7 +16,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 })
 export class SentenciasComponent implements OnInit {
 
-  @Input() sentencias: Sentencia[] = [];
+  @Input() sentencias: Sentencia[];
 
   configuracion = {
     loop: true,
@@ -31,29 +31,32 @@ export class SentenciasComponent implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor(
-    private socialSharing: SocialSharing,
-    private servicioFavoritos: FavoritosService ) { }
+  constructor( private socialSharing: SocialSharing, private servicioFavoritos: FavoritosService ) {}
 
   ngOnInit() {
-
-    // Resaltamos las sentencias favoritas
-    setTimeout( () => {
-      this.sentencias.forEach( ( sentencia ) => {
-        sentencia.reaccion = this.servicioFavoritos.getReaccion( sentencia.id );
-        // console.log( sentencia.reaccion );
-      });
-    }, 500);
+    this.resaltarReacciones();
   }
 
   guardarFavorito( sentencia: Sentencia, reaccion: string ) {
-    this.servicioFavoritos.guardarFavoritos( sentencia, reaccion );
+
+    // Actualizamos la reacción de la sentencia dentro de la página
     sentencia.reaccion = reaccion;
+
+    const EXISTE = this.servicioFavoritos.existeFavorito( sentencia );
+
+    // Si no existe, se crea
+    if ( !EXISTE )
+      this.servicioFavoritos.crearFavorito( sentencia );
+      
+    // Si sí existe, se actualiza la rección
+    else
+      this.servicioFavoritos.actualizarFavorito( sentencia );
+
   }
 
   eliminarFavorito ( sentencia: Sentencia ) {
     sentencia.reaccion = '';
-    this.servicioFavoritos.eliminarFavorito( sentencia.id );
+    this.servicioFavoritos.eliminarFavorito( sentencia );
   }
 
   compartir( sentencia: Sentencia ) {
@@ -82,5 +85,15 @@ export class SentenciasComponent implements OnInit {
     }
 
     this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
+  }
+
+  // ──────────────── //
+  //     AUXILIAR     //
+  // ──────────────── //
+
+  resaltarReacciones() {
+    this.sentencias.forEach( ( sentencia ) => {
+      sentencia.reaccion = this.servicioFavoritos.getReaccion( sentencia.id );
+    });
   }
 }
