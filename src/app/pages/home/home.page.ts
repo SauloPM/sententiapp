@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 // Interfaces
 import { Fecha     } from '../../interfaces/fecha';
-import { Categoria } from 'src/app/interfaces/categoria';
+import { Categoria } from './../../interfaces/categoria';
 
 // Servicios
 import { FechasService } from '../../services/fechas.service';
@@ -22,11 +22,9 @@ export class HomePage implements OnInit {
 
   deviceID: number = 0;
   recuento: number = 0;
-
-  fechas    : Fecha[]     = [];
+  fechas: Fecha[]  = [];
   categorias: Categoria[] = [];
-
-  categoriaActiva: Categoria = { categoria: 'Todos' };
+  categoriaSeleccionada: string = 'Todos';
 
   configuracion = {
     spaceBetween: 0,
@@ -55,13 +53,13 @@ export class HomePage implements OnInit {
     this.getCategorias(); // Guardamos en una variable todas las categorías
 
     // Abrir buscador
-    $(document).on("click", ".buscador.cerrado", function() {
+    $(document).on('click', '.buscador.cerrado', function() {
 
 
-      if ($(".cierre").css("display") == "flex")
+      if ($('.cierre').css('display') == 'flex')
         return;
   
-      $(".buscador").removeClass("cerrado").addClass("abierto");
+      $('.buscador').removeClass('cerrado').addClass('abierto');
       
       $(".buscador").css('cursor', 'initial');
   
@@ -154,26 +152,19 @@ export class HomePage implements OnInit {
     }
   }
 
-  cambiarCategoria( categoriaSeleccionada: string ) {
+  cambiarCategoria( categoria: Categoria ) {
   
-    this.categoriaActiva.categoria = categoriaSeleccionada;
+    this.categoriaSeleccionada = categoria.categoria;
 
-    // Cuando se seleccione cualquier otra, solo se muestran las fechas que correspondan a la categoría seleccionada
-    this.servicioFechas.getFechasPorCategoria( categoriaSeleccionada ).subscribe( ( data ) => {
+    this.servicioFechas.getFechasPorCategoria( this.categoriaSeleccionada ).subscribe( data => {
       
-      this.fechas = data;
-      this.recuento = this.fechas.length;
+      this.fechas   = data;
+      this.recuento = data.length;
 
-      let fechaGenerica = this.fechas.find( item => item.id === 1 );
-        
-      // La fecha genérica se ha de poner al final a petición de Gregorio
-      if ( fechaGenerica ) {
-        this.fechas.shift();
-        this.fechas.push( fechaGenerica );
-      }
+      // La fecha genérica no debe aparecer al comienzo del listado, sino al final
+      this.colocarAlFinal( this.fechas.find( item => item.id === 1 ) );
 
     });
-
   }
 
   // ──────────────── //
@@ -181,22 +172,28 @@ export class HomePage implements OnInit {
   // ──────────────── //
   
   getFechas() {
-    this.servicioFechas.getFechas().subscribe( ( data ) => {
-      this.fechas = data;
-      this.recuento = this.fechas.length;
+    this.servicioFechas.getFechas().subscribe( resultado => {
+
+      this.fechas   = resultado;
+      this.recuento = resultado.length;
+
+      // La fecha genérica no debe aparecer al comienzo del listado, sino al final
+      this.colocarAlFinal( this.fechas.find( item => item.id === 1 ) );
+
     });
   }
 
   getCategorias() {
-    this.servicioFechas.getCategorias().subscribe( ( data ) => {
-      this.categorias =  data;
+    this.servicioFechas.getCategorias().subscribe( resultado => {
+      this.categorias = resultado;
       this.categorias.unshift({ categoria: 'Todos' });
     });
   }
+
+  colocarAlFinal( omnibusOccasionibus: Fecha ) {
+    if ( omnibusOccasionibus ) {
+      this.fechas.shift();
+      this.fechas.push( omnibusOccasionibus );
+    }
+  }
 }
-
-
-
-
-
-

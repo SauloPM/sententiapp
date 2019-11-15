@@ -36,14 +36,14 @@
 
             <!-- Filtro de categorías -->
             <ion-slides class="filtro" [options]="configuracion">
-              <ion-slide class="item" *ngFor="let categoria of categorias; index as i" [ngClass]="{ 'seleccionado' : i == 0 }" (click)="cambiarCategoria( categoria.categoria )">
+              <ion-slide class="item" *ngFor="let categoria of categorias; index as i" [ngClass]="{ 'seleccionado' : i == 0 }" (click)="cambiarCategoria( categoria )">
                 {{ categoria.categoria }}
               </ion-slide>
             </ion-slides>
 
             <!-- Fechas -->
             <small class="recuento">{{ recuento }} fecha(s)</small>
-            <a class="fecha" [routerLink]="['/informacion', fecha.id, categoriaActiva.categoria]" *ngFor="let fecha of fechas" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'">
+            <a class="fecha" [routerLink]="['/informacion', fecha.id, categoriaSeleccionada]" *ngFor="let fecha of fechas" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'">
               <div class="imagen" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'"></div>
               <div>
                 <div class="etiqueta">{{ fecha.etiqueta }}</div>
@@ -52,8 +52,6 @@
             </a>
 
           </div>
-
-          
         </div>
       </div>
       
