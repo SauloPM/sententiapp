@@ -56,7 +56,7 @@ export class SentenciasComponent implements OnInit {
     else
       this.servicioFavoritos.actualizarFavorito( sentencia );
 
-    // Refrescamos
+    // Refrescamos (solo en la página de favoritos)
     this.favoritoSeleccionado.emit( this.sentencias );
   }
 
@@ -65,7 +65,7 @@ export class SentenciasComponent implements OnInit {
     sentencia.reaccion = '';
     this.servicioFavoritos.eliminarFavorito( sentencia );
 
-    // Refrescamos
+    // Refrescamos (solo en la página de favoritos)
     this.favoritoSeleccionado.emit( this.sentencias );
 
   }
