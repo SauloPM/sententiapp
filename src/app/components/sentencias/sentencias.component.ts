@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 // Servicios
 import { FavoritosService } from '../../services/favoritos.service';
@@ -18,6 +18,8 @@ export class SentenciasComponent implements OnInit {
 
   @Input() sentencias: Sentencia[];
 
+  @Output() favoritoSeleccionado: EventEmitter<Sentencia[]>;
+
   configuracion = {
     loop: true,
     spaceBetween: 0,
@@ -31,7 +33,9 @@ export class SentenciasComponent implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private socialSharing: SocialSharing, private servicioFavoritos: FavoritosService ) {}
+  constructor( private socialSharing: SocialSharing, private servicioFavoritos: FavoritosService ) {
+    this.favoritoSeleccionado = new EventEmitter();
+  }
 
   ngOnInit() {
     this.resaltarReacciones();
@@ -52,11 +56,18 @@ export class SentenciasComponent implements OnInit {
     else
       this.servicioFavoritos.actualizarFavorito( sentencia );
 
+    // Refrescamos
+    this.favoritoSeleccionado.emit( this.sentencias );
   }
 
   eliminarFavorito ( sentencia: Sentencia ) {
+
     sentencia.reaccion = '';
     this.servicioFavoritos.eliminarFavorito( sentencia );
+
+    // Refrescamos
+    this.favoritoSeleccionado.emit( this.sentencias );
+
   }
 
   compartir( sentencia: Sentencia ) {

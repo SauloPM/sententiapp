@@ -17,12 +17,12 @@
       </ion-slides>
 
       <!-- Listado de sentencias -->
-      <div class="sentencias" *ngIf="favoritos.length > 0">
-        <app-sentencias-favoritas [sentencias]="favoritos" (favoritoSeleccionado)="actualizarFavoritos( $event )"></app-sentencias-favoritas>
+      <div class="favoritos" *ngIf="favoritos">
+        <app-sentencias [sentencias]="favoritos" *ngIf="favoritos" (favoritoSeleccionado)="actualizarFavoritos( $event )"></app-sentencias>
       </div>
 
       <!-- Mensaje de notificación cuando no existen sentencias favoritas -->
-      <div class="sin-favoritos" *ngIf="favoritos.length === 0">
+      <div class="sin-favoritos" *ngIf="!favoritos">
         No se ha encontrado ninguna sentencia
       </div>
 

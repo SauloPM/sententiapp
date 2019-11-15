@@ -3,14 +3,14 @@ $text        : rgb(50,50,50);
 $primary     : rgb(225,165,075);
 $darkprimary : rgb(175,115,025);
 $lightprimary: rgb(255,195,105);
-$ligthgray   : rgb(225,225,225);
+$lightgray   : rgb(225,225,225);
 
 // Dimensiones
 $mobile: 468px;
 $tablet: 768px;
 
 .sentencia {
-    border: 1px solid $ligthgray;
+    border: 1px solid $lightgray;
     border-radius: 2px;
     outline: none;
     padding: 15px 25px;
@@ -32,7 +32,7 @@ $tablet: 768px;
         padding: 0 5px;
 
         .idioma {
-            color: $ligthgray;
+            color: $lightgray;
             font-weight: normal;
             white-space: nowrap;
         }
@@ -41,7 +41,7 @@ $tablet: 768px;
     // Flechas
 
     .flecha {
-        color: $ligthgray;
+        color: $lightgray;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -62,7 +62,7 @@ $tablet: 768px;
         align-items: center;
         justify-content: space-between;
         color: $primary;
-        border-top: 1px solid $ligthgray;
+        border-top: 1px solid $lightgray;
         padding: 10px 5px 0;
         margin-top: 7px;
 
@@ -114,7 +114,7 @@ $tablet: 768px;
         &::after {
             content: '';
             display: inline-block;
-            background: $ligthgray;
+            background: $lightgray;
             width: 1px;
             height: 10px;
         }

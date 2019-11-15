@@ -13,7 +13,7 @@ declare var $: any;
 })
 export class FavoritosPage implements OnInit {
 
-  favoritos : Sentencia[] = [];
+  favoritos : Sentencia[];
   reacciones: string   [] = [ 'Todos', 'Me gusta', 'Me encanta', 'Me divierte', 'No me gusta' ];
 
   reaccionSeleccionada: string = 'Todos';
@@ -44,6 +44,7 @@ export class FavoritosPage implements OnInit {
       $('.filtro .item.seleccionado').removeClass('seleccionado');
       $(this).addClass('seleccionado');
     });
+    
   }
 
   cambiarReaccion( reaccion: string ) {
