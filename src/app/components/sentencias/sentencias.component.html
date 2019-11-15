@@ -6,10 +6,10 @@
       {{ sentencia.extractolatino }}
     </ion-slide>
     <ion-slide class="extracto" *ngIf="sentencia.extractoespanol.length">
-      <span>{{ sentencia.extractoespanol }}&nbsp;<b class="idioma">[ es ]</b></span>
+      <span>{{ sentencia.extractoespanol }}</span>
     </ion-slide>
     <ion-slide class="extracto" *ngIf="sentencia.extractoingles.length">
-      <span>{{ sentencia.extractoingles }}&nbsp;<b class="idioma">[ en ]</b></span>
+      <span>{{ sentencia.extractoingles }}</span>
     </ion-slide>
   </ion-slides>
 
