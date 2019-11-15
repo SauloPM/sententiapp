@@ -1,7 +1,11 @@
 import { Sentencia } from './../../interfaces/sentencia';
 import { Component, OnInit } from '@angular/core';
 
+// Interfaces
+import { Fecha } from 'src/app/interfaces/fecha';
+
 // Servicios
+import { FechasService    } from './../../services/fechas.service';
 import { FavoritosService } from '../../services/favoritos.service';
 
 // jQuery
@@ -12,6 +16,8 @@ declare var $: any;
   templateUrl: './favoritos.page.html'
 })
 export class FavoritosPage implements OnInit {
+
+  fechas: Fecha[];
 
   favoritos : Sentencia[];
   reacciones: string   [] = [ 'Todos', 'Me gusta', 'Me encanta', 'Me divierte', 'No me gusta' ];
@@ -31,9 +37,14 @@ export class FavoritosPage implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( public servicioFavoritos: FavoritosService ) {}
+  constructor( private servicioFechas: FechasService, public servicioFavoritos: FavoritosService ) {}
   
   ngOnInit() {
+
+    // Obtenemos todas las fechas menos la actual
+    this.servicioFechas.getFechas().subscribe( data => {
+      this.fechas = data;
+    });
 
     setTimeout( () => {
       this.favoritos = this.servicioFavoritos.favoritos;
@@ -44,7 +55,7 @@ export class FavoritosPage implements OnInit {
       $('.filtro .item.seleccionado').removeClass('seleccionado');
       $(this).addClass('seleccionado');
     });
-    
+
   }
 
   cambiarReaccion( reaccion: string ) {

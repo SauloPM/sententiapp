@@ -36,9 +36,7 @@ export class InformacionPage implements OnInit {
 
   ngOnInit() {
 
-    this.getFechas(); // Guardamos en una variable todas las fechas
-
-    this.getSentencias(); // Guardamos en una variable los datos de la fecha actual y en otra las sentencias    
+    this.getDatos(); // Guardamos en una variable los datos de la fecha actual y en otra las sentencias    
 
   }
 
@@ -51,15 +49,10 @@ export class InformacionPage implements OnInit {
   //     AUXILIAR     //
   // ──────────────── //
 
-  getFechas() {
-    this.servicioFechas.getFechas().subscribe( ( data: Fecha[]) => {
-      this.otrasFechas = data;
-    });
-  }
-
-  getSentencias() {
+  getDatos() {
     this.activatedRoute.params.subscribe( parametrosURL => {
 
+      // Almacenamos los parámetros de la URL
       this.id        = parametrosURL.id;
       this.categoria = parametrosURL.categoria;
 
@@ -73,6 +66,10 @@ export class InformacionPage implements OnInit {
         this.sentencias = this.categoria === 'Todos' ? data : data.filter ( item => item.categoria === this.categoria );
       });
 
+      // Obtenemos todas las fechas menos la actual
+      this.servicioFechas.getFechas().subscribe( data => {
+        this.otrasFechas = data.filter( item => item.id != this.id ); // Si cambias != por !== no funcionará porque this.id o parametrosURL.id son de tipo string, aunque this.id fuera declarado como int
+      });
     });
   }
 }

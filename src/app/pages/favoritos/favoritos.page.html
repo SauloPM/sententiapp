@@ -16,15 +16,16 @@
         </ion-slide>
       </ion-slides>
 
-      <!-- Listado de sentencias -->
-      <div class="favoritos" *ngIf="favoritos">
-        <app-sentencias [sentencias]="favoritos" *ngIf="favoritos" (favoritoSeleccionado)="actualizarFavoritos( $event )"></app-sentencias>
-      </div>
+      <!-- Sentencias -->
+      <app-sentencias [sentencias]="favoritos" *ngIf="favoritos" (favoritoSeleccionado)="actualizarFavoritos( $event )"></app-sentencias>
 
       <!-- Mensaje de notificación cuando no existen sentencias favoritas -->
       <div class="sin-favoritos" *ngIf="!favoritos">
         No se ha encontrado ninguna sentencia
       </div>
+
+      <!-- Otras fechas -->
+      <app-otras-fechas [fechas]="fechas" *ngIf="fechas"></app-otras-fechas>
 
     </div>
 

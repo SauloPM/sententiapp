@@ -1,7 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-
-// Servicios
-import { FechasService  } from '../../services/fechas.service';
+import { Component, Input } from '@angular/core';
 
 // Interfaces
 import { Fecha } from '../../interfaces/fecha';
@@ -11,18 +8,15 @@ import { Fecha } from '../../interfaces/fecha';
   templateUrl: './otras-fechas.component.html',
   styleUrls: ['./otras-fechas.component.scss'],
 })
-export class OtrasFechasComponent implements OnInit {
+export class OtrasFechasComponent {
 
-  @Input() id: number;
-
-  fechas: Fecha[] = [];
+  @Input() fechas: Fecha[];
 
   // Configuración del carrusel
   opcionesSlider = {
     pagination: false,
     spaceBetween: 5,
     slidesPerView: 5,
-    loop: true,
     autoplay: {
       delay: 5000,
     },
@@ -31,21 +25,8 @@ export class OtrasFechasComponent implements OnInit {
         slidesPerView: 3,
       }
     }
-  }
+  };
 
-  // ─────────────── //
-  //     MÉTODOS     //
-  // ─────────────── //
-
-  constructor( private servicioFechas: FechasService ) { }
-
-  ngOnInit() {
-
-    // Guardamos en una variable todas las fechas
-    this.servicioFechas.getFechas().subscribe( ( data: Fecha[]) => {
-      this.fechas = data;
-    });
-
-  }
+  constructor() {}
 
 }
