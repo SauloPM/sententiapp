@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-const url = 'http://sententiapp.iatext.ulpgc.es/img/fechas/';
+const url = 'https://sententiapp.iatext.ulpgc.es/img/fechas/';
 
 @Pipe({
   name: 'imagenDefecto'
@@ -8,6 +8,6 @@ const url = 'http://sententiapp.iatext.ulpgc.es/img/fechas/';
 export class ImagenDefectoPipe implements PipeTransform {
 
   transform( imagen: string ): string {
-    return imagen == '/img/fechas/default.jpg' ? './assets/img/default-image.jpg' : `${ url }${ imagen }`;
+    return imagen === 'default.jpg' ? './assets/img/default.jpg' : `${ url }${ imagen }`;
   }
 }
