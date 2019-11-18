@@ -1,0 +1,20 @@
+<div #menu id="menu" [attr.data-estado]="estado">
+  <div #itemsMenu class="items">
+    <div class="item">
+      <span #texto class="texto">Inicio</span>
+      <a [routerLink]="['/home']" class="enlace">
+        <i class="icono fa fa-home"></i>
+      </a>
+    </div>
+    <div class="item">
+      <span #texto class="texto">Mis sentencias</span>
+      <a [routerLink]="['/favoritos']" class="enlace">
+        <i class="icono fa fa-star"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div #botonMenu class="boton" (click)="abrirMenu()">
+  <i class="icono fa fa-plus"></i>
+</div>

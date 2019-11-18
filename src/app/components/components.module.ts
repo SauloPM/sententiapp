@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 // Componentes
+import { MenuComponent        } from './menu/menu.component';
 import { FooterComponent      } from './footer/footer.component';
 import { BottombarComponent   } from './bottombar/bottombar.component';
 import { SentenciasComponent  } from './sentencias/sentencias.component';
@@ -16,6 +17,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @NgModule({
   declarations: [
+    MenuComponent,
     FooterComponent,
     BottombarComponent,
     SentenciasComponent,
@@ -27,6 +29,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
     PipesModule
   ],
   exports: [
+    MenuComponent,
     FooterComponent,
     BottombarComponent,
     SentenciasComponent,

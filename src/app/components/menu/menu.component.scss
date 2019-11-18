@@ -1,0 +1,120 @@
+// Colores
+$text        : rgb(50,50,50);
+$primary     : rgb(225,165,075);
+$darkprimary : rgb(175,115,025);
+$lightprimary: rgb(255,195,105);
+$lightgray   : rgb(225,225,225);
+
+// Dimensiones
+$mobile: 468px;
+$tablet: 768px;
+
+.boton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $primary;
+    border-radius: 50%;
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    z-index: 75;
+    width: 60px;
+    height: 60px;
+    transition: .1s;
+
+    .icono {
+        color: white;
+        font-size: 18px;
+    }
+
+    &:active,
+    &.abierto {
+        background: $darkprimary;
+        transform: rotate(-45deg);
+    }
+}
+
+#menu {
+    background: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: background-color .25s;
+    
+    .items {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: column;
+        position: absolute;
+        bottom: 75px;
+        width: 60px;
+        transition: .25s ease-out;
+        
+        .item {
+            margin-bottom: 30px;
+            position: relative;
+
+            .texto {
+                color: white;
+                font-size: 12px;
+                background: $text;
+                border-radius: 2px;
+                white-space: nowrap;
+                padding: 2px 10px;
+                position: absolute;
+                top: 50%;
+                right: 50px;
+                transform: translateY(-50%);
+                transition: .25s;
+                opacity: 0;
+
+                &::after {
+                    content: '';
+                    background: $text;
+                    width: 10px;
+                    height: 10px;
+                    position: absolute;
+                    top: 50%;
+                    right: -2px;
+                    transform: translateY(-50%) rotate(45deg);
+                }
+            }
+
+            .enlace {
+                text-decoration: none;
+
+                .icono {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    text-decoration: none;
+                    background: $lightprimary;
+                    border-radius: 50%;
+                    outline: none;
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+
+        }
+    }
+
+    &[data-estado='abierto'] {
+
+        .items {
+            right: 15px;
+        }
+    }
+
+    &[data-estado='cerrado'] {
+
+        .items {
+            right: -60px;
+        }
+    }
+}
