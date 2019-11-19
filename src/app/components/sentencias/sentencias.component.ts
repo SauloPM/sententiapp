@@ -72,23 +72,25 @@ export class SentenciasComponent implements OnInit {
 
   compartir( sentencia: Sentencia ) {
 
+    console.log( sentencia );
+
     let extracto = sentencia.extractoespanol;
-    let extractosActivos = document.getElementsByClassName('swiper-slide-active');
+    let extractosActivos = document.getElementsByClassName('extracto swiper-slide-active');
 
     // Detectamos qué traducción del extraco se desea compartir
     for (let i = 0; i < extractosActivos.length - 1 ; i++) {
       
-      if ( extractosActivos[i].innerHTML.trim() === sentencia.extractolatino.trim() ) {
+      if ( extractosActivos[i].textContent.trim() === sentencia.extractolatino.trim() ) {
         extracto = sentencia.extractolatino;
         break;
       }
 
-      if ( extractosActivos[i].innerHTML.trim() === sentencia.extractoespanol.trim() ) {
+      if ( extractosActivos[i].textContent.trim() === sentencia.extractoespanol.trim() ) {
         extracto = sentencia.extractoespanol;
         break;
       }
 
-      if ( extractosActivos[i].innerHTML.trim() === sentencia.extractoingles.trim() ) {
+      if ( extractosActivos[i].textContent.trim() === sentencia.extractoingles.trim() ) {
         extracto = sentencia.extractoingles;
         break;
       }
