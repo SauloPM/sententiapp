@@ -6,7 +6,7 @@ import { Fecha } from 'src/app/interfaces/fecha';
 
 // Servicios
 import { FechasService    } from './../../services/fechas.service';
-import { FavoritosService } from '../../services/favoritos.service';
+import { FavoritosService } from './../../services/favoritos.service';
 
 // jQuery
 declare var $: any;
@@ -18,10 +18,9 @@ declare var $: any;
 export class FavoritosPage implements OnInit {
 
   fechas: Fecha[];
-
+  vacio: boolean = true;
   favoritos : Sentencia[];
-  reacciones: string   [] = [ 'Todos', 'Me gusta', 'Me encanta', 'Me divierte', 'No me gusta' ];
-
+  reacciones: string[] = [ 'Todos', 'Me gusta', 'Me encanta', 'Me divierte', 'No me gusta' ];
   reaccionSeleccionada: string = 'Todos';
 
   configuracion = {
@@ -41,13 +40,14 @@ export class FavoritosPage implements OnInit {
   
   ngOnInit() {
 
-    // Obtenemos todas las fechas menos la actual
+    // Obtenemos todas las fechas
     this.servicioFechas.getFechas().subscribe( data => {
       this.fechas = data;
     });
 
     setTimeout( () => {
       this.favoritos = this.servicioFavoritos.favoritos;
+      this.vacio = this.favoritos === undefined ? true : this.favoritos.length === 0 ? true : false;
     }, 500);
 
     // Seleccionar categoría del filtro
@@ -61,9 +61,11 @@ export class FavoritosPage implements OnInit {
   cambiarReaccion( reaccion: string ) {
     this.reaccionSeleccionada = reaccion;
     this.favoritos = reaccion === 'Todos' ? this.servicioFavoritos.favoritos : this.servicioFavoritos.favoritos.filter( item => item.reaccion === reaccion );
+    this.vacio = this.favoritos === undefined ? true : this.favoritos.length === 0 ? true : false;
   }
 
   actualizarFavoritos() {
     this.favoritos = this.reaccionSeleccionada === 'Todos' ? this.servicioFavoritos.favoritos : this.servicioFavoritos.favoritos.filter( item => item.reaccion === this.reaccionSeleccionada )
+    this.vacio = this.favoritos === undefined ? true : this.favoritos.length === 0 ? true : false;
   }
 }

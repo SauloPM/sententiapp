@@ -5,7 +5,7 @@
     <!--     CUERPO     -->
     <!-- ────────────── -->
 
-    <div class="contenedor">
+    <div class="contenedor pb-0">
 
       <h1 class="titulo">Mis sentencias</h1>
       
@@ -17,23 +17,25 @@
       </ion-slides>
 
       <!-- Sentencias -->
-      <app-sentencias [sentencias]="favoritos" *ngIf="favoritos" (favoritoSeleccionado)="actualizarFavoritos( $event )"></app-sentencias>
+      <app-sentencias [sentencias]="favoritos" *ngIf="!vacio" (favoritoSeleccionado)="actualizarFavoritos( $event )"></app-sentencias>
 
       <!-- Mensaje de notificación cuando no existen sentencias favoritas -->
-      <div class="sin-favoritos" *ngIf="!favoritos">
+      <div class="sin-favoritos" *ngIf="vacio">
         No se ha encontrado ninguna sentencia
       </div>
 
-      <!-- Otras fechas -->
-      <app-otras-fechas [fechas]="fechas" *ngIf="fechas"></app-otras-fechas>
-
     </div>
-
+    
     <!-- ────────────── -->
     <!--     FOOTER     -->
     <!-- ────────────── -->
-
+    
     <div>
+
+      <!-- Otras fechas -->
+      <div class="contenedor pt-0">
+        <app-otras-fechas [fechas]="fechas" *ngIf="fechas"></app-otras-fechas>
+      </div>
 
       <img class="pagina-rota" src="assets/img/pagina-rota.png" alt="">
       <app-footer [color]="'negro'"></app-footer>
