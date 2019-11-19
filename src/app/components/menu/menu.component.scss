@@ -30,7 +30,7 @@ $tablet: 768px;
 
     &:active,
     &.abierto {
-        background: $darkprimary;
+        box-shadow: inset 5px 5px 10px $darkprimary;
         transform: rotate(-45deg);
     }
 }
@@ -42,6 +42,7 @@ $tablet: 768px;
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: -1;
     transition: background-color .25s;
     
     .items {
@@ -98,9 +99,13 @@ $tablet: 768px;
                     outline: none;
                     width: 40px;
                     height: 40px;
+                    transition: .1s;
+
+                    &:active {
+                        box-shadow: inset 5px 5px 10px $darkprimary;
+                    }
                 }
             }
-
         }
     }
 
