@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 // Componentes
 import { MenuComponent        } from './menu/menu.component';
 import { FooterComponent      } from './footer/footer.component';
-import { BottombarComponent   } from './bottombar/bottombar.component';
 import { SentenciasComponent  } from './sentencias/sentencias.component';
 import { OtrasFechasComponent } from './otras-fechas/otras-fechas.component';
 
@@ -19,7 +18,6 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
   declarations: [
     MenuComponent,
     FooterComponent,
-    BottombarComponent,
     SentenciasComponent,
     OtrasFechasComponent
   ],
@@ -31,7 +29,6 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
   exports: [
     MenuComponent,
     FooterComponent,
-    BottombarComponent,
     SentenciasComponent,
     OtrasFechasComponent
   ],
