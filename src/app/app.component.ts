@@ -1,9 +1,13 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
-import { PushService } from './services/push.service';
 
-import { Platform     } from '@ionic/angular';
+import { Router } from '@angular/router';
+
+import { Platform } from '@ionic/angular';
+
 import { StatusBar    } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+
+import { PushService } from './services/push.service';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +18,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   backButtonSubscription;
 
   constructor(
+    public router: Router,
     private platform: Platform,
-    private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private pushService: PushService
+    private pushService: PushService,
+    private splashScreen: SplashScreen
   ) {
     this.initializeApp();
   }

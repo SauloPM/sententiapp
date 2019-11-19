@@ -2,6 +2,6 @@
 
   <ion-router-outlet></ion-router-outlet>
 
-  <app-menu></app-menu>
+  <app-menu *ngIf="!router.url.includes('warning')"></app-menu>
 
 </ion-app>
