@@ -53,12 +53,18 @@ export class InformacionPage implements OnInit {
     this.activatedRoute.params.subscribe( parametrosURL => {
 
       // Almacenamos los parámetros de la URL
-      this.id        = parametrosURL.id;
+      this.id        = parseInt(parametrosURL.id, 10);
       this.categoria = parametrosURL.categoria;
 
       // Obtenemos el título y la descripción de la fecha actual
       this.servicioFechas.getDatosFecha( parametrosURL.id ).subscribe( data => {
+
         this.fecha = data[0];
+        
+        if ( this.id === 1 ) {
+          this.fecha.descripcion = 'Sentencias latinas para diferentes circunstancias sin una fecha determinada asociada.';
+        }
+
       });
 
       // Obtenemos las sentencias de la fecha actual
@@ -68,7 +74,7 @@ export class InformacionPage implements OnInit {
 
       // Obtenemos todas las fechas menos la actual
       this.servicioFechas.getFechas().subscribe( data => {
-        this.otrasFechas = data.filter( item => item.id != this.id ); // Si cambias != por !== no funcionará porque this.id o parametrosURL.id son de tipo string, aunque this.id fuera declarado como int
+        this.otrasFechas = data.filter( item => item.id !== this.id );
       });
     });
   }
