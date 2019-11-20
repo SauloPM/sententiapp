@@ -168,9 +168,41 @@ p {
     
     .texto {
         color: $primary;
+        text-align: justify;
+        text-align-last: center;
         margin: 0 auto;
         width: 100%;
-        max-width: 300px;
+        max-width: 295px;
+    }
+
+    .notificacion {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: justify;
+        border: 1px solid $primary;
+        border-radius: 2px;
+        padding: 10px 20px 10px 0;
+        margin: 25px auto 0;
+        width: 100%;
+        position: relative;
+
+        .icono {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $primary;
+            font-size: 20px;
+            width: 70px;
+            height: 100%;
+
+        }
+
+        .texto {
+            line-height: 20px;
+            text-align: left;
+            text-align-last: left;
+        }
     }
 
     .boton {
