@@ -72,13 +72,11 @@ export class SentenciasComponent implements OnInit {
 
   compartir( sentencia: Sentencia ) {
 
-    console.log( sentencia );
-
-    let extracto = sentencia.extractoespanol;
+    let extracto = sentencia.extractolatino;
     let extractosActivos = document.getElementsByClassName('extracto swiper-slide-active');
 
     // Detectamos qué traducción del extraco se desea compartir
-    for (let i = 0; i < extractosActivos.length - 1 ; i++) {
+    for (let i = 0; i < extractosActivos.length ; i++) {
       
       if ( extractosActivos[i].textContent.trim() === sentencia.extractolatino.trim() ) {
         extracto = sentencia.extractolatino;
@@ -94,10 +92,10 @@ export class SentenciasComponent implements OnInit {
         extracto = sentencia.extractoingles;
         break;
       }
-
     }
 
-    this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
+    this.socialSharing.share(
+      `« ${ extracto } »\n- ${ sentencia.autor }\n`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
   }
 
   // ──────────────── //
