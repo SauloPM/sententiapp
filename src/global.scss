@@ -103,6 +103,10 @@ p {
 .pt-0 { padding-top:    0 !important }
 .pb-0 { padding-bottom: 0 !important }
 
+// Margin
+
+.mr-15 { margin-right: 15px !important }
+
 // Filtro
     
 .filtro {
@@ -374,7 +378,6 @@ p {
         background-position: center;
         text-decoration: none;
         border-radius: 2px;
-        border: 1px solid $lightgray;
         outline: none;
         padding: 15px 25px;
         margin-bottom: 15px;

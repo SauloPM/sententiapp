@@ -6,6 +6,12 @@ import { Sentencia } from '../interfaces/sentencia';
 // BD local
 import { Storage } from '@ionic/storage';
 
+// Peticiones HTTP
+import { HttpClient } from '@angular/common/http';
+
+// Operadores RXJS
+import { map } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,21 +19,44 @@ export class FavoritosService {
 
   favoritos: Sentencia[] = [];
 
+  private url = 'https://sententiapp-889ef.firebaseio.com';
+
   // ─────────────── //
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private storage: Storage ) {
+  constructor( private http: HttpClient, private storage: Storage ) {
     this.cargarFavoritos();
   }
 
-  crearFavorito( sentencia: Sentencia ) {
+  crearFavorito( sentencia: Sentencia, deviceID: string ) {
 
     // Insertamos la sentencia al comienzo de la variable
-    this.favoritos.unshift( sentencia );
+    // this.favoritos.unshift( sentencia );
 
     // Sobreescribimos el campo de favoritos del local storage, ahora actualizado
-    this.storage.set( 'favoritos', this.favoritos );
+    // this.storage.set( 'favoritos', this.favoritos );
+
+    let temp = {
+      id: sentencia.id,
+      estados: {
+        meGusta: [],
+        meEncanta: [],
+        meDivierte: [],
+        noMeGusta: []
+      }
+    };
+
+    temp.estados.meDivierte.push( deviceID );
+
+    // temp.estados.reaccion.push( deviceID );
+
+    return this.http.post( `${ this.url }/sentencias/${ temp.id }/${ sentencia.reaccion }.json`, '2019' ); /*.pipe(
+      map( ( data: any ) => {
+        palabra.id = data.name;
+        return palabra;
+      })
+    );*/
 
   }
 

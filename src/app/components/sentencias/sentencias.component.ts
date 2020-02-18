@@ -9,6 +9,9 @@ import { Sentencia } from '../../interfaces/sentencia';
 // Compartir en RRSS
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
+// Obtener ID único del dispositivo
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+
 @Component({
   selector: 'app-sentencias',
   templateUrl: './sentencias.component.html',
@@ -19,6 +22,8 @@ export class SentenciasComponent implements OnInit {
   @Input() sentencias: Sentencia[];
 
   @Output() favoritoSeleccionado: EventEmitter<Sentencia[]>;
+
+  deviceID: string = '74a1eb27';
 
   configuracion = {
     loop: true,
@@ -33,12 +38,21 @@ export class SentenciasComponent implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private socialSharing: SocialSharing, private servicioFavoritos: FavoritosService ) {
+  constructor( private socialSharing: SocialSharing, private servicioFavoritos: FavoritosService, private uniqueDeviceID: UniqueDeviceID ) {
     this.favoritoSeleccionado = new EventEmitter();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
     this.resaltarReacciones();
+
+    await this.uniqueDeviceID.get()
+      .then (( uuid : any ) => { 
+        this.deviceID = uuid;
+        console.log( 'ID único del dispositivo » ' + uuid );
+      })
+      .catch(( error: any ) => console.log( error ));
+
   }
 
   guardarFavorito( sentencia: Sentencia, reaccion: string ) {
@@ -46,18 +60,28 @@ export class SentenciasComponent implements OnInit {
     // Actualizamos la reacción de la sentencia dentro de la página
     sentencia.reaccion = reaccion;
 
-    const EXISTE = this.servicioFavoritos.existeFavorito( sentencia );
+    // const EXISTE = this.servicioFavoritos.existeFavorito( sentencia );
 
     // Si no existe, se crea
-    if ( !EXISTE )
-      this.servicioFavoritos.crearFavorito( sentencia );
+    // if ( !EXISTE )
+      // this.servicioFavoritos.crearFavorito( sentencia, this.deviceID );
       
     // Si sí existe, se actualiza la rección
-    else
-      this.servicioFavoritos.actualizarFavorito( sentencia );
+    // else
+    //   this.servicioFavoritos.actualizarFavorito( sentencia );
 
     // Refrescamos (solo en la página de favoritos)
-    this.favoritoSeleccionado.emit( this.sentencias );
+    // this.favoritoSeleccionado.emit( this.sentencias );
+
+    this.servicioFavoritos.crearFavorito( sentencia, this.deviceID ).subscribe(
+      respuesta => {
+        console.log( respuesta );
+      },
+      error => {
+        console.log( error );
+      }
+    );
+
   }
 
   eliminarFavorito ( sentencia: Sentencia ) {
