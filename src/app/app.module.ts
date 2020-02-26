@@ -24,6 +24,14 @@ import { IonicStorageModule } from '@ionic/storage';
 // Get Device ID
 import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 
+// Firebase
+import { firebaseConfiguration     } from "../environments/firebase-configuration";
+import { AngularFireModule         } from "@angular/fire";
+import { AngularFireAuthModule     } from "@angular/fire/auth";
+import { AngularFirestoreModule    } from "@angular/fire/firestore";
+import { AngularFireStorageModule  } from "@angular/fire/storage";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
+
 @NgModule({
   declarations: [
     AppComponent
@@ -31,11 +39,18 @@ import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    HttpClientModule,
     ComponentsModule,
-    IonicStorageModule.forRoot()
+    HttpClientModule,
+    IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
+
+    // Firebase
+    AppRoutingModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp( firebaseConfiguration )
   ],
   providers: [
     StatusBar,
