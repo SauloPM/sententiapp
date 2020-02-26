@@ -8,9 +8,6 @@ import { Categoria } from './../../interfaces/categoria';
 // Servicios
 import { FechasService } from '../../services/fechas.service';
 
-// Get Device ID
-import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
-
 // jQuery
 declare var $: any;
 

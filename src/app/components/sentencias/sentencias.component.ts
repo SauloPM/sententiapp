@@ -9,6 +9,9 @@ import { Sentencia } from '../../interfaces/sentencia';
 // Compartir en RRSS
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
+// Get Device ID
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+
 @Component({
   selector: 'app-sentencias',
   templateUrl: './sentencias.component.html',
@@ -33,7 +36,7 @@ export class SentenciasComponent implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private socialSharing: SocialSharing, private servicioFavoritos: FavoritosService ) {
+  constructor( private socialSharing: SocialSharing, private servicioFavoritos: FavoritosService, private uniqueDeviceID: UniqueDeviceID ) {
     this.favoritoSeleccionado = new EventEmitter();
   }
 
@@ -42,6 +45,10 @@ export class SentenciasComponent implements OnInit {
   }
 
   guardarFavorito( sentencia: Sentencia, reaccion: string ) {
+
+    this.uniqueDeviceID.get()
+      .then (( uuid : any ) => console.log( uuid  ))
+      .catch(( error: any ) => console.log( error ));
 
     // Actualizamos la reacción de la sentencia dentro de la página
     sentencia.reaccion = reaccion;
