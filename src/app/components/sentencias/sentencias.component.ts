@@ -9,7 +9,7 @@ import { Sentencia } from '../../interfaces/sentencia';
 // Compartir en RRSS
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
-// Get Device ID
+// Obtener ID único del dispositivo
 import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 
 @Component({
@@ -22,6 +22,8 @@ export class SentenciasComponent implements OnInit {
   @Input() sentencias: Sentencia[];
 
   @Output() favoritoSeleccionado: EventEmitter<Sentencia[]>;
+
+  deviceID: string = '74a1eb27';
 
   configuracion = {
     loop: true,
@@ -40,8 +42,17 @@ export class SentenciasComponent implements OnInit {
     this.favoritoSeleccionado = new EventEmitter();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
     this.resaltarReacciones();
+
+    await this.uniqueDeviceID.get()
+      .then (( uuid : any ) => { 
+        this.deviceID = uuid;
+        console.log( 'ID único del dispositivo » ' + uuid );
+      })
+      .catch(( error: any ) => console.log( error ));
+
   }
 
   guardarFavorito( sentencia: Sentencia, reaccion: string ) {
@@ -53,18 +64,28 @@ export class SentenciasComponent implements OnInit {
     // Actualizamos la reacción de la sentencia dentro de la página
     sentencia.reaccion = reaccion;
 
-    const EXISTE = this.servicioFavoritos.existeFavorito( sentencia );
+    // const EXISTE = this.servicioFavoritos.existeFavorito( sentencia );
 
     // Si no existe, se crea
-    if ( !EXISTE )
-      this.servicioFavoritos.crearFavorito( sentencia );
+    // if ( !EXISTE )
+      // this.servicioFavoritos.crearFavorito( sentencia, this.deviceID );
       
     // Si sí existe, se actualiza la rección
-    else
-      this.servicioFavoritos.actualizarFavorito( sentencia );
+    // else
+    //   this.servicioFavoritos.actualizarFavorito( sentencia );
 
     // Refrescamos (solo en la página de favoritos)
-    this.favoritoSeleccionado.emit( this.sentencias );
+    // this.favoritoSeleccionado.emit( this.sentencias );
+
+    this.servicioFavoritos.crearFavorito( sentencia, this.deviceID ).subscribe(
+      respuesta => {
+        console.log( respuesta );
+      },
+      error => {
+        console.log( error );
+      }
+    );
+
   }
 
   eliminarFavorito ( sentencia: Sentencia ) {
@@ -79,13 +100,11 @@ export class SentenciasComponent implements OnInit {
 
   compartir( sentencia: Sentencia ) {
 
-    console.log( sentencia );
-
-    let extracto = sentencia.extractoespanol;
+    let extracto = sentencia.extractolatino;
     let extractosActivos = document.getElementsByClassName('extracto swiper-slide-active');
 
     // Detectamos qué traducción del extraco se desea compartir
-    for (let i = 0; i < extractosActivos.length - 1 ; i++) {
+    for (let i = 0; i < extractosActivos.length ; i++) {
       
       if ( extractosActivos[i].textContent.trim() === sentencia.extractolatino.trim() ) {
         extracto = sentencia.extractolatino;
@@ -101,10 +120,10 @@ export class SentenciasComponent implements OnInit {
         extracto = sentencia.extractoingles;
         break;
       }
-
     }
 
-    this.socialSharing.share(`« ${ extracto } »`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
+    this.socialSharing.share(
+      `« ${ extracto } »\n- ${ sentencia.autor }\n`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
   }
 
   // ──────────────── //
