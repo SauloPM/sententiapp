@@ -46,7 +46,7 @@ export class SentenciasComponent implements OnInit {
     
     this.servicioFavoritos.getSentencias().subscribe(( data: any ) => {
       this.favoritos = data;
-      console.log( data );
+      console.log( this.favoritos );
     });
   }
 
@@ -75,13 +75,13 @@ export class SentenciasComponent implements OnInit {
     // Si no existe, se crea
     if ( !EXISTE ) {
       console.log( `La sentencia ${ sentencia.id } no existe` );
-      // this.servicioFavoritos.crearFavorito( sentencia, this.deviceID );
+      this.servicioFavoritos.crear( sentencia.id, this.deviceID, reaccion );
     }
       
     // Si sí existe, se actualiza la rección
     else {
       console.log( `La sentencia ${ sentencia.id } sí existe` );
-      // this.servicioFavoritos.actualizarFavorito( sentencia );
+      this.servicioFavoritos.actualizar( sentencia.id, this.deviceID, reaccion );
     }
 
     // Refrescamos (solo en la página de favoritos)

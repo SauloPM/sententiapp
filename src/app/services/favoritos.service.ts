@@ -33,47 +33,23 @@ export class FavoritosService {
     this.cargarFavoritos();
   }
 
-  crearFavorito( sentencia: Sentencia, deviceID: string ) {
+  crear( sentenciaID: number, deviceID: string, reaccion: string ) {
 
-    // Insertamos la sentencia al comienzo de la variable
-    // this.favoritos.unshift( sentencia );
-
-    // Sobreescribimos el campo de favoritos del local storage, ahora actualizado
-    // this.storage.set( 'favoritos', this.favoritos );
-
-    let temp = {
-      id: sentencia.id,
-      estados: {
-        meGusta: [],
-        meEncanta: [],
-        meDivierte: [],
-        noMeGusta: []
-      }
-    };
-
-    temp.estados.meDivierte.push( deviceID );
-
-    // temp.estados.reaccion.push( deviceID );
-
-    return this.http.post( `${ this.url }/sentencias/${ temp.id }/${ sentencia.reaccion }.json`, '2019' ); /*.pipe(
-      map( ( data: any ) => {
-        palabra.id = data.name;
-        return palabra;
-      })
-    );*/
+    this.angularFirestore.collection( 'sentencias' ).doc( deviceID + sentenciaID ).set({
+      id_sentencia: sentenciaID,
+      id_dispositivo: deviceID,
+      reaccion: reaccion
+    });
 
   }
 
-  actualizarFavorito( sentencia: Sentencia ) {
+  actualizar( sentenciaID: number, deviceID: string, reaccion: string ) {
 
-    // Localizamos la posición de la sentencia cuya reacción deseamos actualizar
-    let i = this.favoritos.findIndex( item => item.id === sentencia.id );
-
-    // Actualizamos la reacción
-    this.favoritos[i] = sentencia;
-
-    // Sobreescribimos el campo de favoritos del local storage, ahora actualizado
-    this.storage.set( 'favoritos', this.favoritos );
+    this.angularFirestore.collection( 'sentencias' ).doc( deviceID + sentenciaID ).update({
+      id_sentencia: sentenciaID,
+      id_dispositivo: deviceID,
+      reaccion: reaccion
+    });
 
   }
 
