@@ -25,7 +25,7 @@ export class SentenciasComponent implements OnInit {
 
   deviceID: string;
 
-  favoritos: any;
+  sentenciasFirebase: any;
 
   configuracion = {
     loop: true,
@@ -44,43 +44,35 @@ export class SentenciasComponent implements OnInit {
     
     this.favoritoSeleccionado = new EventEmitter();
     
-    this.servicioFavoritos.getSentencias().subscribe(( data: any ) => {
-      this.favoritos = data;
-      console.log( this.favoritos );
-    });
   }
 
   async ngOnInit() {
 
-    this.resaltarReacciones();
-
-    /*await this.uniqueDeviceID.get()
-      .then (( uuid : any ) => { 
-        this.deviceID = uuid;
-        console.log( 'ID único del dispositivo » ' + uuid );
-      })
-      .catch(( error: any ) => console.log( error ));*/
-
-  }
-
-  async guardarFavorito( sentencia: Sentencia, reaccion: string ) {
-
-    // Obtenemos el ID de nuestro smartphone
     await this.uniqueDeviceID.get()
       .then (( data : any ) => this.deviceID = data       )
       .catch(( error: any ) => this.deviceID = '74a1eb27' );
 
-    const EXISTE = this.favoritos.find( item => item.id_dispositivo === this.deviceID && item.id_sentencia === sentencia.id );
+    this.servicioFavoritos.getSentencias().subscribe(( data: any ) => {
+
+      this.sentenciasFirebase = data;
+      
+      this.resaltarSentencias();
+      
+    });
+  }
+
+  guardarFavorito( sentencia: Sentencia, reaccion: string ) {
+
+    // Obtenemos el ID de nuestro smartphone
+    const EXISTE = this.sentenciasFirebase.find( item => item.id_dispositivo === this.deviceID && item.id_sentencia === sentencia.id );
 
     // Si no existe, se crea
     if ( !EXISTE ) {
-      console.log( `La sentencia ${ sentencia.id } no existe` );
       this.servicioFavoritos.crear( sentencia.id, this.deviceID, reaccion );
     }
-      
-    // Si sí existe, se actualiza la rección
+
+    // Si existe, se actualiza la reacción
     else {
-      console.log( `La sentencia ${ sentencia.id } sí existe` );
       this.servicioFavoritos.actualizar( sentencia.id, this.deviceID, reaccion );
     }
 
@@ -90,11 +82,10 @@ export class SentenciasComponent implements OnInit {
 
   eliminarFavorito ( sentencia: Sentencia ) {
 
-    sentencia.reaccion = '';
-    this.servicioFavoritos.eliminarFavorito( sentencia );
+    this.servicioFavoritos.eliminar( this.deviceID, sentencia.id );
 
     // Refrescamos (solo en la página de favoritos)
-    this.favoritoSeleccionado.emit( this.sentencias );
+    // this.favoritoSeleccionado.emit( this.sentencias );
 
   }
 
@@ -130,9 +121,29 @@ export class SentenciasComponent implements OnInit {
   //     AUXILIAR     //
   // ──────────────── //
 
-  resaltarReacciones() {
-    this.sentencias.forEach( ( sentencia ) => {
-      sentencia.reaccion = this.servicioFavoritos.getReaccion( sentencia.id );
+  resaltarSentencias() {
+
+    let busqueda: any;
+    let misFavoritos = this.sentenciasFirebase.filter( item => item.id_dispositivo === this.deviceID );
+
+    this.sentencias.forEach(( sentencia ) => {
+
+      busqueda = misFavoritos.find( item => item.id_dispositivo === this.deviceID && item.id_sentencia === sentencia.id );
+
+      sentencia.reaccion = busqueda != undefined ? busqueda.reaccion : '';
+
     });
+
+    console.log( 'Sentencias de la fecha seleccionada' );
+    console.log( this.sentencias );
+    console.log( '───────────────────────────────────────────────────────────────────' );
+
+    console.log( 'Sentencias almacenadas en la BD' );
+    console.log( this.sentenciasFirebase );
+    console.log( '───────────────────────────────────────────────────────────────────' );
+
+    console.log( 'Sentencias favoritas' );
+    console.log( misFavoritos );
+    console.log( '───────────────────────────────────────────────────────────────────' );
   }
 }
