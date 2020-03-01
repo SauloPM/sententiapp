@@ -12,6 +12,10 @@ import { HttpClient } from '@angular/common/http';
 // Operadores RXJS
 import { map } from 'rxjs/operators';
 
+// Firebase
+import { Observable       } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +29,7 @@ export class FavoritosService {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private http: HttpClient, private storage: Storage ) {
+  constructor( private http: HttpClient, private angularFirestore: AngularFirestore, private storage: Storage ) {
     this.cargarFavoritos();
   }
 
@@ -83,10 +87,6 @@ export class FavoritosService {
     
   }
 
-  existeFavorito( sentencia: Sentencia ) {
-    return this.favoritos.find( item => item.id === sentencia.id ) ? true : false;
-  }
-
   getReaccion( id: number ) {
     
     // const EXISTE = this.favoritos.find( item => item.id === id ) ? true : false;
@@ -104,11 +104,30 @@ export class FavoritosService {
 
   }
 
+  // ──────────────── //
+  //     AUXILIAR     //
+  // ──────────────── //
+
   async cargarFavoritos() {
 
     const favoritos = await this.storage.get( 'favoritos' );
 
     this.favoritos = favoritos ? favoritos : [];
 
+  }
+
+  getSentencias() {
+    return this.angularFirestore.collection( 'sentencias' ).valueChanges();
+    // return this.angularFirestore.collection( 'sentencias' ).doc( deviceID ).valueChanges();
+  }
+
+  existeFavorito( sentenciasFavoritas: Sentencia[], sentenciaID: number ) {
+
+    if ( sentenciasFavoritas[ 'me_gusta'    ] !== undefined && sentenciasFavoritas[ 'me_gusta'    ].find( id => id === sentenciaID ) > 0 ) return true;
+    if ( sentenciasFavoritas[ 'me_encanta'  ] !== undefined && sentenciasFavoritas[ 'me_encanta'  ].find( id => id === sentenciaID ) > 0 ) return true;
+    if ( sentenciasFavoritas[ 'me_divierte' ] !== undefined && sentenciasFavoritas[ 'me_divierte' ].find( id => id === sentenciaID ) > 0 ) return true;
+    if ( sentenciasFavoritas[ 'no_me_gusta' ] !== undefined && sentenciasFavoritas[ 'no_me_gusta' ].find( id => id === sentenciaID ) > 0 ) return true;
+
+    return false;
   }
 }

@@ -23,7 +23,9 @@ export class SentenciasComponent implements OnInit {
 
   @Output() favoritoSeleccionado: EventEmitter<Sentencia[]>;
 
-  deviceID: string = '74a1eb27';
+  deviceID: string;
+
+  favoritos: any;
 
   configuracion = {
     loop: true,
@@ -39,53 +41,51 @@ export class SentenciasComponent implements OnInit {
   // ─────────────── //
 
   constructor( private socialSharing: SocialSharing, private servicioFavoritos: FavoritosService, private uniqueDeviceID: UniqueDeviceID ) {
+    
     this.favoritoSeleccionado = new EventEmitter();
+    
+    this.servicioFavoritos.getSentencias().subscribe(( data: any ) => {
+      this.favoritos = data;
+      console.log( data );
+    });
   }
 
   async ngOnInit() {
 
     this.resaltarReacciones();
 
-    await this.uniqueDeviceID.get()
+    /*await this.uniqueDeviceID.get()
       .then (( uuid : any ) => { 
         this.deviceID = uuid;
         console.log( 'ID único del dispositivo » ' + uuid );
       })
-      .catch(( error: any ) => console.log( error ));
+      .catch(( error: any ) => console.log( error ));*/
 
   }
 
-  guardarFavorito( sentencia: Sentencia, reaccion: string ) {
+  async guardarFavorito( sentencia: Sentencia, reaccion: string ) {
 
-    this.uniqueDeviceID.get()
-      .then (( uuid : any ) => console.log( uuid  ))
-      .catch(( error: any ) => console.log( error ));
+    // Obtenemos el ID de nuestro smartphone
+    await this.uniqueDeviceID.get()
+      .then (( data : any ) => this.deviceID = data       )
+      .catch(( error: any ) => this.deviceID = '74a1eb27' );
 
-    // Actualizamos la reacción de la sentencia dentro de la página
-    sentencia.reaccion = reaccion;
-
-    // const EXISTE = this.servicioFavoritos.existeFavorito( sentencia );
+    const EXISTE = this.favoritos.find( item => item.id_dispositivo === this.deviceID && item.id_sentencia === sentencia.id );
 
     // Si no existe, se crea
-    // if ( !EXISTE )
+    if ( !EXISTE ) {
+      console.log( `La sentencia ${ sentencia.id } no existe` );
       // this.servicioFavoritos.crearFavorito( sentencia, this.deviceID );
+    }
       
     // Si sí existe, se actualiza la rección
-    // else
-    //   this.servicioFavoritos.actualizarFavorito( sentencia );
+    else {
+      console.log( `La sentencia ${ sentencia.id } sí existe` );
+      // this.servicioFavoritos.actualizarFavorito( sentencia );
+    }
 
     // Refrescamos (solo en la página de favoritos)
     // this.favoritoSeleccionado.emit( this.sentencias );
-
-    this.servicioFavoritos.crearFavorito( sentencia, this.deviceID ).subscribe(
-      respuesta => {
-        console.log( respuesta );
-      },
-      error => {
-        console.log( error );
-      }
-    );
-
   }
 
   eliminarFavorito ( sentencia: Sentencia ) {
