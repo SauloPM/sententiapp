@@ -19,9 +19,9 @@ export class FechasService {
 
   constructor( private http: HttpClient ) { }
 
-  // ─────────────── //
-  //     PORTADA     //
-  // ─────────────── //
+  // ────────────── //
+  //     INICIO     //
+  // ────────────── //
 
   // Función que solicita un JSON mediante HTTP (método GET) con el ID, la etiqueta, el día y la imagen de toda las fechas 
   getFechas() {
@@ -55,9 +55,9 @@ export class FechasService {
   //     AUXILIAR     //
   // ──────────────── //
 
-  private ejecutarApi<T>( metodo: string, prod: boolean = true ) {
+  private ejecutarApi<T>( metodo: string, produccion: boolean = true ) {
 
-    let url: string = prod ? urlApi + metodo : urlApiLocal + metodo;
+    let url: string = produccion ? urlApi + metodo : urlApiLocal + metodo;
 
     return this.http.get<T>(`${ url }`);
   }
