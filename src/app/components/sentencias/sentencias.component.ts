@@ -66,23 +66,41 @@ export class SentenciasComponent implements OnInit {
     // Obtenemos el ID de nuestro smartphone
     const EXISTE = this.sentenciasFirebase.find( item => item.id_dispositivo === this.deviceID && item.id_sentencia === sentencia.id );
 
+    console.log( EXISTE );
+
     // Si no existe, se crea
     if ( !EXISTE ) {
+
+      sentencia.reaccion = reaccion;
+
       this.servicioFavoritos.crear( sentencia.id, this.deviceID, reaccion );
+
+      // sentencia.recuentoMeGusta    = reaccion == 'me-gusta'    ? sentencia.recuentoMeGusta    + 1 : sentencia.recuentoMeGusta;
+      // sentencia.recuentoMeEncanta  = reaccion == 'me-encanta'  ? sentencia.recuentoMeEncanta  + 1 : sentencia.recuentoMeEncanta;
+      // sentencia.recuentoMeDivierte = reaccion == 'me-divierte' ? sentencia.recuentoMeDivierte + 1 : sentencia.recuentoMeDivierte;
+      // sentencia.recuentoNoMeGusta  = reaccion == 'no-me-gusta' ? sentencia.recuentoNoMeGusta  + 1 : sentencia.recuentoNoMeGusta;
     }
 
     // Si existe, se actualiza la reacción
     else {
+      sentencia.reaccion = reaccion;
+
       this.servicioFavoritos.actualizar( sentencia.id, this.deviceID, reaccion );
+
+      $( `.recuento.${ reaccion }` ).html( '' );
     }
 
     // Refrescamos (solo en la página de favoritos)
     // this.favoritoSeleccionado.emit( this.sentencias );
   }
 
-  eliminarFavorito ( sentencia: Sentencia ) {
+  eliminarFavorito ( sentencia: Sentencia, reaccion: string ) {
+
+    sentencia.reaccion = '';
 
     this.servicioFavoritos.eliminar( this.deviceID, sentencia.id );
+    
+    $( `#sentencia-${ sentencia.id } .recuento.${ reaccion }` ).html( '' );
 
     // Refrescamos (solo en la página de favoritos)
     // this.favoritoSeleccionado.emit( this.sentencias );
@@ -128,22 +146,35 @@ export class SentenciasComponent implements OnInit {
 
     this.sentencias.forEach(( sentencia ) => {
 
+      // Resaltamos la reacción
       busqueda = misFavoritos.find( item => item.id_dispositivo === this.deviceID && item.id_sentencia === sentencia.id );
 
-      sentencia.reaccion = busqueda != undefined ? busqueda.reaccion : '';
+      if ( busqueda != undefined ) sentencia.reaccion = busqueda.reaccion;
 
+      // Ajustamos los recuentos
+      let recuentoMeGusta    = this.sentenciasFirebase.filter( item => item.id_sentencia === sentencia.id && item.reaccion === 'me-gusta' );
+      let recuentoMeEncanta  = this.sentenciasFirebase.filter( item => item.id_sentencia === sentencia.id && item.reaccion === 'me-encanta' );
+      let recuentoMeDivierte = this.sentenciasFirebase.filter( item => item.id_sentencia === sentencia.id && item.reaccion === 'me-divierte' );
+      let recuentoNoMeGusta  = this.sentenciasFirebase.filter( item => item.id_sentencia === sentencia.id && item.reaccion === 'no-me-gusta' );
+
+      if ( recuentoMeGusta    != undefined ) sentencia.recuentoMeGusta    = recuentoMeGusta.length    = recuentoMeGusta.length;
+      if ( recuentoMeEncanta  != undefined ) sentencia.recuentoMeEncanta  = recuentoMeEncanta.length  = recuentoMeEncanta.length;
+      if ( recuentoMeDivierte != undefined ) sentencia.recuentoMeDivierte = recuentoMeDivierte.length = recuentoMeDivierte.length;
+      if ( recuentoNoMeGusta  != undefined ) sentencia.recuentoNoMeGusta  = recuentoNoMeGusta.length  = recuentoNoMeGusta.length;
     });
 
+    /*
     console.log( 'Sentencias de la fecha seleccionada' );
     console.log( this.sentencias );
     console.log( '───────────────────────────────────────────────────────────────────' );
-
+    */
     console.log( 'Sentencias almacenadas en la BD' );
     console.log( this.sentenciasFirebase );
     console.log( '───────────────────────────────────────────────────────────────────' );
-
+    /*
     console.log( 'Sentencias favoritas' );
     console.log( misFavoritos );
     console.log( '───────────────────────────────────────────────────────────────────' );
+    */
   }
 }

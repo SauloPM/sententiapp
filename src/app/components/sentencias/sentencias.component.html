@@ -1,4 +1,4 @@
-<div class="sentencia" *ngFor="let sentencia of sentencias; let i = index">
+<div [id]="'sentencia-' + sentencia.id" class="sentencia" *ngFor="let sentencia of sentencias; let i = index">
 
   <!-- Extractos -->
   <ion-slides [options]="configuracion">
@@ -27,26 +27,18 @@
 
       <!-- Reacciones -->
       <div class="reacciones">
-        <span class="reaccion me-gusta">
-          <i class="icono far fa-thumbs-up" *ngIf="sentencia.reaccion != 'Me gusta'" (click)="guardarFavorito  ( sentencia, 'Me gusta' )"></i>
-          <i class="icono fas fa-thumbs-up" *ngIf="sentencia.reaccion == 'Me gusta'" (click)="eliminarFavorito ( sentencia )"></i>
-          <span class="recuento">1</span>
-        </span>
-        <span class="reaccion me-encanta">
-          <i class="icono far fa-heart" *ngIf="sentencia.reaccion != 'Me encanta'" (click)="guardarFavorito  ( sentencia, 'Me encanta' )"></i>
-          <i class="icono fas fa-heart" *ngIf="sentencia.reaccion == 'Me encanta'" (click)="eliminarFavorito ( sentencia )"></i>
-          <span class="recuento">3</span>
-        </span>
-        <span class="reaccion me-divierte">
-          <i class="icono far fa-grin-squint" *ngIf="sentencia.reaccion != 'Me divierte'" (click)="guardarFavorito  ( sentencia, 'Me divierte' )"></i>
-          <i class="icono fas fa-grin-squint" *ngIf="sentencia.reaccion == 'Me divierte'" (click)="eliminarFavorito ( sentencia )"></i>
-          <span class="recuento">0</span>
-        </span>
-        <span class="reaccion no-me-gusta">
-          <i class="icono far fa-thumbs-down" *ngIf="sentencia.reaccion != 'No me gusta'" (click)="guardarFavorito  ( sentencia, 'No me gusta' )"></i>
-          <i class="icono fas fa-thumbs-down" *ngIf="sentencia.reaccion == 'No me gusta'" (click)="eliminarFavorito ( sentencia )"></i>
-          <span class="recuento">2</span>
-        </span>
+        <i class="icono far fa-thumbs-up" *ngIf="sentencia.reaccion != 'me-gusta'" (click)="guardarFavorito  ( sentencia, 'me-gusta' )"></i>
+        <i class="icono fas fa-thumbs-up" *ngIf="sentencia.reaccion == 'me-gusta'" (click)="eliminarFavorito ( sentencia, 'me-gusta' )"></i>
+        <span *ngIf="sentencia.recuentoMeGusta > 0" class="recuento">{{ sentencia.recuentoMeGusta }}</span>
+        <i class="icono far fa-heart" *ngIf="sentencia.reaccion != 'me-encanta'" (click)="guardarFavorito  ( sentencia, 'me-encanta' )"></i>
+        <i class="icono fas fa-heart" *ngIf="sentencia.reaccion == 'me-encanta'" (click)="eliminarFavorito ( sentencia, 'me-encanta' )"></i>
+        <span *ngIf="sentencia.recuentoMeEncanta > 0" class="recuento">{{ sentencia.recuentoMeEncanta }}</span>
+        <i class="icono far fa-grin-squint" *ngIf="sentencia.reaccion != 'me-divierte'" (click)="guardarFavorito  ( sentencia, 'me-divierte' )"></i>
+        <i class="icono fas fa-grin-squint" *ngIf="sentencia.reaccion == 'me-divierte'" (click)="eliminarFavorito ( sentencia, 'me-divierte' )"></i>
+        <span *ngIf="sentencia.recuentoMeDivierte > 0" class="recuento">{{ sentencia.recuentoMeDivierte }}</span>
+        <i class="icono far fa-thumbs-down" *ngIf="sentencia.reaccion != 'no-me-gusta'" (click)="guardarFavorito  ( sentencia, 'no-me-gusta' )"></i>
+        <i class="icono fas fa-thumbs-down" *ngIf="sentencia.reaccion == 'no-me-gusta'" (click)="eliminarFavorito ( sentencia, 'no-me-gusta' )"></i>
+        <span *ngIf="sentencia.recuentoNoMeGusta > 0" class="recuento">{{ sentencia.recuentoNoMeGusta }}</span>
       </div>
 
       <!-- Compartir -->
