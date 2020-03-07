@@ -1,5 +1,6 @@
 import { PushService } from './../../services/push.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Interfaces
 import { Fecha     } from '../../interfaces/fecha';
@@ -34,7 +35,7 @@ export class HomePage implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( public servicioFechas: FechasService, private pushService: PushService ) {
+  constructor( public servicioFechas: FechasService, private pushService: PushService, private router: Router ) {
 
     // Notificaciones push (pendiente)
     this.pushService.getDeviceID().get()
@@ -162,6 +163,12 @@ export class HomePage implements OnInit {
       this.colocarAlFinal( this.fechas.find( item => item.id === 1 ) );
 
     });
+  }
+
+  seleccionarFecha( fecha: Fecha ) {
+
+    this.router.navigate([ '/informacion', fecha.id, this.categoriaSeleccionada ], { skipLocationChange: true });
+
   }
 
   // ──────────────── //
