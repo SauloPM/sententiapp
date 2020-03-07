@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Interfaces
 import { Fecha } from '../../interfaces/fecha';
@@ -27,6 +28,11 @@ export class OtrasFechasComponent {
     }
   };
 
-  constructor() {}
+  constructor( private router: Router ) {}
 
+  seleccionarFecha( fecha: Fecha ) {
+
+    this.router.navigate([ '/informacion', fecha.id, 'Todos' ], { replaceUrl: true });
+
+  }
 }

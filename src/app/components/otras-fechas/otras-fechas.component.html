@@ -2,7 +2,7 @@
 
 <ion-slides class="slider" pager="true" [options]="opcionesSlider" *ngIf="fechas">
   <ng-container *ngFor="let fecha of fechas">
-    <ion-slide class="slide" [routerLink]="['/informacion', fecha.id, 'Todos']" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'">
+    <ion-slide class="slide" (click)="seleccionarFecha( fecha )" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'">
       <span class="caption">{{ fecha.etiqueta }}</span>
     </ion-slide>
   </ng-container>
