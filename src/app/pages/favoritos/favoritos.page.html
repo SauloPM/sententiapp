@@ -11,13 +11,13 @@
       
       <!-- Filtro de reacciones -->
       <ion-slides class="filtro negro" [options]="configuracion">
-        <ion-slide class="item" *ngFor="let reaccion of reacciones; index as i" [ngClass]="{ 'seleccionado' : i == 0 }" (click)="cambiarReaccion( reaccion )">
-          {{ reaccion }}
+        <ion-slide class="item" *ngFor="let reaccion of reacciones; index as i" [ngClass]="{ 'seleccionado' : i == 0 }" (click)="cambiarReaccion( reaccion.key )">
+          {{ reaccion.value }}
         </ion-slide>
       </ion-slides>
 
       <!-- Sentencias -->
-      <app-sentencias [sentencias]="favoritos" *ngIf="!vacio" (favoritoSeleccionado)="actualizarFavoritos( $event )"></app-sentencias>
+      <app-sentencias [sentencias]="sentencias" *ngIf="!vacio" (dispararActualizarFavoritos)="actualizarFavoritos()"></app-sentencias>
 
       <!-- Mensaje de notificación cuando no existen sentencias favoritas -->
       <div class="sin-favoritos" *ngIf="vacio">
