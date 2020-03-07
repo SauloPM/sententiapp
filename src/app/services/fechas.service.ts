@@ -55,7 +55,7 @@ export class FechasService {
   //     AUXILIAR     //
   // ──────────────── //
 
-  private ejecutarApi<T>( metodo: string, produccion: boolean = false ) {
+  private ejecutarApi<T>( metodo: string, produccion: boolean = true ) {
 
     let url: string = produccion ? urlApi + metodo : urlApiLocal + metodo;
 

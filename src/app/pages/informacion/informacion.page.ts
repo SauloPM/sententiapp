@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController     } from '@ionic/angular';
 import { ActivatedRoute    } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 // Interfaces
 import { Fecha     } from '../../interfaces/fecha';
@@ -18,7 +17,7 @@ export class InformacionPage implements OnInit {
   otrasFechas: Fecha    [];
   sentencias : Sentencia[];
 
-  id       : number = 0;
+  id: number = 0;
   categoria: string = 'Todos';
 
   fecha: Fecha = {
@@ -32,7 +31,7 @@ export class InformacionPage implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private servicioFechas: FechasService, private activatedRoute: ActivatedRoute, private navController: NavController ) { }
+  constructor( private servicioFechas: FechasService, private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit() {
 
@@ -51,25 +50,20 @@ export class InformacionPage implements OnInit {
       this.id        = parseInt(parametrosURL.id, 10);
       this.categoria = parametrosURL.categoria;
 
-      // Obtenemos el título y la descripción de la fecha actual
+      // Obtenemos el título y la descripción de la fecha seleccionada
       this.servicioFechas.getDatosFecha( parametrosURL.id ).subscribe( data => {
 
         this.fecha = data[0];
         
+        // Si nos encontramos en la fecha general
         if ( this.id === 1 ) {
           this.fecha.descripcion = 'Sentencias latinas para diferentes circunstancias sin una fecha determinada asociada.';
         }
-
       });
 
-      // Obtenemos las sentencias de la fecha actual
+      // Obtenemos las sentencias de la fecha seleccionada
       this.servicioFechas.getSentencias( parametrosURL.id ).subscribe( ( data: Sentencia[] ) => {
         this.sentencias = this.categoria === 'Todos' ? data : data.filter ( item => item.categoria === this.categoria );
-      });
-
-      // Obtenemos todas las fechas menos la actual
-      this.servicioFechas.getFechas().subscribe( data => {
-        this.otrasFechas = data.filter( item => item.id !== this.id );
       });
     });
   }

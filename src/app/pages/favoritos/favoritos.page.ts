@@ -60,23 +60,18 @@ export class FavoritosPage implements OnInit {
       .then (( id   : any ) => this.deviceID = id   )
       .catch(( error: any ) => this.deviceID = '74a1eb27' );
 
-    // Obtenemos todas las fechas (para enviarlas al componente 'Otras fechas')
-    this.servicioFechas.getFechas().subscribe( data => {
-      this.fechas = data;
+    // Obtenemos las sentencias de todas las fechas
+    this.servicioFechas.getSentencias().subscribe(( data: Sentencia[] ) => {
+      this.todasLasSentencias = data;
 
-      // Obtenemos las sentencias de todas las fechas
-      this.servicioFechas.getSentencias().subscribe(( data: Sentencia[] ) => {
-        this.todasLasSentencias = data;
-
-        // Obtenemos las sentencias almacenadas en Firebase de este dispositivo
-        this.servicioFavoritos.getSentencias().subscribe(( data: any[] ) => {
-          this.sentenciasFirebase = data.filter( item => item.id_dispositivo === this.deviceID );
-          
-          // De todas las sentencias de todas las fechas, solo nos interesan aquellas para las que haya reaccionado desde este dispositivo
-          this.todasLasSentencias = this.filtrarSentenciasPorReaccion();
-          this.sentencias = this.todasLasSentencias;
-          this.vacio = this.sentencias === undefined ? true : this.sentencias.length === 0 ? true : false;
-        });
+      // Obtenemos las sentencias almacenadas en Firebase de este dispositivo
+      this.servicioFavoritos.getSentencias().subscribe(( data: any[] ) => {
+        this.sentenciasFirebase = data.filter( item => item.id_dispositivo === this.deviceID );
+        
+        // De todas las sentencias de todas las fechas, solo nos interesan aquellas para las que haya reaccionado desde este dispositivo
+        this.todasLasSentencias = this.filtrarSentenciasPorReaccion();
+        this.sentencias = this.todasLasSentencias;
+        this.vacio = this.sentencias === undefined ? true : this.sentencias.length === 0 ? true : false;
       });
     });
   }
