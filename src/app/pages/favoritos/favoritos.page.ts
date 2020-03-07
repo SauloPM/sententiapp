@@ -58,7 +58,7 @@ export class FavoritosPage implements OnInit {
     // Obtenemos el ID de este dispositivo
     await this.uniqueDeviceID.get()
       .then (( id   : any ) => this.deviceID = id   )
-      .catch(( error: any ) => this.deviceID = '74a1eb27' );
+      .catch(( error: any ) => this.deviceID = '-1' );
 
     // Obtenemos las sentencias de todas las fechas
     this.servicioFechas.getSentencias().subscribe(( data: Sentencia[] ) => {

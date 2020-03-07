@@ -51,7 +51,7 @@ export class SentenciasComponent implements OnInit {
 
     await this.uniqueDeviceID.get()
       .then (( id   : any ) => this.deviceID = id   )
-      .catch(( error: any ) => this.deviceID = '74a1eb27' );
+      .catch(( error: any ) => this.deviceID = '-1' );
 
     this.servicioFavoritos.getSentencias().subscribe(( data: any ) => {
 
