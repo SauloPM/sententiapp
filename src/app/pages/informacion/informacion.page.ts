@@ -40,11 +40,6 @@ export class InformacionPage implements OnInit {
 
   }
 
-  // Volver a la página anterior
-  volverAtras() {
-    this.navController.back();
-  }
-
   // ──────────────── //
   //     AUXILIAR     //
   // ──────────────── //

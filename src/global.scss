@@ -525,15 +525,6 @@ p {
             z-index: 75;
             width: 100%;
         }
-
-        .volver {
-            color: white;
-            font-size: 50px;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            left: 15px;
-        }
     }
 
     .descripcion {
@@ -569,15 +560,6 @@ p {
 
         .cabecera {
             height: 500px;
-
-            .volver {
-                opacity: .5;
-                transition: .25s;
-        
-                &:hover {
-                    opacity: 1
-                }
-            }
         }
 
         .descripcion {
