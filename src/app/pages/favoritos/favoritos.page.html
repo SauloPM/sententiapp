@@ -11,7 +11,7 @@
       
       <!-- Filtro de reacciones -->
       <ion-slides class="filtro negro" [options]="configuracion">
-        <ion-slide class="item" *ngFor="let reaccion of reacciones; index as i" [ngClass]="{ 'seleccionado' : i == 0 }" (click)="cambiarReaccion( reaccion.key )">
+        <ion-slide [class]="'item ' + reaccion.key" *ngFor="let reaccion of reacciones; index as i" [ngClass]="{ 'seleccionado': i == 0 }" (click)="cambiarReaccion( reaccion.key )">
           {{ reaccion.value }}
         </ion-slide>
       </ion-slides>
