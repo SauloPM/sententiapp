@@ -17,7 +17,7 @@
       </ion-slides>
 
       <!-- Sentencias -->
-      <app-sentencias [sentencias]="sentencias" *ngIf="!vacio" (dispararActualizarFavoritos)="actualizarFavoritos()"></app-sentencias>
+      <app-sentencias [sentencias]="sentencias" *ngIf="!vacio" (dispararRefrescarListadoDeSentenciasFavoritas)="actualizarFavoritos()"></app-sentencias>
 
       <!-- Mensaje de notificación cuando no existen sentencias favoritas -->
       <div class="sin-favoritos" *ngIf="vacio">

@@ -12,6 +12,9 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 // Obtener ID único del dispositivo
 import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 
+// jQuery
+declare var $: any;
+
 @Component({
   selector: 'app-sentencias',
   templateUrl: './sentencias.component.html',
@@ -21,7 +24,7 @@ export class SentenciasComponent implements OnInit {
 
   @Input() sentencias: Sentencia[];
 
-  @Output() favoritoSeleccionado: EventEmitter<Sentencia[]>;
+  @Output() dispararRefrescarListadoDeSentenciasFavoritas: EventEmitter<any>;
 
   deviceID: string;
 
@@ -41,15 +44,13 @@ export class SentenciasComponent implements OnInit {
   // ─────────────── //
 
   constructor( private socialSharing: SocialSharing, private servicioFavoritos: FavoritosService, private uniqueDeviceID: UniqueDeviceID ) {
-    
-    this.favoritoSeleccionado = new EventEmitter();
-    
+    this.dispararRefrescarListadoDeSentenciasFavoritas = new EventEmitter();
   }
 
   async ngOnInit() {
 
     await this.uniqueDeviceID.get()
-      .then (( data : any ) => this.deviceID = data       )
+      .then (( id   : any ) => this.deviceID = id   )
       .catch(( error: any ) => this.deviceID = '74a1eb27' );
 
     this.servicioFavoritos.getSentencias().subscribe(( data: any ) => {
@@ -57,54 +58,34 @@ export class SentenciasComponent implements OnInit {
       this.sentenciasFirebase = data;
       
       this.resaltarSentencias();
-      
+
+      // Refrescamos (solo en la página de favoritos)
+      this.dispararRefrescarListadoDeSentenciasFavoritas.emit();
     });
   }
 
   guardarFavorito( sentencia: Sentencia, reaccion: string ) {
 
-    // Obtenemos el ID de nuestro smartphone
+    sentencia.reaccion = reaccion;
+    
+    // ¿Habíamos reaccionado previamente a la sentencia a la que acabamos de reaccionar?
     const EXISTE = this.sentenciasFirebase.find( item => item.id_dispositivo === this.deviceID && item.id_sentencia === sentencia.id );
 
-    console.log( EXISTE );
-
-    // Si no existe, se crea
+    // En caso negativo, se crea en Firebase un nuevo registro para alojar la nueva sentencia favorita
     if ( !EXISTE ) {
-
-      sentencia.reaccion = reaccion;
-
       this.servicioFavoritos.crear( sentencia.id, this.deviceID, reaccion );
-
-      // sentencia.recuentoMeGusta    = reaccion == 'me-gusta'    ? sentencia.recuentoMeGusta    + 1 : sentencia.recuentoMeGusta;
-      // sentencia.recuentoMeEncanta  = reaccion == 'me-encanta'  ? sentencia.recuentoMeEncanta  + 1 : sentencia.recuentoMeEncanta;
-      // sentencia.recuentoMeDivierte = reaccion == 'me-divierte' ? sentencia.recuentoMeDivierte + 1 : sentencia.recuentoMeDivierte;
-      // sentencia.recuentoNoMeGusta  = reaccion == 'no-me-gusta' ? sentencia.recuentoNoMeGusta  + 1 : sentencia.recuentoNoMeGusta;
     }
 
-    // Si existe, se actualiza la reacción
+    // En caso positivo, se actualiza en Firebase la reacción del registro correspondiente
     else {
       sentencia.reaccion = reaccion;
-
       this.servicioFavoritos.actualizar( sentencia.id, this.deviceID, reaccion );
-
-      $( `.recuento.${ reaccion }` ).html( '' );
     }
-
-    // Refrescamos (solo en la página de favoritos)
-    // this.favoritoSeleccionado.emit( this.sentencias );
   }
 
   eliminarFavorito ( sentencia: Sentencia, reaccion: string ) {
-
     sentencia.reaccion = '';
-
     this.servicioFavoritos.eliminar( this.deviceID, sentencia.id );
-    
-    $( `#sentencia-${ sentencia.id } .recuento.${ reaccion }` ).html( '' );
-
-    // Refrescamos (solo en la página de favoritos)
-    // this.favoritoSeleccionado.emit( this.sentencias );
-
   }
 
   compartir( sentencia: Sentencia ) {
@@ -152,29 +133,15 @@ export class SentenciasComponent implements OnInit {
       if ( busqueda != undefined ) sentencia.reaccion = busqueda.reaccion;
 
       // Ajustamos los recuentos
-      let recuentoMeGusta    = this.sentenciasFirebase.filter( item => item.id_sentencia === sentencia.id && item.reaccion === 'me-gusta' );
-      let recuentoMeEncanta  = this.sentenciasFirebase.filter( item => item.id_sentencia === sentencia.id && item.reaccion === 'me-encanta' );
+      let recuentoMeGusta    = this.sentenciasFirebase.filter( item => item.id_sentencia === sentencia.id && item.reaccion === 'me-gusta'    );
+      let recuentoMeEncanta  = this.sentenciasFirebase.filter( item => item.id_sentencia === sentencia.id && item.reaccion === 'me-encanta'  );
       let recuentoMeDivierte = this.sentenciasFirebase.filter( item => item.id_sentencia === sentencia.id && item.reaccion === 'me-divierte' );
       let recuentoNoMeGusta  = this.sentenciasFirebase.filter( item => item.id_sentencia === sentencia.id && item.reaccion === 'no-me-gusta' );
 
-      if ( recuentoMeGusta    != undefined ) sentencia.recuentoMeGusta    = recuentoMeGusta.length    = recuentoMeGusta.length;
-      if ( recuentoMeEncanta  != undefined ) sentencia.recuentoMeEncanta  = recuentoMeEncanta.length  = recuentoMeEncanta.length;
+      if ( recuentoMeGusta    != undefined ) sentencia.recuentoMeGusta    = recuentoMeGusta   .length = recuentoMeGusta   .length;
+      if ( recuentoMeEncanta  != undefined ) sentencia.recuentoMeEncanta  = recuentoMeEncanta .length = recuentoMeEncanta .length;
       if ( recuentoMeDivierte != undefined ) sentencia.recuentoMeDivierte = recuentoMeDivierte.length = recuentoMeDivierte.length;
-      if ( recuentoNoMeGusta  != undefined ) sentencia.recuentoNoMeGusta  = recuentoNoMeGusta.length  = recuentoNoMeGusta.length;
+      if ( recuentoNoMeGusta  != undefined ) sentencia.recuentoNoMeGusta  = recuentoNoMeGusta .length = recuentoNoMeGusta .length;
     });
-
-    /*
-    console.log( 'Sentencias de la fecha seleccionada' );
-    console.log( this.sentencias );
-    console.log( '───────────────────────────────────────────────────────────────────' );
-    */
-    console.log( 'Sentencias almacenadas en la BD' );
-    console.log( this.sentenciasFirebase );
-    console.log( '───────────────────────────────────────────────────────────────────' );
-    /*
-    console.log( 'Sentencias favoritas' );
-    console.log( misFavoritos );
-    console.log( '───────────────────────────────────────────────────────────────────' );
-    */
   }
 }

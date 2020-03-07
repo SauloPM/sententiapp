@@ -95,12 +95,14 @@ $tablet: 768px;
 
         .icono {
             color: $primary;
+            margin: 0 5px;
         }
 
         .recuento {
             color: $text;
             font-size: 8px;
-            margin: 0 5px;
+            position: relative;
+            top: 5px;
         }
 
         &::after {
