@@ -12,6 +12,9 @@ import { FechasService } from '../../services/fechas.service';
 // jQuery
 declare var $: any;
 
+// Plugin Moment.js
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html'
@@ -35,13 +38,14 @@ export class HomePage implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( public servicioFechas: FechasService, private pushService: PushService, private router: Router ) {
+  constructor( private router: Router, public servicioFechas: FechasService, private pushService: PushService ) {
 
     // Notificaciones push (pendiente)
+    /*
     this.pushService.getDeviceID().get()
-      .then (( uuid:  any ) => console.log(uuid) )
-      .catch(( error: any ) => console.log(error));
-
+      .then (( uuid:  any ) => console.log( uuid  ))
+      .catch(( error: any ) => console.log( error ));
+    */
   }
 
   ngOnInit() {
@@ -52,7 +56,6 @@ export class HomePage implements OnInit {
 
     // Abrir buscador
     $(document).on('click', '.buscador.cerrado', function() {
-
 
       if ($('.cierre').css('display') == 'flex')
         return;
@@ -130,7 +133,7 @@ export class HomePage implements OnInit {
 
     function filtrar() {
 
-      var etiqueta      = "";
+      var etiqueta  = '';
       var secuencia = $(".entrada").val().toLowerCase().trim();
 
       $(".fecha .etiqueta").each(function () {
@@ -154,15 +157,8 @@ export class HomePage implements OnInit {
   
     this.categoriaSeleccionada = categoria.categoria;
 
-    this.servicioFechas.getFechasPorCategoria( this.categoriaSeleccionada ).subscribe( data => {
-      
-      this.fechas   = data;
-      this.recuento = data.length;
+    this.getFechasPorCategoria( this.categoriaSeleccionada );
 
-      // La fecha genérica no debe aparecer al comienzo del listado, sino al final
-      this.colocarAlFinal( this.fechas.find( item => item.id === 1 ) );
-
-    });
   }
 
   seleccionarFecha( fecha: Fecha ) {
@@ -171,27 +167,156 @@ export class HomePage implements OnInit {
 
   }
 
+  /*
+
+  abrirBuscador() {
+
+    if ( !this.buscadorCerrado ) {
+      return;
+    }
+  
+    $( '.mango' ).css( 'opacity', '0' );
+    $( '.buscador' ).removeClass( 'cerrado' ).addClass( 'abierto' );
+    
+    setTimeout(() => { $( '.buscador' ).css( 'border-radius', '2px'   )}, 250);
+    setTimeout(() => { $( '.buscador' ).css( 'width'        , '100%'  )}, 500);
+    setTimeout(() => { $( '.buscador' ).css( 'height'       , '50px'  )}, 1000);
+    setTimeout(() => { $( '.entrada'  ).css( 'display'      , 'block' ).focus() }, 1500);
+    setTimeout(() => { $( '.cierre'   ).css( 'display'      , 'flex'  )}, 1750);
+  }
+
+  cerrarBuscador() {
+
+    if ( this.buscadorCerrado ) {
+      return;
+    }
+
+    // Vaciamos la entrada
+    $( '.entrada' ).val( '' );
+
+    // Mostramos de nuevo todas las fechas
+    this.filtrar();
+    
+    $( '.cierre'  ).css( 'display', 'none' );
+    $( '.entrada' ).css( 'display', 'none' );
+    $( '.buscador' ).removeClass( 'abierto' ).addClass( 'cerrado' ).css( 'width', '30px' );
+
+    setTimeout(() => { 
+      $('.buscador').animate({ height: '30px' }, 500);
+    }, 500);
+    
+    setTimeout(() => { 
+      $('.buscador').animate({ borderRadius: '50%' }, 500);
+    }, 1000);
+    
+    setTimeout(() => { 
+      $('.mango').animate({ opacity: '1' }, 250);
+      $('.buscador').removeClass('abierto').addClass('cerrado');
+    }, 1500);
+  }
+
+  filtrar() {
+
+    var etiqueta  = '';
+    var secuencia = $(".entrada").val().toLowerCase().trim();
+
+    $(".fecha .etiqueta").each(function () {
+
+      etiqueta = $(this).html().toLowerCase();
+
+        // Ha habido coincidencias o no se ha escrito nada
+        if ((etiqueta.indexOf(secuencia) > -1) || (secuencia.length == 0)) {
+            $(this).parent().parent().css("display", "flex");
+        }
+
+        // No ha habido coincidencia
+        else {
+            $(this).parent().parent().css("display", "none");
+        }
+    });
+  }
+
+  */
+
   // ──────────────── //
   //     AUXILIAR     //
   // ──────────────── //
   
   getFechas() {
-    this.servicioFechas.getFechas().subscribe( resultado => {
 
-      this.fechas   = resultado;
-      this.recuento = resultado.length;
+    this.servicioFechas.getFechas().subscribe( data => {
 
-      // La fecha genérica no debe aparecer al comienzo del listado, sino al final
-      this.colocarAlFinal( this.fechas.find( item => item.id === 1 ) );
+      this.fechas   = data;
+      this.recuento = data.length;
 
+      this.ordenarFechas();
+    });
+  }
+
+  getFechasPorCategoria( categoria: string ) {
+
+    this.servicioFechas.getFechasPorCategoria( categoria ).subscribe( data => {
+      
+      this.fechas   = data;
+      this.recuento = data.length;
+
+      // Situamos la fecha genérica al final del listado de fechas
+      this.ordenarFechas();
     });
   }
 
   getCategorias() {
-    this.servicioFechas.getCategorias().subscribe( resultado => {
-      this.categorias = resultado;
+    
+    this.servicioFechas.getCategorias().subscribe( data => {
+      this.categorias = data;
+
+      // Creamos la categoría 'Todos' y la situamos al comienzo del listado de categorías
       this.categorias.unshift({ categoria: 'Todos' });
     });
+  }
+
+  ordenarFechas() {
+
+    let dia: string;
+    let mes: string;
+    let meses = [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ];
+
+    for( let i = 0; i < meses.length; i++ ) {
+
+      this.fechas.forEach(( fecha ) => {
+
+        if ( fecha['dia'].includes( meses[i] )) {
+          fecha['dia'] = fecha['dia'].replace( ` de ${ meses[i] }`, '' );
+          fecha['dia'] = fecha['dia'].length == 1 ? `0${ fecha['dia'] }` : fecha['dia'];
+          mes = ( i + 1 ) < 10 ? `0${ i + 1 }` : ( i + 1 ).toString();
+          fecha['dia'] = `${ mes }${ fecha['dia'] }`
+        }
+      });
+    }
+
+    this.fechas.sort( function( fechaA, fechaB ) { return fechaA['dia'] - fechaB['dia'] });
+
+    this.fechas.forEach(( fecha ) => {
+
+      // Ignoramos la fecha genérica
+      if ( fecha['id'] === 1 ) {
+        return;
+      }
+
+      // Extraemos el día y el mes de la fecha, respectivamente
+      dia = fecha['dia'].substring(2,4);
+      mes = fecha['dia'].substring(0,2);
+
+      // Eliminamos los ceros innecesarios de la izquierda
+      dia = dia[0] === '0' ? dia[1] : dia;
+      mes = mes[0] === '0' ? mes[1] : mes;
+
+      // Situamos primero el día y luego el mes
+      fecha['dia'] = dia + ' de ' + meses[ parseInt( mes ) - 1 ];
+    });
+
+    // Situamos la fecha genérica al final del listado de fechas
+    this.colocarAlFinal( this.fechas.find( item => item.id === 1 ));
   }
 
   colocarAlFinal( omnibusOccasionibus: Fecha ) {
