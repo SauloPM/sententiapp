@@ -14,11 +14,11 @@ import { FechasService } from '../../services/fechas.service';
 })
 export class InformacionPage implements OnInit {
 
+  id = 0;
+  categoria = 'Todos';
+
   otrasFechas: Fecha    [];
   sentencias : Sentencia[];
-
-  id: number = 0;
-  categoria: string = 'Todos';
 
   fecha: Fecha = {
     id: 0,
