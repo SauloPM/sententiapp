@@ -66,6 +66,11 @@ export class SentenciasComponent implements OnInit {
 
   guardarFavorito( sentencia: Sentencia, reaccion: string ) {
 
+    if ( this.deviceID === '-1' ) {
+      this.notificarUsuario();
+      return;
+    }
+
     sentencia.reaccion = reaccion;
     
     // ¿Habíamos reaccionado previamente a la sentencia a la que acabamos de reaccionar?
@@ -84,6 +89,12 @@ export class SentenciasComponent implements OnInit {
   }
 
   eliminarFavorito ( sentencia: Sentencia, reaccion: string ) {
+
+    if ( this.deviceID === '-1' ) {
+      this.notificarUsuario();
+      return;
+    }
+
     sentencia.reaccion = '';
     this.servicioFavoritos.eliminar( this.deviceID, sentencia.id );
   }
@@ -91,7 +102,7 @@ export class SentenciasComponent implements OnInit {
   compartir( sentencia: Sentencia ) {
 
     let extracto = sentencia.extractolatino;
-    let extractosActivos = document.getElementsByClassName('extracto swiper-slide-active');
+    let extractosActivos = document.getElementsByClassName( 'extracto swiper-slide-active' );
 
     // Detectamos qué traducción del extraco se desea compartir
     for (let i = 0; i < extractosActivos.length ; i++) {
@@ -143,5 +154,14 @@ export class SentenciasComponent implements OnInit {
       if ( recuentoMeDivierte != undefined ) sentencia.recuentoMeDivierte = recuentoMeDivierte.length = recuentoMeDivierte.length;
       if ( recuentoNoMeGusta  != undefined ) sentencia.recuentoNoMeGusta  = recuentoNoMeGusta .length = recuentoNoMeGusta .length;
     });
+  }
+
+  notificarUsuario() {
+
+    $( '.notificacion' ).css( 'opacity', '1' );
+
+    setTimeout(() => {
+      $( '.notificacion' ).css( 'opacity', '' );
+    }, 2500);
   }
 }
