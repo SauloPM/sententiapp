@@ -37,7 +37,6 @@
 
             <!-- Fechas -->
             <small class="recuento">{{ recuento }} fecha(s)</small>
-            <!-- <a class="fecha" (click)="seleccionarFecha( $evento )" [routerLink]="['/informacion', fecha.id, categoriaSeleccionada]" *ngFor="let fecha of fechas" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'"></a> -->
             <a class="fecha" (click)="seleccionarFecha( fecha )" *ngFor="let fecha of fechas" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'">
               <div class="imagen" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'"></div>
               <div>
@@ -45,9 +44,7 @@
                 <div class="dia">{{ fecha.dia }}</div>
               </div>
             </a>
-
           </div>
-
         </div>
       </div>
       
