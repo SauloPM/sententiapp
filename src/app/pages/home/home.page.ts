@@ -12,9 +12,6 @@ import { FechasService } from '../../services/fechas.service';
 // jQuery
 declare var $: any;
 
-// Plugin Moment.js
-import * as moment from 'moment';
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html'
