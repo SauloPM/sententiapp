@@ -596,3 +596,59 @@ p {
         }
     }
 }
+
+// ────────────────────── //
+//     NOTIFICACIONES     //
+// ────────────────────── //
+
+.notificacion-usuario {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: white;
+    border: 1px solid $lightgray;
+    border-bottom: none;
+    border-radius: 4px;
+    box-shadow: 0 10px 20px -15px black;
+    padding: 20px 25px 20px 70px;
+    margin: auto;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 500;
+    max-width: 300px;
+    height: auto;
+    min-height: 75px;
+    opacity: 0;
+    overflow: hidden;
+    transition: .15s ease-in-out;
+
+    .icono {
+        font-size: 18px;
+        color: rgba(255,255,255,.9);
+        background: tomato;
+        border-radius: 50%;
+        line-height: 35px;
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+    }
+
+    .mensaje {
+        color: $text;
+        line-height: 20px;
+    }
+
+    .raya {
+        background: tomato;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 4px;
+        transition: 2.5s ease-in-out;
+    }
+}
