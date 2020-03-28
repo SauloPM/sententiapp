@@ -6,6 +6,7 @@ import { Fecha } from 'src/app/interfaces/fecha';
 
 // Servicios
 import { FechasService    } from './../../services/fechas.service';
+import { UsuariosService  } from './../../services/usuarios.service';
 import { FavoritosService } from './../../services/favoritos.service';
 
 // jQuery
@@ -18,7 +19,7 @@ declare var $: any;
 export class FavoritosPage implements OnInit {
   
   vacio = true;
-  deviceID: string;
+  usuarioID: string;
   fechas: Fecha[];
   
   reacciones = [
@@ -48,9 +49,15 @@ export class FavoritosPage implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private servicioFechas: FechasService, public servicioFavoritos: FavoritosService ) {}
+  constructor( private servicioFechas: FechasService, private servicioFavoritos: FavoritosService, private usuariosService: UsuariosService ) {}
   
   async ngOnInit() {
+
+    // Almacenamos en una variable el ID del usuario
+    await this.usuariosService.getUsuarioID().then(
+      data  => this.usuarioID = data,
+      error => console.log( error )
+    );
 
     // Obtenemos las sentencias de todas las fechas
     this.servicioFechas.getSentencias().subscribe(( data: Sentencia[] ) => {
@@ -58,7 +65,7 @@ export class FavoritosPage implements OnInit {
 
       // Obtenemos las sentencias almacenadas en Firebase de este dispositivo
       this.servicioFavoritos.getSentencias().subscribe(( data: any[] ) => {
-        this.sentenciasFirebase = data.filter( item => item.id_dispositivo === this.deviceID );
+        this.sentenciasFirebase = data.filter( item => item.id_dispositivo === this.usuarioID );
         
         // De todas las sentencias de todas las fechas, solo nos interesan aquellas para las que haya reaccionado desde este dispositivo
         this.todasLasSentencias = this.filtrarSentenciasPorReaccion();
