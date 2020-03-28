@@ -1,13 +1,13 @@
-import { PushService } from './../../services/push.service';
+import { Router            } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 // Interfaces
 import { Fecha     } from '../../interfaces/fecha';
 import { Categoria } from './../../interfaces/categoria';
 
 // Servicios
-import { FechasService } from '../../services/fechas.service';
+import { FechasService   } from '../../services/fechas.service';
+import { UsuariosService } from './../../services/usuarios.service';
 
 // jQuery
 declare var $: any;
@@ -18,7 +18,6 @@ declare var $: any;
 })
 export class HomePage implements OnInit {
 
-  deviceID: number = 0;
   recuento: number = 0;
   fechas: Fecha[]  = [];
   categorias: Categoria[] = [];
@@ -35,20 +34,11 @@ export class HomePage implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private router: Router, public servicioFechas: FechasService, private pushService: PushService ) {
+  constructor( private router: Router, public servicioFechas: FechasService ) {}
 
-    // Notificaciones push (pendiente)
-    /*
-    this.pushService.getDeviceID().get()
-      .then (( uuid:  any ) => console.log( uuid  ))
-      .catch(( error: any ) => console.log( error ));
-    */
-  }
-
-  ngOnInit() {
+  async ngOnInit() {
 
     this.getFechas(); // Guardamos en una variable todas las fechas
-
     this.getCategorias(); // Guardamos en una variable todas las categorías
 
     // Abrir buscador
@@ -241,35 +231,57 @@ export class HomePage implements OnInit {
   
   getFechas() {
 
-    this.servicioFechas.getFechas().subscribe( data => {
+    this.servicioFechas.getFechas().subscribe(
+      
+      data => {
 
-      this.fechas   = data;
-      this.recuento = data.length;
+        this.fechas   = data;
+        this.recuento = data.length;
 
-      this.ordenarFechas();
-    });
+        this.ordenarFechas();
+      },
+      error => {
+        console.log( error );
+        this.notificarUsuario( 'Se ha producido un error al cargar el listado de fechas' );
+      }
+    );
   }
 
   getFechasPorCategoria( categoria: string ) {
 
-    this.servicioFechas.getFechasPorCategoria( categoria ).subscribe( data => {
+    this.servicioFechas.getFechasPorCategoria( categoria ).subscribe(
       
-      this.fechas   = data;
-      this.recuento = data.length;
+      data => {
+      
+        this.fechas   = data;
+        this.recuento = data.length;
 
-      // Situamos la fecha genérica al final del listado de fechas
-      this.ordenarFechas();
-    });
+        // Situamos la fecha genérica al final del listado de fechas
+        this.ordenarFechas();
+      },
+      error => {
+        console.log( error );
+        this.notificarUsuario( 'Se ha producido un error al cargar el listado de fechas' );
+      }
+    );
   }
 
   getCategorias() {
     
-    this.servicioFechas.getCategorias().subscribe( data => {
-      this.categorias = data;
+    this.servicioFechas.getCategorias().subscribe(
 
-      // Creamos la categoría 'Todos' y la situamos al comienzo del listado de categorías
-      this.categorias.unshift({ categoria: 'Todos' });
-    });
+      data => {
+
+        this.categorias = data;
+
+        // Creamos la categoría 'Todos' y la situamos al comienzo del listado de categorías
+        this.categorias.unshift({ categoria: 'Todos' });
+      },
+      error => {
+        console.log( error );
+        this.notificarUsuario( 'Se ha producido un error al cargar las categorías' );
+      }
+    );
   }
 
   ordenarFechas() {
@@ -321,5 +333,18 @@ export class HomePage implements OnInit {
       this.fechas.shift();
       this.fechas.push( omnibusOccasionibus );
     }
+  }
+
+  notificarUsuario( mensaje: string ) {
+
+    $( '.notificacion .mensaje' ).html( mensaje );
+
+    $( '.notificacion'       ).css( 'opacity',    '1' );
+    $( '.notificacion .raya' ).css(   'width', '100%' );
+
+    setTimeout(() => {
+      $( '.notificacion'       ).css( 'opacity', '' );
+      $( '.notificacion .raya' ).css(   'width', '' );
+    }, 2500);
   }
 }
