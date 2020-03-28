@@ -18,11 +18,8 @@ import { ComponentsModule } from './components/components.module';
 // Notificaciones PUSH
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 
-// BD local
+// Almacenamiento local
 import { IonicStorageModule } from '@ionic/storage';
-
-// Get Device ID
-import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 
 // Firebase
 import { firebaseConfiguration     } from "../environments/firebase-configuration";
@@ -56,7 +53,6 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
     StatusBar,
     OneSignal,
     SplashScreen,
-    UniqueDeviceID,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }    
   ],
   bootstrap: [AppComponent]

@@ -8,9 +8,6 @@ import { Fecha } from 'src/app/interfaces/fecha';
 import { FechasService    } from './../../services/fechas.service';
 import { FavoritosService } from './../../services/favoritos.service';
 
-// Obtener ID único del dispositivo
-import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
-
 // jQuery
 declare var $: any;
 
@@ -51,14 +48,9 @@ export class FavoritosPage implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private servicioFechas: FechasService, public servicioFavoritos: FavoritosService, private uniqueDeviceID: UniqueDeviceID ) {}
+  constructor( private servicioFechas: FechasService, public servicioFavoritos: FavoritosService ) {}
   
   async ngOnInit() {
-
-    // Obtenemos el ID de este dispositivo
-    await this.uniqueDeviceID.get()
-      .then (( id   : any ) => this.deviceID = id   )
-      .catch(( error: any ) => this.deviceID = '-1' );
 
     // Obtenemos las sentencias de todas las fechas
     this.servicioFechas.getSentencias().subscribe(( data: Sentencia[] ) => {
