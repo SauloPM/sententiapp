@@ -7,7 +7,6 @@ import { Categoria } from './../../interfaces/categoria';
 
 // Servicios
 import { FechasService   } from '../../services/fechas.service';
-import { UsuariosService } from './../../services/usuarios.service';
 
 // jQuery
 declare var $: any;
@@ -39,7 +38,6 @@ export class HomePage implements OnInit {
   async ngOnInit() {
 
     this.getFechas(); // Guardamos en una variable todas las fechas
-    this.getCategorias(); // Guardamos en una variable todas las categorías
 
     // Abrir buscador
     $(document).on('click', '.buscador.cerrado', function() {
@@ -234,34 +232,16 @@ export class HomePage implements OnInit {
     this.servicioFechas.getFechas().subscribe(
       
       data => {
-
         this.fechas   = data;
         this.recuento = data.length;
-
-        this.ordenarFechas();
       },
       error => {
-        console.log( error );
+        console.log( 'Se ha producido un error', error );
         this.notificarUsuario( 'Se ha producido un error al cargar el listado de fechas' );
-      }
-    );
-  }
-
-  getFechasPorCategoria( categoria: string ) {
-
-    this.servicioFechas.getFechasPorCategoria( categoria ).subscribe(
-      
-      data => {
-      
-        this.fechas   = data;
-        this.recuento = data.length;
-
-        // Situamos la fecha genérica al final del listado de fechas
-        this.ordenarFechas();
       },
-      error => {
-        console.log( error );
-        this.notificarUsuario( 'Se ha producido un error al cargar el listado de fechas' );
+      () => {
+        this.ordenarFechas();
+        this.getCategorias();
       }
     );
   }
@@ -271,16 +251,29 @@ export class HomePage implements OnInit {
     this.servicioFechas.getCategorias().subscribe(
 
       data => {
-
         this.categorias = data;
-
-        // Creamos la categoría 'Todos' y la situamos al comienzo del listado de categorías
-        this.categorias.unshift({ categoria: 'Todos' });
       },
       error => {
-        console.log( error );
+        console.log( 'Se ha producido un error', error );
         this.notificarUsuario( 'Se ha producido un error al cargar las categorías' );
-      }
+      },
+      () => this.categorias.unshift({ categoria: 'Todos' }) // Creamos manualmente la categoría 'Todos' y la situamos al comienzo del listado de categorías
+    );
+  }
+
+  getFechasPorCategoria( categoria: string ) {
+
+    this.servicioFechas.getFechasPorCategoria( categoria ).subscribe(
+      
+      data => {
+        this.fechas   = data;
+        this.recuento = data.length;
+      },
+      error => {
+        console.log( 'Se ha producido un error', error );
+        this.notificarUsuario( 'Se ha producido un error al cargar el listado de fechas' );
+      },
+      () => this.ordenarFechas() // Situamos la fecha genérica al final del listado de fechas
     );
   }
 
@@ -337,14 +330,14 @@ export class HomePage implements OnInit {
 
   notificarUsuario( mensaje: string ) {
 
-    $( '.notificacion .mensaje' ).html( mensaje );
+    $( '.notificacion-usuario .mensaje' ).html( mensaje );
 
-    $( '.notificacion'       ).css( 'opacity',    '1' );
-    $( '.notificacion .raya' ).css(   'width', '100%' );
+    $( '.notificacion-usuario'       ).css( 'opacity',    '1' );
+    $( '.notificacion-usuario .raya' ).css(   'width', '100%' );
 
     setTimeout(() => {
-      $( '.notificacion'       ).css( 'opacity', '' );
-      $( '.notificacion .raya' ).css(   'width', '' );
-    }, 2500);
+      $( '.notificacion-usuario'       ).css( 'opacity', '' );
+      $( '.notificacion-usuario .raya' ).css(   'width', '' );
+    }, 3000);
   }
 }
