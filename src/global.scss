@@ -55,9 +55,9 @@ h2 {
 
 p {
     color: gray;
-    font-size: 15px;
-    line-height: 30px;
-    margin: 0 0 30px;
+    font-size: 13px;
+    line-height: 25px;
+    margin: 0 0 25px;
 }
 
 // Mobile First
@@ -594,6 +594,32 @@ p {
             font-size: 15px;
             line-height: 30px;
         }
+    }
+}
+
+// ─────────────── //
+//     SPINNER     //
+// ─────────────── //
+
+.spinner {
+    display: flex;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 500;
+    overflow: hidden;
+    opacity: 1;
+    transition: .25s ease-in;
+
+    .logo {
+        width: 175px;
+        height: auto;
     }
 }
 
