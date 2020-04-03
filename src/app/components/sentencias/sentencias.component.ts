@@ -128,7 +128,7 @@ export class SentenciasComponent implements OnInit {
     }
 
     this.socialSharing.share(
-      `« ${ extracto } »\n- ${ sentencia.autor }\n`, 'SententiApp', null, 'https://iatext.ulpgc.es/es/aplicaciones');
+      `« ${ extracto } »\n- ${ sentencia.autor }\n`, 'SententiApp', null, 'https://play.google.com/store/apps/details?id=com.ulpgc.iatext.sententiapp');
   }
 
   // ──────────────── //
