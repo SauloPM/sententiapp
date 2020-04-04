@@ -1,10 +1,10 @@
 
 <!-- Ítems -->
-<div #menu id="menu" [attr.data-estado]="estado">
-  <div #itemsMenu class="items">
+<div id="menu" [attr.data-estado]="estado">
+  <div class="items">
     <div class="item" *ngFor="let item of items">
-      <span #texto class="texto">{{ item.texto }}</span>
-      <a #enlaceMenu class="enlace" (click)="navegar( item.enlace )">
+      <span class="texto">{{ item.texto }}</span>
+      <a class="enlace" (click)="navegar( item.enlace )">
         <i class="icono fa fa-{{ item.icono }}"></i>
       </a>
     </div>
@@ -12,6 +12,6 @@
 </div>
 
 <!-- Botón -->
-<div #botonMenu class="boton" (click)="mostrarMenu()">
+<div class="boton" (click)="mostrarMenu()">
   <i class="icono fa fa-plus"></i>
 </div>

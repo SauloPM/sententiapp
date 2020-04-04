@@ -21,7 +21,7 @@ $tablet: 768px;
     z-index: 75;
     width: 60px;
     height: 60px;
-    transition: .1s;
+    transition: .25s;
 
     .icono {
         color: white;
@@ -36,13 +36,14 @@ $tablet: 768px;
 }
 
 #menu {
+    display: none;
     background: transparent;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: -1;
+    z-index: 50;
     transition: background-color .25s;
     
     .items {
@@ -51,6 +52,7 @@ $tablet: 768px;
         justify-content: flex-end;
         flex-direction: column;
         position: absolute;
+        right: -75px;
         bottom: 75px;
         width: 60px;
         transition: .25s ease-out;

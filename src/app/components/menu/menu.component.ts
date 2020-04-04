@@ -1,25 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+
+// jQuery
+declare var $: any;
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
-export class MenuComponent implements OnInit {
-
-  @ViewChild('menu') menu: ElementRef;
-  @ViewChild('botonMenu') botonMenu: ElementRef;
-
-  @ViewChildren('texto') texto: any;
-
-  estado: string = 'cerrado';
-
-  // ─────────────── //
-  //     MÉTODOS     //
-  // ─────────────── //
-
-  constructor( private router: Router ) { }
+export class MenuComponent {
 
   items = [
     {
@@ -34,19 +24,21 @@ export class MenuComponent implements OnInit {
     }
   ];
 
-  ngOnInit() {}
+  // ─────────────── //
+  //     MÉTODOS     //
+  // ─────────────── //
+
+  constructor( private router: Router ) { }
 
   mostrarMenu() {
 
-    let menu = this.menu.nativeElement;
+    const MENU_ABIERTO = $( '#menu' ).attr( 'data-estado' ) === 'abierto' ? true : false;
 
-    const ABIERTO = menu.attributes['data-estado'].nodeValue === 'abierto' ? true : false;
-    
-    if ( ABIERTO )
+    if ( MENU_ABIERTO ) {
       this.cerrarMenu();
-    else
+    } else {
       this.abrirMenu();
-
+    }
   }
 
   navegar( enlace: string ) {
@@ -55,8 +47,7 @@ export class MenuComponent implements OnInit {
 
     setTimeout( () => {
       this.router.navigate( [ `/${ enlace }` ] );
-    }, 1000);
-
+    }, 1150);
   }
 
   // ──────────────── //
@@ -65,47 +56,43 @@ export class MenuComponent implements OnInit {
 
   abrirMenu() {
 
-    let menu = this.menu.nativeElement;
+    $( '#menu' ).css( 'display', 'block' );
+    $( '#menu' ).css( 'background-color', 'rgba(255,255,255,.75)' );
 
-    menu.style.zIndex = '50';
-    menu.style.backgroundColor = 'rgba(255,255,255,.75)';
-
-    this.botonMenu.nativeElement.className = 'boton abierto';
+    $( '.boton' ).addClass( 'abierto' );
 
     setTimeout(() => {
-      this.menu.nativeElement.attributes['data-estado'].nodeValue = 'abierto';
+      $( '#menu' ).attr( 'data-estado', 'abierto' );
     }, 250);
 
     setTimeout(() => {
-      this.texto.first.nativeElement.style.opacity = '1';
-    }, 500);
+      $( '#menu .item:nth-child(1) .texto' ).css( 'opacity', '1' );
+    }, 400);
 
     setTimeout(() => {
-      this.texto.last.nativeElement.style.opacity = '1';
-    }, 650);
+      $( '#menu .item:nth-child(2) .texto' ).css( 'opacity', '1' );
+    }, 550);
   }
 
   cerrarMenu() {
 
-    let menu = this.menu.nativeElement;
-
-    this.texto.first.nativeElement.style.opacity = '0';
+    $( '#menu .item:nth-child(1) .texto' ).css( 'opacity', '' );
 
     setTimeout(() => {
-      this.texto.last.nativeElement.style.opacity = '0';
+      $( '#menu .item:nth-child(2) .texto' ).css( 'opacity', '' );
     }, 150);
 
     setTimeout(() => {
-      this.menu.nativeElement.attributes['data-estado'].nodeValue = 'cerrado';
+      $( '#menu' ).attr( 'data-estado', 'cerrado' );
     }, 400);
     
     setTimeout(() => {
-      menu.style.backgroundColor = 'transparent';
-      this.botonMenu.nativeElement.className = 'boton';
+      $( '#menu' ).css( 'background-color', '' );
+      $( '.boton' ).removeClass( 'abierto' );
     }, 650);
 
     setTimeout(() => {
-      menu.style.zIndex = '-1';
+      $( '#menu' ).css( 'display', '' );
     }, 900);
   }
 
