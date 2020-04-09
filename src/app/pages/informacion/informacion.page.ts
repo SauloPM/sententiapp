@@ -36,7 +36,7 @@ export class InformacionPage implements OnInit {
   ngOnInit() {
 
     this.getDatos(); // Guardamos en una variable los datos de la fecha actual y en otra las sentencias    
-
+    
   }
 
   // ──────────────── //

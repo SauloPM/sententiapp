@@ -28,7 +28,7 @@ export class MenuComponent {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private router: Router ) { }
+  constructor( private router: Router ) {}
 
   mostrarMenu() {
 
@@ -46,8 +46,9 @@ export class MenuComponent {
     this.cerrarMenu();
 
     setTimeout( () => {
-      this.router.navigate( [ `/${ enlace }` ] );
+      this.router.navigate([ `/${ enlace }` ]);
     }, 1150);
+
   }
 
   // ──────────────── //
@@ -95,5 +96,4 @@ export class MenuComponent {
       $( '#menu' ).css( 'display', '' );
     }, 900);
   }
-
 }

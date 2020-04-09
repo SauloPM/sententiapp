@@ -11,5 +11,8 @@ export class WarningPage {
   aclaracion = 'SententiApp no se hace responsable de las opiniones de los autores antiguos';
 
   constructor() { }
-  
+
+  ngOnInit() {
+    // $( window ).on( 'load', () => $( 'body' ).css( 'opacity', '1' ));
+  }
 }

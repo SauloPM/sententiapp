@@ -17,13 +17,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   
   backButtonSubscription;
 
-  constructor(
-    public router: Router,
-    private platform: Platform,
-    private statusBar: StatusBar,
-    private pushService: PushService,
-    private splashScreen: SplashScreen
-  ) {
+  constructor( public router: Router, private platform: Platform, private statusBar: StatusBar, private pushService: PushService, private splashScreen: SplashScreen ) {
     this.initializeApp();
   }
 
