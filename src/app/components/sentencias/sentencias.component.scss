@@ -41,17 +41,22 @@ $tablet: 768px;
     // Flechas
 
     .flecha {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: $lightgray;
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 0;
+        bottom: 0;
 
         &.derecha {
-            right: 5px;
+            padding-right: 5px;
+            right: 0;
         }
 
         &.izquierda {
-            left: 5px;
+            padding-left: 5px;
+            left: 0;
         }
     }
 

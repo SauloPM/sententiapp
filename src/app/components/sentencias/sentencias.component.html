@@ -1,7 +1,7 @@
 <div [id]="'sentencia-' + sentencia.id" class="sentencia" *ngFor="let sentencia of sentencias; let i = index">
 
   <!-- Extractos -->
-  <ion-slides [options]="configuracion">
+  <ion-slides #slider [options]="configuracion">
     <ion-slide class="extracto" *ngIf="sentencia.extractolatino.length">
       {{ sentencia.extractolatino }}
     </ion-slide>
@@ -14,8 +14,8 @@
   </ion-slides>
 
   <!-- Navegación -->
-  <i class="flecha derecha   fas fa-angle-right" aria-hidden="true"></i>
-  <i class="flecha izquierda fas fa-angle-left"  aria-hidden="true"></i>
+  <i class="flecha derecha   fas fa-angle-right" aria-hidden="true" (click)="moverDerecha(slider)"></i>
+  <i class="flecha izquierda fas fa-angle-left"  aria-hidden="true" (click)="moverIzquierda(slider)"></i>
     
   <!-- Footer -->
   <div class="footer">

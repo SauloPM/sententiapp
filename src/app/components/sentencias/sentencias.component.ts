@@ -1,3 +1,4 @@
+import { IonSlides } from '@ionic/angular';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 // Servicios
@@ -63,6 +64,14 @@ export class SentenciasComponent implements OnInit {
       // Refrescamos (solo en la página de favoritos)
       this.dispararRefrescarListadoDeSentenciasFavoritas.emit();
     });
+  }
+
+  moverIzquierda( slider: IonSlides ) {
+    slider.slidePrev();
+  }
+
+  moverDerecha( slider: IonSlides ) {
+    slider.slideNext();
   }
 
   async guardarFavorito( sentencia: Sentencia, reaccion: string ) {
