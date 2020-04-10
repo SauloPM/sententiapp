@@ -35,6 +35,11 @@
               </ion-slide>
             </ion-slides>
 
+            <!-- Logo IATEXT -->
+            <a href="https://iatext.ulpgc.es" target="_blank">
+              <img class="logo-iatext" src="assets/img/logo-iatext.svg" alt="">
+            </a>
+
             <!-- Fechas -->
             <small class="recuento">{{ recuento }} fecha(s)</small>
             <a class="fecha" (click)="seleccionarFecha( fecha )" *ngFor="let fecha of fechas" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'">
