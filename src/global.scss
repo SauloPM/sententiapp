@@ -31,7 +31,6 @@ $tablet: 768px;
 
 body {
     font-size: 13px;
-    font-family: 'Lato', sans-serif;
     line-height: 25px;
 }
 
@@ -48,7 +47,6 @@ h1 {
 h2 {
     color: $text;
     font-size: 18px;
-    font-family: 'Lato', sans-serif;
     font-weight: bold;
     margin: 0 0 25px;
 }
@@ -115,7 +113,6 @@ p {
     .item {
         color: $text;
         font-size: 13px;
-        font-family: 'Lato', sans-serif;
         line-height: 25px;
         text-transform: none;
         border-top: 1px solid rgba(50,50,50,.1);
@@ -164,7 +161,6 @@ p {
     justify-content: center;
     flex-direction: column;
     font-size: 13px;
-    font-family: 'Lato', sans-serif;
     line-height: 25px;
     padding: 50px 50px 100px;
     width: 100%;
@@ -271,7 +267,6 @@ p {
         justify-content: flex-end;
         color: $text;
         font-size: 10px;
-        font-family: 'Lato', sans-serif;
         text-align: right;
         padding: 0 8px 8px;
         line-height: 10px;
@@ -384,7 +379,6 @@ p {
             display: none;
             color: $text;
             font-size: 13px;
-            font-family: 'Lato', sans-serif;
             line-height: 25px;
             background: transparent;
             border: none;
@@ -428,7 +422,6 @@ p {
         .etiqueta {
             color: white;
             font-size: 13px;
-            font-family: 'Lato', sans-serif;
             text-align: left;
             line-height: 20px;
             position: relative;
@@ -521,7 +514,6 @@ p {
     .sin-favoritos {
         color: $text;
         font-size: 13px;
-        font-family: 'Lato', sans-serif;
         text-align: center;
         line-height: 25px;
     }
@@ -557,7 +549,6 @@ p {
 
     .descripcion {
         font-size: 13px;
-        font-family: 'Lato', sans-serif;
         line-height: 25px;
         margin-bottom: 25px;
     }
