@@ -41,7 +41,6 @@
             </a>
 
             <!-- Fechas -->
-            <small class="recuento">{{ recuento }} fecha(s)</small>
             <a class="fecha" (click)="seleccionarFecha( fecha )" *ngFor="let fecha of fechas" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'">
               <div class="imagen" [style.backgroundImage]="'url(' + ( fecha.imagen | imagenDefecto ) + ')'"></div>
               <div>
