@@ -21,6 +21,11 @@ export class MenuComponent {
       texto: 'Mis sentencias',
       enlace: 'favoritos',
       icono: 'star'
+    },
+    {
+      texto: 'Cerrar aplicación',
+      enlace: 'cerrar-aplicacion',
+      icono: 'power-off'
     }
   ];
 
@@ -73,6 +78,10 @@ export class MenuComponent {
     setTimeout(() => {
       $( '#menu .item:nth-child(2) .texto' ).css( 'opacity', '1' );
     }, 550);
+
+    setTimeout(() => {
+      $( '#menu .item:nth-child(3) .texto' ).css( 'opacity', '1' );
+    }, 700);
   }
 
   cerrarMenu() {
@@ -84,16 +93,20 @@ export class MenuComponent {
     }, 150);
 
     setTimeout(() => {
+      $( '#menu .item:nth-child(3) .texto' ).css( 'opacity', '' );
+    }, 300);
+
+    setTimeout(() => {
       $( '#menu' ).attr( 'data-estado', 'cerrado' );
-    }, 400);
+    }, 550);
     
     setTimeout(() => {
       $( '#menu' ).css( 'background-color', '' );
       $( '.boton' ).removeClass( 'abierto' );
-    }, 650);
+    }, 800);
 
     setTimeout(() => {
       $( '#menu' ).css( 'display', '' );
-    }, 900);
+    }, 1050);
   }
 }
