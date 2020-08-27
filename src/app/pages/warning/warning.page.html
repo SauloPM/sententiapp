@@ -1,5 +1,6 @@
 <ion-content>
   <div id="advertencia">
+    <div class="fondo-blanco"></div>
     <img src="assets/img/logo.svg" alt="" class="logo">
     <span class="texto">
       {{ mensaje }}
@@ -12,6 +13,6 @@
         {{ aclaracion }}
       </span>
     </span>
-    <a class="boton" [routerLink]="['/home']">Entrar en SententiApp</a>
+    <a class="boton" (click)="aceptarCondiciones()">Entrar en SententiApp</a>
   </div>
 </ion-content>

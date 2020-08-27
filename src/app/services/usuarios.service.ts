@@ -22,13 +22,23 @@ export class UsuariosService {
     const usuarioID = await this.storage.get( 'usuarioID' );
 
     return usuarioID ? usuarioID : '-1';
-
   }
 
   guardarUsuarioEnLocalStorage( usuarioID: string ) {
 
     this.storage.set( 'usuarioID', usuarioID );
+  }
 
+  async checkAceptacionDeCondiciones() {
+
+    const aceptarCondiciones = await this.storage.get( 'aceptarCondiciones' );
+
+    return aceptarCondiciones ? true : false;
+  }
+
+  guardarAceptacionDeCondicionesEnLocalStorage() {
+
+    this.storage.set( 'aceptarCondiciones', 'true' );
   }
 
   // ───────────────── //
@@ -41,7 +51,6 @@ export class UsuariosService {
 
     // Creamos un nuevo documento en la colección de usuarios de Firestore y luego almacenamos el ID del usuario en el local storage
     await this.angularFirestore.collection( 'usuarios' ).add({ fecha: fecha.getFullYear() }).then( documento => this.guardarUsuarioEnLocalStorage( documento.id ));
-
   }
 
   actualizarUsuario( usuarioID: string, fecha: Date ) {
