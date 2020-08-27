@@ -37,12 +37,12 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
   imports: [
     BrowserModule,
     ComponentsModule,
+    AppRoutingModule,
     HttpClientModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
 
     // Firebase
-    AppRoutingModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
