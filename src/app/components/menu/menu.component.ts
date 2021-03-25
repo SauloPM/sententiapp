@@ -22,11 +22,6 @@ export class MenuComponent {
       enlace: 'favoritos',
       icono: 'star'
     },
-    {
-      texto: 'Cerrar aplicación',
-      enlace: 'cerrar-aplicacion',
-      icono: 'power-off'
-    }
   ];
 
   // ─────────────── //

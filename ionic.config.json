@@ -1,7 +1,8 @@
 {
   "name": "sententiapp",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

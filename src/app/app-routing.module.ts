@@ -9,7 +9,6 @@ const routes: Routes = [
   { path: 'home'             , loadChildren: './pages/home/home.module#HomePageModule'                                       },
   { path: 'warning'          , loadChildren: './pages/warning/warning.module#WarningPageModule'                              },
   { path: 'favoritos'        , loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule'                        },
-  { path: 'cerrar-aplicacion', loadChildren: './pages/cerrar-aplicacion/cerrar-aplicacion.module#CerrarAplicacionPageModule' },
   
   // Rutas con parámetros
   { path: 'informacion/:id/:categoria', loadChildren: './pages/informacion/informacion.module#InformacionPageModule' }

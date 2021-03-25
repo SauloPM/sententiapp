@@ -5,16 +5,13 @@ import { Platform     } from '@ionic/angular';
 import { StatusBar    } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
-// Notificaciones push
-import { PushService } from './services/push.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
   
-  constructor( public router: Router, private platform: Platform, private statusBar: StatusBar, private pushService: PushService, private splashScreen: SplashScreen ) {
+  constructor( public router: Router, private platform: Platform, private statusBar: StatusBar, private splashScreen: SplashScreen ) {
     this.initializeApp();
   }
 
@@ -28,8 +25,6 @@ export class AppComponent {
       }
 
       this.splashScreen.hide();
-
-      this.pushService.configuracionInicial();
     });
   }
 }

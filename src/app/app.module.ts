@@ -15,9 +15,6 @@ import { HttpClientModule } from '@angular/common/http';
 // Módulos
 import { ComponentsModule } from './components/components.module';
 
-// Notificaciones PUSH
-import { OneSignal } from '@ionic-native/onesignal/ngx';
-
 // Almacenamiento local
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -51,7 +48,6 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
   ],
   providers: [
     StatusBar,
-    OneSignal,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }    
   ],

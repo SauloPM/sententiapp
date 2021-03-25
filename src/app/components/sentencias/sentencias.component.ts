@@ -1,4 +1,4 @@
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, Platform } from '@ionic/angular';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 // Servicios
@@ -42,7 +42,7 @@ export class SentenciasComponent implements OnInit {
   //     MÉTODOS     //
   // ─────────────── //
 
-  constructor( private socialSharing: SocialSharing, private servicioFavoritos: FavoritosService, private usuariosService: UsuariosService ) {
+  constructor( private socialSharing: SocialSharing, private servicioFavoritos: FavoritosService, private usuariosService: UsuariosService, private platform: Platform ) {
     this.dispararRefrescarListadoDeSentenciasFavoritas = new EventEmitter();
   }
 
@@ -136,8 +136,15 @@ export class SentenciasComponent implements OnInit {
       }
     }
 
-    this.socialSharing.share(
-      `« ${ extracto } »\n- ${ sentencia.autor }\n`, 'SententiApp', null, 'https://play.google.com/store/apps/details?id=com.ulpgc.iatext.sententiapp');
+    if(this.platform.is("android")){
+      this.socialSharing.share(
+        `« ${ extracto } »\n- ${ sentencia.autor }\n`, 'SententiApp', null, 'https://play.google.com/store/apps/details?id=com.ulpgc.iatext.sententiapp');
+    } else if (this.platform.is("ios")){
+      this.socialSharing.share(
+        `« ${ extracto } »\n- ${ sentencia.autor }\n`, 'SententiApp', null, 'https://apps.apple.com/us/app/sententiapp/id1541531881');
+    }
+    
+
   }
 
   // ──────────────── //
